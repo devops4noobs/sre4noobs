@@ -1,103 +1,77 @@
-import Image from "next/image";
+"use client"; // needed for useState
 
-export default function Home() {
+import { useState } from "react";
+
+export default function HomePage() {
+  const [showSRE, setShowSRE] = useState(false);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div>
+      <h1 className="text-4xl font-bold text-indigo-400 mb-8">Welcome to the SRE Learning Platform</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        {/* What is SRE Card */}
+        <div
+          className="cursor-pointer bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors"
+          onClick={() => setShowSRE(!showSRE)}
+          aria-expanded={showSRE}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setShowSRE(!showSRE);
+          }}
+        >
+          <h2 className="text-2xl font-semibold text-indigo-300 mb-2">What is SRE?</h2>
+          {!showSRE && (
+            <p className="text-gray-400">
+              Click to learn more about Site Reliability Engineering, the role of an SRE, principles, and pillars.
+            </p>
+          )}
+
+          {showSRE && (
+            <div className="mt-4 text-gray-300 space-y-4">
+              <p>
+                Site Reliability Engineering (SRE) is a discipline that combines software engineering and systems engineering to build and run
+                scalable, reliable, and highly available systems. SRE teams focus on automating operations, improving system reliability, and
+                reducing manual toil.
+              </p>
+
+              <h3 className="text-xl font-semibold text-indigo-400">What does a SRE do day-to-day?</h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Monitor system health and respond to incidents</li>
+                <li>Automate repetitive operational tasks to reduce toil</li>
+                <li>Define and measure SLIs, SLOs, and error budgets</li>
+                <li>Run postmortems and conduct root cause analyses (RCA)</li>
+                <li>Improve deployment and CI/CD pipelines</li>
+                <li>Collaborate closely with development teams</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold text-indigo-400">Core SRE Principles</h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Embrace risk and balance reliability with feature velocity</li>
+                <li>Reduce manual toil through automation</li>
+                <li>Measure reliability with SLIs (Service Level Indicators) and SLOs (Service Level Objectives)</li>
+                <li>Use error budgets to drive engineering priorities</li>
+                <li>Conduct blameless postmortems</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold text-indigo-400">SRE Pillars</h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li><strong>Monitoring & Alerting:</strong> Detect problems early and reduce downtime.</li>
+                <li><strong>Incident Response:</strong> Efficiently manage and resolve incidents. Create incident summary</li>
+                <li><strong>Automation & Tooling:</strong> Automate repetitive tasks to save time and reduce errors.</li>
+                <li><strong>Capacity Planning:</strong> Ensure systems can handle growth and traffic spikes.</li>
+                <li><strong>Change Management:</strong> Safely deploy new code and infrastructure changes.</li>
+                <li><strong>Postmortem & RCA:</strong> Learn from failures without blame to prevent recurrence.</li>
+              </ul>
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* You can add other cards here */}
+
+      </div>
     </div>
   );
 }
