@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 export const metadata: Metadata = {
   title: "SRE Learning Platform",
   description: "Learn Site Reliability Engineering from scratch.",
+  keywords: ["SRE", "Site Reliability Engineering", "DevOps", "AWS", "SignalFx", "Postmortem", "Incident Management", "RCA"],
 };
 
 export default function RootLayout({
