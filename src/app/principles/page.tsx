@@ -162,7 +162,7 @@ const principles = [
       </p>
 
       <p className="text-gray-400 italic">
-        `&quot;`If it&apos;s boring, repetitive, and required — automate it.`&quot;`
+        &quot;If it&apos;s boring, repetitive, and required — automate it.&quot;
       </p>
     </div>
   )
