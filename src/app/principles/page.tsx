@@ -8,7 +8,7 @@ const principles = [
       <div className="space-y-4 text-gray-300">
         <p>
           <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users.
-          It's the reliability promise you make — like “99.9% of requests respond under 300ms. SLOs are crucials for balancing risk, managing user expectations and guiding our engineering efforts.”
+          It`&apos;`s the reliability promise you make — like “99.9% of requests respond under 300ms. SLOs are crucials for balancing risk, managing user expectations and guiding our engineering efforts.”
         </p>
 
         <p>
@@ -58,7 +58,7 @@ const principles = [
         <strong>Error budgets</strong> are a core concept in SRE that let teams
         balance reliability with innovation. Instead of aiming for perfect
         uptime (which is unrealistic), we define an acceptable amount of
-        failure based on the service's <strong>SLO</strong>.
+        failure based on the service`&apos;`s <strong>SLO</strong>.
       </p>
 
       <p>
@@ -70,7 +70,7 @@ const principles = [
       <h4 className="text-indigo-400 font-semibold">🧠 Why It Matters</h4>
       <div className="space-y-2">
         <div>
-          ✅ <strong>Encourages calculated risk-taking:</strong> If you're within budget, ship faster.
+          ✅ <strong>Encourages calculated risk-taking:</strong> If you`&apos;`re within budget, ship faster.
         </div>
         <div>
           ✅ <strong>Triggers caution when SLOs are at risk:</strong> Pause releases if the budget is burned.
@@ -114,7 +114,7 @@ const principles = [
   content: (
     <div className="space-y-4 text-gray-300">
       <p>
-        <strong>Toil</strong> is the repetitive, manual, and automatable work that keeps systems running — but doesn't improve them. A core principle of SRE is to **identify and eliminate toil through automation** so engineers can focus on scalable, high-impact work.
+        <strong>Toil</strong> is the repetitive, manual, and automatable work that keeps systems running — but doesn`&apos;`t improve them. A core principle of SRE is to **identify and eliminate toil through automation** so engineers can focus on scalable, high-impact work.
       </p>
 
       <h4 className="text-indigo-400 font-semibold">🔁 What Is Toil?</h4>
@@ -130,7 +130,7 @@ const principles = [
       </ul>
 
       <p>
-        If you do something more than once, it’s probably toil — and it’s likely a candidate for automation.
+        If you do something more than once, it`&apos;`s probably toil — and it`&apos;`s likely a candidate for automation.
       </p>
 
       <h4 className="text-indigo-400 font-semibold">🛠️ Examples of Toil</h4>
@@ -162,7 +162,7 @@ const principles = [
       </p>
 
       <p className="text-gray-400 italic">
-        "If it’s boring, repetitive, and required — automate it."
+        `&quot;`If it`&apos;`s boring, repetitive, and required — automate it.`&quot;`
       </p>
     </div>
   )
