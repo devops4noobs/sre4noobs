@@ -38,7 +38,6 @@ export default function Sidebar() {
           </Link>
         ))}
         <div className="text-gray-400 text-sm p-4 text-left">
-          Contact:{" "}
             <a href="mailto:devops4noobs@gmail.com" className="text-indigo-400 hover:underline">devops4noobs@gmail.com</a> <br></br>
             <a href="https://coff.ee/devops4noow" className="text-indigo-400 hover:underline">Buy me a coffee</a>
         </div>
