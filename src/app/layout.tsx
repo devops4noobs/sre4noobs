@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Sidebar from "../components/Sidebar";
-import Head from "next/head";
+
 
 export const metadata: Metadata = {
   title: "SRE Learning Platform",
@@ -15,20 +15,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        {/* <!-- Google tag (gtag.js) --> */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-C635CHGZZ0"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-C635CHGZZ0');
-            `,
-          }}
-        />
-      </Head>
+      <head>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C635CHGZZ0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C635CHGZZ0');
+</script>
+      </head>
       <body className="flex min-h-screen font-sans text-white bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <Sidebar />
         <main className="flex-1 p-10 bg-gray-900 bg-opacity-70">{children}</main>
