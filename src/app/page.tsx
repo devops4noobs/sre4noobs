@@ -12,7 +12,7 @@ export default function HomePage() {
           </p>
 
           <h3 className="text-2xl font-semibold text-indigo-300 mb-4 ">Why SRE Matters in 2025:</h3>
-          <p >Key stats: Downtime costs enterprises an average of $100,000 per hour, but SRE practices can reduce incidents by up to 50% through error budgets and blameless postmortems. Drawing from the latest industry insights, here's what SRE professionals are focusing on this year. These trends highlight the evolution from reactive ops to AI-augmented, user-centric reliability.</p>
+          <p >Key stats: Downtime costs enterprises an average of $100,000 per hour, but SRE practices can reduce incidents by up to 50% through error budgets and blameless postmortems. Drawing from the latest industry insights, here&apos;s what SRE professionals are focusing on this year. These trends highlight the evolution from reactive ops to AI-augmented, user-centric reliability.</p>
           <br></br>
 
           <h3 className="text-2xl font-semibold text-indigo-300 mb-4">Emerging SRE Trends Shaping 2025</h3>
