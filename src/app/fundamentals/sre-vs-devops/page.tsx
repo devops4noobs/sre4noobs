@@ -43,7 +43,7 @@ export default function SreVsDevOps() {
               </tr>
               <tr>
                 <td className="px-4 py-2 border-b border-gray-600">Team Structure</td>
-                <td className="px-4 py-2 border-b border-gray-600">Cross-functional teams; "You build it, you run it."</td>
+                <td className="px-4 py-2 border-b border-gray-600">Cross-functional teams; `&quot;`You build it, you run it.`&quot;`</td>
                 <td className="px-4 py-2 border-b border-gray-600">Dedicated SRE teams (often 50% ops, 50% dev); caps on operational work.</td>
               </tr>
               <tr>

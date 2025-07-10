@@ -5,12 +5,12 @@ export default function MonitoringDistributedSystems() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Monitoring Distributed Systems" pillar of Site Reliability Engineering (SRE) ensures the health, performance, and reliability of complex, distributed environments. By leveraging real-time data and actionable insights, SRE teams can detect issues early, optimize systems, and maintain service quality in dynamic, multi-component architectures.
+          The `&quot;`Monitoring Distributed Systems`&quot;` pillar of Site Reliability Engineering (SRE) ensures the health, performance, and reliability of complex, distributed environments. By leveraging real-time data and actionable insights, SRE teams can detect issues early, optimize systems, and maintain service quality in dynamic, multi-component architectures.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Visibility into Complexity</h2>
         <p className="mb-4">
-          Distributed systems, with their multiple services, nodes, and dependencies, require robust monitoring to track performance and identify failures. SRE emphasizes the "four golden signals"—latency, traffic, errors, and saturation—as a foundation for effective oversight, ensuring teams can respond proactively rather than reactively.
+          Distributed systems, with their multiple services, nodes, and dependencies, require robust monitoring to track performance and identify failures. SRE emphasizes the `&quot;`four golden signals`&quot;`—latency, traffic, errors, and saturation—as a foundation for effective oversight, ensuring teams can respond proactively rather than reactively.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🧠 The Four Golden Signals</h2>

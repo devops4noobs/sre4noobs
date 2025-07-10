@@ -5,7 +5,7 @@ export default function SLOs() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Service Level Objectives" (SLOs) pillar is a cornerstone of Site Reliability Engineering (SRE), providing a measurable target for service reliability that aligns with user expectations. SLOs help teams balance innovation with stability, ensuring services meet defined performance standards while allowing for calculated risk-taking.
+          The `&quot;`Service Level Objectives`&quot;` (SLOs) pillar is a cornerstone of Site Reliability Engineering (SRE), providing a measurable target for service reliability that aligns with user expectations. SLOs help teams balance innovation with stability, ensuring services meet defined performance standards while allowing for calculated risk-taking.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Defining Reliability</h2>

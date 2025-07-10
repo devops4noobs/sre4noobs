@@ -5,7 +5,7 @@ export default function Simplicity() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Simplicity" pillar of Site Reliability Engineering (SRE) advocates for designing and maintaining systems that are easy to understand, manage, and scale. By reducing complexity, SRE teams enhance reliability, reduce debugging time, and lower the cognitive load on engineers, aligning with the goal of sustainable operations.
+          The `&quot;`Simplicity`&quot;` pillar of Site Reliability Engineering (SRE) advocates for designing and maintaining systems that are easy to understand, manage, and scale. By reducing complexity, SRE teams enhance reliability, reduce debugging time, and lower the cognitive load on engineers, aligning with the goal of sustainable operations.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Complexity as a Liability</h2>

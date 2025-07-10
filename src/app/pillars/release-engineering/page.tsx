@@ -5,7 +5,7 @@ export default function ReleaseEngineering() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Release Engineering" pillar of Site Reliability Engineering (SRE) focuses on delivering software updates safely, reliably, and efficiently. By integrating reliability into the release process, SRE teams minimize outages caused by changes, ensuring a seamless experience for users while supporting rapid development cycles.
+          The `&quot;`Release Engineering`&quot;` pillar of Site Reliability Engineering (SRE) focuses on delivering software updates safely, reliably, and efficiently. By integrating reliability into the release process, SRE teams minimize outages caused by changes, ensuring a seamless experience for users while supporting rapid development cycles.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Safe and Reliable Releases</h2>

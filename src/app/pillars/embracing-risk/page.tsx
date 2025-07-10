@@ -5,7 +5,7 @@ export default function EmbracingRisk() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto"> {/* Increased max-width and centered */}
         <p className="mb-4">
-          The "Embracing Risk" pillar of Site Reliability Engineering (SRE) acknowledges that achieving 100% reliability is neither practical nor cost-effective. Instead, SRE encourages a calculated approach to risk management, using tools like error budgets to balance reliability with innovation. This principle empowers teams to ship features faster while maintaining an acceptable level of service performance.
+          The `&quot;`Embracing Risk`&quot;` pillar of Site Reliability Engineering (SRE) acknowledges that achieving 100% reliability is neither practical nor cost-effective. Instead, SRE encourages a calculated approach to risk management, using tools like error budgets to balance reliability with innovation. This principle empowers teams to ship features faster while maintaining an acceptable level of service performance.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-300 mb-4">Core Concept: Risk as a Trade-Off</h2>
@@ -17,7 +17,7 @@ export default function EmbracingRisk() {
         <ul className="list-disc list-inside space-y-2 mb-6">
           <li><strong>Acceptable Failure:</strong> Define how much failure is tolerable based on user needs.</li>
           <li><strong>Error Budgets:</strong> Use a quantifiable allowance for outages to guide decision-making.</li>
-          <li><strong>Innovation vs. Stability:</strong> Prioritize feature development when reliability is strong, and focus on stability when it’s at risk.</li>
+          <li><strong>Innovation vs. Stability:</strong> Prioritize feature development when reliability is strong, and focus on stability when it&apos;s at risk.</li>
           <li><strong>Data-Driven Decisions:</strong> Base risk acceptance on metrics, not assumptions.</li>
         </ul>
 

@@ -5,7 +5,7 @@ export default function EliminatingToil() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Eliminating Toil" pillar of Site Reliability Engineering (SRE) emphasizes reducing repetitive, manual tasks that offer little long-term value. By automating toil, SRE teams free up engineers to focus on innovation, improve system reliability, and prevent burnout, aligning with the goal of scalable and efficient operations.
+          The `&quot;`Eliminating Toil`&quot;` pillar of Site Reliability Engineering (SRE) emphasizes reducing repetitive, manual tasks that offer little long-term value. By automating toil, SRE teams free up engineers to focus on innovation, improve system reliability, and prevent burnout, aligning with the goal of scalable and efficient operations.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Defining Toil</h2>

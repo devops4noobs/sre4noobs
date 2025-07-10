@@ -5,7 +5,7 @@ export default function Automation() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          The "Automation" pillar of Site Reliability Engineering (SRE) is about leveraging technology to reduce manual effort, enhance consistency, and scale operations efficiently. By automating repetitive tasks and processes, SRE teams can focus on innovation, improve system reliability, and respond to incidents more effectively.
+          The `&quot;`Automation`&quot;` pillar of Site Reliability Engineering (SRE) is about leveraging technology to reduce manual effort, enhance consistency, and scale operations efficiently. By automating repetitive tasks and processes, SRE teams can focus on innovation, improve system reliability, and respond to incidents more effectively.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Efficiency Through Automation</h2>
