@@ -128,7 +128,7 @@ export default function Sidebar() {
       </nav>
       <div className="mt-auto pt-4 text-sm text-blue-400">
         <p>devops4noobs@gmail.com</p>
-        <a href="https://buymeacoffee.com/yourusername" className="hover:underline">Buy me a coffee</a>
+        <a href="https://buymeacoffee.com/devops4noow" className="hover:underline">Buy me a coffee</a>
       </div>
     </aside>
   );
