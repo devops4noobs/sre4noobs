@@ -83,13 +83,13 @@ const principles = [
       <h4 className="text-indigo-400 font-semibold">📊 Real-World Examples</h4>
       <div className="space-y-3">
         <div>
-          ☁️ <strong>Cloud Service:</strong> A storage team has a 99.95% availability SLO. After a major incident, they’ve used up 80% of their error budget. They pause feature deployments until the next window.
+          ☁️ <strong>Cloud Service:</strong> A storage team has a 99.95% availability SLO. After a major incident, they&apos;ve used up 80% of their error budget. They pause feature deployments until the next window.
         </div>
         <div>
           🚀 <strong>Frontend Web App:</strong> The team runs chaos tests during low-traffic hours to validate resilience — using up part of their budget strategically.
         </div>
         <div>
-          🧪 <strong>Experiment Rollout:</strong> An AI team wants to launch a new ML model. Since they’re only at 10% of their error budget, they proceed with the rollout.
+          🧪 <strong>Experiment Rollout:</strong> An AI team wants to launch a new ML model. Since they&apos;re only at 10% of their error budget, they proceed with the rollout.
         </div>
       </div>
 
@@ -101,7 +101,7 @@ const principles = [
       </p>
 
       <p className="text-gray-400">
-        Embracing risk doesn’t mean being reckless — it means using reliability
+        Embracing risk doesn&apos;t mean being reckless — it means using reliability
         data (via error budgets) to make smart trade-offs between stability and
         speed.
       </p>
@@ -258,7 +258,7 @@ const principles = [
         <li>Focus on <em>systems and processes</em>, not individuals.</li>
         <li>Use a standard template to ensure consistency.</li>
         <li>Share postmortems broadly to promote learning.</li>
-        <li>Schedule timely reviews—don’t delay the analysis.</li>
+        <li>Schedule timely reviews—don&apos;t delay the analysis.</li>
       </ul>
 
       <p className="text-gray-400 italic">

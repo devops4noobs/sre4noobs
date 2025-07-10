@@ -29,7 +29,7 @@ export default function DetectorsPage() {
         <li>
           <strong>Define Clear Conditions</strong><br />
           <em>Why?</em> Precise rules ensure relevant alerts without noise.<br />
-          <em>What?</em> Set thresholds (e.g., CPU > 80%) or anomaly detection based on historical data in Splunk Observability Cloud.
+          <em>What?</em> Set thresholds (e.g., CPU `{'>'}` 80%) or anomaly detection based on historical data in Splunk Observability Cloud.
         </li>
         <li>
           <strong>Leverage Real-Time Data</strong><br />

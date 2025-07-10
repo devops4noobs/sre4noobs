@@ -77,7 +77,7 @@ export default function IncidentManagementPage() {
       </ul>
 
       <p className="italic text-gray-400">
-        Incident Management is more than a reactive process—it’s a strategic practice that combines observability, coordination, and learning to build reliable systems and maintain user confidence.
+        Incident Management is more than a reactive process—it&apos;s a strategic practice that combines observability, coordination, and learning to build reliable systems and maintain user confidence.
       </p>
     </div>
   );
