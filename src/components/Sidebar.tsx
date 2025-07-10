@@ -58,9 +58,9 @@ const menuItems = [
       { label: 'Forum/Discussions', href: '/community/forum', icon: ChatBubbleLeftRightIcon },
       { label: 'External Links', href: '/resources/links', icon: LinkIcon },
       { label: 'Contribute', href: 'https://github.com/devops4noobs/sre4noobs', icon: CodeBracketIcon },
-      { label: 'About/Contact', href: '/about', icon: UserCircleIcon },
     ],
   },
+  { label: 'About/Contact', href: '/about', icon: UserCircleIcon },
 ];
 
 export default function Sidebar() {
@@ -126,10 +126,6 @@ export default function Sidebar() {
           ))}
         </ul>
       </nav>
-      <div className="mt-auto pt-4 text-sm text-blue-400">
-        <p>devops4noobs@gmail.com</p>
-        <a href="https://buymeacoffee.com/devops4noow" className="hover:underline">Buy me a coffee</a>
-      </div>
     </aside>
   );
 }
