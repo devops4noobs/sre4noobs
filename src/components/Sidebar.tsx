@@ -65,7 +65,7 @@ const menuItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [expandedSections, setExpandedSections] = useState<string[]>(['SRE Fundamentals']);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   const toggleSection = (label: string) => {
     setExpandedSections((prev) =>
