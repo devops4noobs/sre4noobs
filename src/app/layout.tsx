@@ -33,8 +33,12 @@ export default function RootLayout({
 
       </head>
       <body className="flex min-h-screen font-sans text-white bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-        <Sidebar />
-        <main className="flex-1 p-10 bg-gray-900 bg-opacity-70">{children}</main>
+        
+          <Sidebar />
+          <main className="flex-1 p-6 bg-gray-900 text-white ml-64  ">
+            {children}
+          </main>
+        
       </body>
     </html>
   );

@@ -74,7 +74,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-gray-900 h-screen p-4 overflow-y-auto text-white border-r border-gray-700"> {/* Added border-r for delimitation */}
+    <aside className="w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg">
       <nav>
         <ul className="space-y-2">
           {menuItems.map((item, index) => (
