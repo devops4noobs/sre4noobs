@@ -77,7 +77,7 @@ export default function PostmortemPage() {
   </ul>
 
   <p className="italic text-gray-400">
-    Blameless postmortems are not just about fixing technical issues—they're a cultural investment in reliability, trust, and shared responsibility.
+    Blameless postmortems are not just about fixing technical issues—they&apos;re a cultural investment in reliability, trust, and shared responsibility.
   </p>
 </div>
 
