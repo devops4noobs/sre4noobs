@@ -37,6 +37,14 @@ const menuItems = [
     ],
   },
   {
+    label: 'Kubernetes',
+    subItems: [
+      { label: 'Fundamental Concepts', href: '/kubernetes/fundamental-concepts', icon: QuestionMarkCircleIcon },
+      { label: 'Cheatsheets', href: '/kubernetes/cheatsheets', icon: BookOpenIcon },
+      { label: 'Infra', href: '/kubernetes/infra', icon: CogIcon },
+    ],
+  },
+  {
     label: 'Advanced Topics',
     subItems: [
       { label: 'Case Studies & Examples', href: '/advanced/case-studies', icon: BookOpenIcon },
