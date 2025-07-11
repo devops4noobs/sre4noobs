@@ -1,33 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { DocumentDuplicateIcon, ChevronDownIcon, StarIcon as StarOutlineIcon, StarIcon as StarSolidIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { DocumentDuplicateIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export default function CheatsheetsPage() {
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [favorites, setFavorites] = useState<{ [key: string]: boolean }>({});
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) =>
       prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
     );
   };
-
-  const toggleFavorite = (command: string) => {
-    setFavorites((prev) => {
-      const newFavorites = { ...prev, [command]: !prev[command] };
-      localStorage.setItem('k8sFavorites', JSON.stringify(newFavorites));
-      return newFavorites;
-    });
-  };
-
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem('k8sFavorites');
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
 
   const categories = [
     {
@@ -42,13 +26,15 @@ export default function CheatsheetsPage() {
         { command: 'kubectl delete pod <pod_name>', description: 'Delete pod' },
         { command: 'kubectl logs pod <pod_name>', description: 'Logs of the pod' },
         { command: 'kubectl exec -it pod <pod_name> /bin/bash', description: 'Execute into pod' },
-        { command: 'kubectl logs -f <pod-name> <container-name>', description: 'Follow logs for container (for multi-container pods)' },
-        { command: 'kubectl get pods --all-namespaces', description: 'Get pods in all namespaces' },
-        { command: 'kubectl get pods -l env=prod', description: 'Get pods with label' },
-        { command: 'kubectl get pods --field-selector=status.phase=Running', description: 'Get all running pods' },
-        { command: 'kubectl cp /tmp/foo <pod-name>:/tmp/bar', description: 'Copy files or directories to/from a pod' },
-        { command: 'kubectl debug pod/<pod-name> -it --image=busybox:1.28', description: 'Create an interactive debugging session within an existing pod' },
         { command: 'kubectl port-forward pod/<pod-name> <local-port>:<pod-port>', description: 'Forward a local port to a port on the pod' },
+        { command: 'kubectl cp <pod-name>:<path> <local-path>', description: 'Copy files from a pod to local' },
+        { command: 'kubectl debug -it <pod-name> --image=busybox --target=<container-name>', description: 'Attach a debugging container to a running pod' },
+        { command: 'kubectl get pods --field-selector=status.phase=Running', description: 'Get all running pods' },
+        { command: 'kubectl get pods -l app=frontend', description: 'Get pods with specific label' },
+        { command: 'kubectl logs -f <pod-name> <container-name>', description: 'Follow logs for container in multi-container pods' },
+        { command: 'kubectl exec -it non-root-pod -- id', description: 'Verify user and group ID in pod' },
+        { command: 'kubectl get pod busybox -ojson|jq \'.spec.containers[0].image\' "busybox"', description: 'Get image from pod JSON' },
+        { command: 'kubectl -it run busybox --rm --image=busybox -- sh', description: 'Run interactive busybox pod' },
       ],
     },
     {
@@ -60,15 +46,17 @@ export default function CheatsheetsPage() {
         { command: 'kubectl drain node <node_name>', description: 'Drain node' },
         { command: 'kubectl cordon node <node_name>', description: 'Cordon node' },
         { command: 'kubectl uncordon node <node_name>', description: 'Uncordon node' },
+        { command: 'kubectl top node', description: 'Display resource (CPU/memory) usage of nodes' },
+        { command: 'kubectl taint nodes <node-name> key=value:NoSchedule', description: 'Add a taint to a node' },
+        { command: 'kubectl label nodes <node-name> disktype=ssd', description: 'Label a node' },
+        { command: 'kubectl get nodes -o wide', description: 'Get nodes with detailed information' },
+        { command: 'kubectl get nodes --selector=node-role.kubernetes.io/master', description: 'Get master nodes' },
         { command: 'k drain node-01', description: 'Drain node (moves pods to another node, recreates them)' },
         { command: 'k cordon node-01', description: 'Mark node unschedulable (does not accept new pods)' },
         { command: 'k uncordon node node-01', description: 'Mark node schedulable again' },
-        { command: 'k top nodes', description: 'Top nodes (CPU/memory usage)' },
-        { command: 'kubectl label nodes <node-name> <label-key>=<label-value>', description: 'Label a node' },
         { command: 'k taint nodes node01 spray=mortein:NoSchedule', description: 'Taint a node' },
         { command: 'k taint nodes controlplane node-role.kubernetes.io=control-plane:NoSchedule-', description: 'Untaint control plane node' },
-        { command: 'kubectl get nodes -o wide', description: 'Get nodes with detailed information' },
-        { command: 'kubectl debug node/<node-name> -it --image=busybox:1.28', description: 'Create an interactive debugging session on a node' },
+        { command: 'k label nodes <node-name> <label-key>=<label-value>', description: 'Label nodes for selector' },
       ],
     },
     {
@@ -86,18 +74,21 @@ export default function CheatsheetsPage() {
         { command: 'kubectl create service <service-type> <service_name> --tcp=<port:target_port>', description: 'Create Service' },
         { command: 'kubectl create service <service-type> <service_name> --tcp=<port:target_port> --dry-run=client -o yaml > <file_name>.yaml', description: 'Create Service YAML File' },
         { command: 'kubectl expose deployment <pod/deployment_name> --type=<service-type> --port=<port> --target-port=<target_port>', description: 'Expose Service from Pod/Deployment' },
-        { command: 'kubectl create configmap <config-name> --from-literal=<key>=<value>', description: 'Create ConfigMap from literal' },
         { command: 'kubectl create configmap <configmap_name> --from-literal=<key>=<value> --from-literal=<key>= <value>', description: 'Create ConfigMap from Key-Value Pairs' },
         { command: 'kubectl create configmap <configmap_name> --from-file=<file_name>', description: 'Create ConfigMap from File' },
         { command: 'kubectl create configmap <configmap_name> --from-env-file=<file_name>', description: 'Create ConfigMap from Environment File' },
         { command: 'kubectl create secret generic <secret_name> --from-literal=<key>=<value> --from-literal=<key>= <value>', description: 'Create Secret from Key-Value Pairs' },
         { command: 'kubectl create secret generic <secret_name> --from-file=<file_name>', description: 'Create Secret from File' },
-        { command: 'kubectl create namespace dev', description: 'Create namespace' },
-        { command: 'kubectl create deployment webserver --image=nginx:alpine --replicas=3 --port=80', description: 'Create deployment with port' },
-        { command: 'kubectl create job <name> --image=<image> -- <command>', description: 'Create a Job' },
-        { command: 'kubectl create cronjob <name> --image=<image> --schedule="*/1 * * * *" -- <command>', description: 'Create a CronJob' },
-        { command: 'kubectl replace --force -f nginx.yaml', description: 'Force replace resource' },
+        { command: 'kubectl create namespace <namespace-name>', description: 'Create a namespace' },
+        { command: 'kubectl create cronjob <name> --image=<image> --schedule="*/1 * * * *" --dry-run=client -o yaml', description: 'Create CronJob with schedule' },
+        { command: 'kubectl create ingress <name> --rule="host/path=service:port"', description: 'Create basic Ingress' },
+        { command: 'kubectl run nginx --image=nginx', description: 'Create a pod imperatively' },
+        { command: 'kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx_pod.yaml', description: 'Generate pod YAML' },
+        { command: 'kubectl create deployment nginx --image=nginx --replicas=3 --dry-run=client -o yaml > nginx_deploy.yaml', description: 'Generate deployment YAML' },
+        { command: 'kubectl create namespace dev', description: 'Create namespace dev' },
         { command: 'k create configmap <config-name> --from-literal=<key>=<value>', description: 'Create configmap from literal' },
+        { command: 'kubectl create deployment webserver --image=nginx:alpine --replicas=3 --port=80', description: 'Create deployment with port' },
+        { command: 'k replace --force -f nginx.yaml', description: 'Force replace resource' },
       ],
     },
     {
@@ -105,13 +96,18 @@ export default function CheatsheetsPage() {
       commands: [
         { command: 'kubectl top node <node_name>', description: 'Get node cpu and memory utilization' },
         { command: 'kubectl top pods <pod_name>', description: 'Get pod cpu and memory utilization' },
-        { command: 'minikube addons enable metrics-server', description: 'Enable metrics-server in Minikube' },
-        { command: 'k top nodes', description: 'Get CPU and memory utilization for all nodes' },
-        { command: 'k top po', description: 'Get CPU and memory utilization for pods' },
+        { command: 'kubectl top node --heapster-namespace=monitoring', description: 'Get node metrics using Heapster' },
+        { command: 'kubectl top pods --all-namespaces', description: 'Get pod metrics across all namespaces' },
         { command: 'kubectl cluster-info dump', description: 'Dump current cluster state to stdout' },
-        { command: 'k get events --sort-by=.metadata.creationTimestamp | tail -8', description: 'Get recent events' },
-        { command: 'kubectl get componentstatuses', description: 'Get component statuses (or k get cs)' },
-        { command: 'k get cs', description: 'Get component statuses' },
+        { command: 'kubectl get events --sort-by=.metadata.creationTimestamp', description: 'List recent events' },
+        { command: 'minikube addons enable metrics-server', description: 'Enable metrics-server' },
+        { command: 'k top nodes', description: 'Top nodes' },
+        { command: 'k top po', description: 'Top pods' },
+        { command: 'k get cs or k get pods -n kube-system', description: 'Get component statuses or system pods' },
+        { command: 'k get events --sort-by=\'.metadata.creationTimestamp\' |tail -8', description: 'Get recent events (from alias kge)' },
+        { command: 'k get cs', description: 'Get componentstatuses' },
+        { command: 'kubectl cluster-info dump', description: 'Dump cluster info' },
+        { command: 'kubectl get componentstatuses', description: 'Get component statuses' },
       ],
     },
     {
@@ -124,14 +120,13 @@ export default function CheatsheetsPage() {
         { command: 'kubectl describe deployment <deployment_name>', description: 'Describe Deployment' },
         { command: 'kubectl delete deployment <deployment_name>', description: 'Delete Deployment' },
         { command: 'kubectl scale deployment <deployment_name> --replicas=<replicas>', description: 'Scale Deployment with Replicas' },
+        { command: 'kubectl autoscale deployment <deployment_name> --min=2 --max=10 --cpu-percent=80', description: 'Auto scale a deployment based on CPU' },
+        { command: 'kubectl rollout pause deployment <deployment_name>', description: 'Pause rollout of a deployment' },
+        { command: 'kubectl rollout resume deployment <deployment_name>', description: 'Resume rollout of a deployment' },
+        { command: 'k set image deployment/my-deployment mycontainer=myimage', description: 'Set image in deployment' },
         { command: 'k set image deployment/mydeploy nginx=nginx:1.19', description: 'Set image for deployment' },
-        { command: 'kubectl rollout undo deployment/my-deployment', description: 'Undo deployment' },
+        { command: 'k rollout undo deployment/my-deployment', description: 'Undo deployment' },
         { command: 'k scale --replicas=6 replicaset myapp-replicaset', description: 'Scale replicaset' },
-        { command: 'kubectl rollout history deployment <deployment_name>', description: 'Get all revisions of deployment' },
-        { command: 'kubectl rollout undo deployment <deployment_name> --to-revision=<revision>', description: 'Undo to specific revision' },
-        { command: 'kubectl rollout pause deployment <deployment_name>', description: 'Pause deployment rollout' },
-        { command: 'kubectl rollout resume deployment <deployment_name>', description: 'Resume deployment rollout' },
-        { command: 'kubectl rollout status deployment <deployment_name>', description: 'Get rollout status' },
       ],
     },
     {
@@ -143,11 +138,13 @@ export default function CheatsheetsPage() {
         { command: 'kubectl edit service <service>', description: 'Edit Service' },
         { command: 'kubectl describe service <service>', description: 'Describe Service' },
         { command: 'kubectl delete service <service>', description: 'Delete Service' },
+        { command: 'kubectl patch svc <service-name> -p \'{"spec":{"type":"LoadBalancer"}}\'', description: 'Change service type' },
+        { command: 'kubectl get services --sort-by=.metadata.name', description: 'List services sorted by name' },
         { command: 'k describe svc pod-hello | grep -i selector', description: 'Get selectors from service' },
         { command: 'k edit svc pod-hello', description: 'Edit service' },
         { command: 'k expose deployment nginx --name=nginx-service --port=80 --type=NodePort', description: 'Expose deployment as NodePort service' },
-        { command: 'kubectl get services --sort-by=.metadata.name', description: 'List services sorted by name' },
-        { command: 'kubectl patch svc <service-name> -p \'{"spec":{"type":"LoadBalancer"}}\'', description: 'Patch service type' },
+        { command: 'curl http://<ipofnode>:<nodePort>', description: 'Curl NodePort' },
+        { command: 'curl <pod-ip>', description: 'Curl pod IP' },
       ],
     },
     {
@@ -159,8 +156,8 @@ export default function CheatsheetsPage() {
         { command: 'kubectl edit ingress <ingress_name>', description: 'Edit Ingress' },
         { command: 'kubectl describe ingress <ingress_name>', description: 'Describe Ingress' },
         { command: 'kubectl delete ingress <ingress_name>', description: 'Delete Ingress' },
-        { command: 'kubectl create ingress <name> --rule="host/path=service:port"', description: 'Create basic Ingress' },
         { command: 'kubectl get ingress --all-namespaces', description: 'Get all ingresses across namespaces' },
+        { command: 'kubectl apply -f ingress.yaml', description: 'Apply Ingress configuration' },
       ],
     },
     {
@@ -206,6 +203,7 @@ export default function CheatsheetsPage() {
         { command: 'kubectl rollout status deployment <deployment_name>', description: 'Get rollout status of deployment' },
         { command: 'kubectl rollout pause deployment <deployment_name>', description: 'Pause rollout of deployment' },
         { command: 'kubectl rollout resume deployment <deployment_name>', description: 'Resume rollout of deployment' },
+        { command: 'k rollout undo deployment/my-deployment', description: 'Undo deployment' },
       ],
     },
     {
@@ -223,7 +221,7 @@ export default function CheatsheetsPage() {
       title: 'ETCD Backup and Restore',
       commands: [
         { command: 'ps -ef | grep etcd', description: 'Find ETCD process' },
-        { command: 'ETCDCTL_API=3 etcdctl snapshot save /home/<user_name>/snapshot-pre-boot.db --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/minikube/certs/etcd/ca.crt --cert=/var/lib/minikube/certs/etcd/server.crt --key=/var/lib/minikube/certs/etcd/server.key', description: 'Save ETCD snapshot (Minikube example)' },
+        { command: 'ETCDCTL_API=3 etcdctl snapshot save /home/chaldan/snapshot-pre-boot.db --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/minikube/certs/etcd/ca.crt --cert=/var/lib/minikube/certs/etcd/server.crt --key=/var/lib/minikube/certs/etcd/server.key', description: 'Save ETCD snapshot (Minikube example)' },
         { command: 'ETCDCTL_API=3 etcdctl snapshot save /opt/etcd-backup.db --endpoints=https://192.22.58.3:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key', description: 'Save ETCD snapshot' },
         { command: 'ETCDCTL_API=3 etcdctl --endpoints $ENDPOINT snapshot save snapshotdb', description: 'Save ETCD snapshot with endpoint var' },
         { command: 'ETCDCTL_API=3 etcdctl snapshot status /opt/etcd-backup.db', description: 'View status of ETCD snapshot' },
@@ -264,6 +262,9 @@ export default function CheatsheetsPage() {
         { command: 'k auth can-i get pods --namespace=development --as john', description: 'Check user permissions' },
         { command: 'k certificate approve john-developer', description: 'Approve CSR' },
         { command: 'cat john.csr | base64 | tr -d "\\n"', description: 'Base64 encode CSR' },
+        { command: 'k create role --help', description: 'Get help for creating role' },
+        { command: 'k auth --help', description: 'Get help for auth' },
+        { command: 'k create rolebinding --help', description: 'Get help for creating rolebinding' },
       ],
     },
     {
@@ -271,9 +272,9 @@ export default function CheatsheetsPage() {
       commands: [
         { command: 'sudo service docker status', description: 'Check Docker status' },
         { command: 'sudo service --status-all', description: 'Check all services status' },
-        { command: 'sudo usermod -aG docker <user_name> && newgrp docker', description: 'Add user to Docker group' },
+        { command: 'sudo usermod -aG docker chaldan && newgrp docker', description: 'Add user to Docker group' },
         { command: 'minikube start --driver=docker', description: 'Start Minikube with Docker driver' },
-        { command: 'sudo usermod -a -G docker <user_name>', description: 'Add user to Docker group (variant)' },
+        { command: 'sudo usermod -a -G docker chaldan', description: 'Add user to Docker group (variant)' },
         { command: 'newgrp docker', description: 'Refresh group membership' },
         { command: 'minikube dashboard --url', description: 'Get Minikube dashboard URL' },
         { command: 'minikube service nginx-service --url', description: 'Get service URL in Minikube' },
@@ -304,43 +305,45 @@ export default function CheatsheetsPage() {
         { command: 'kubectl get <resource> -o wide', description: 'Get resource with extended information' },
         { command: 'kubectl get <resource> -o yaml', description: 'Get resource in YAML format' },
         { command: 'kubectl get <resource> -o json', description: 'Get resource in JSON format' },
-        { command: 'kubectl get pods -l env=prod', description: 'Get pods with label' },
-        { command: 'kubectl config get-clusters', description: 'Get cluster names' },
-        { command: 'kubectl config view', description: 'View complete cluster info' },
+        { command: 'kubectl get pods [-n abc|--all-namespaces] [-o wide|yaml|json]', description: 'Example for getting pods' },
+        { command: 'k config get-clusters', description: 'Get cluster names' },
+        { command: 'k config view', description: 'View complete cluster info' },
         { command: 'k replace --force -f nginx.yaml', description: 'Force replace resource' },
-        { command: 'k get cs', description: 'Get componentstatuses' },
+        { command: 'k get all -l env=prod', description: 'Get all resources with label' },
         { command: 'k config set-context ${kubectl config current-context} --namespace=dev', description: 'Set namespace in context' },
         { command: 'k get pods --all-namespaces', description: 'Get pods in all namespaces' },
-        { command: 'k get all -l env=prod', description: 'Get all resources with label' },
-        { command: 'k help run', description: 'Get help for run command' },
-        { command: 'kubectl exec -it non-root-pod -- id', description: 'Verify user and group ID in pod' },
-        { command: 'k get pod busybox -ojson|jq \'.spec.containers[0].image\' "busybox"', description: 'Get image from pod JSON' },
+        { command: 'k get cs', description: 'Get componentstatuses' },
         { command: 'ps -aux | grep kubelet', description: 'Find kubelet process to get config path' },
         { command: 'k describe pod pod-hello | grep -i ip:', description: 'Get IP from pod description' },
-        { command: 'curl <pod-ip>', description: 'Curl pod IP' },
-        { command: 'curl http://<ipofnode>:<nodePort>', description: 'Curl NodePort' },
         { command: 'k describe svc pod-hello | grep -i selector', description: 'Get selectors from service' },
         { command: 'k edit svc pod-hello', description: 'Edit service' },
         { command: 'k get po -L redis', description: 'Get pods with label' },
-        { command: 'k taint nodes controlplane node-role.kubernetes.io=control-plane:NoSchedule-', description: 'Untaint control plane node' },
-        { command: 'kubectl label nodes <node-name> disktype=ssd', description: 'Label a node' },
-        { command: 'kubectl taint nodes <node-name> key=value:NoSchedule', description: 'Taint a node' },
-        { command: 'k get nodes -o wide', description: 'Get nodes with wide output' },
+        { command: 'kubectl help run', description: 'Get help for run command' },
+        { command: '/ # wget -O- 172.17.254.255', description: 'Test connectivity from busybox pod' },
+        { command: 'kubectl exec -it non-root-pod -- id', description: 'Verify user and group ID in pod' },
+        { command: 'k get pod busybox -ojson|jq \'.spec.containers[0].image\' "busybox"', description: 'Get image from pod JSON' },
+        { command: 'to limit resources in a namespace, create a resource quota', description: 'Note on resource quota' },
+        { command: 'to manually schedule a pod, add nodeName: nodename into yaml on the same line as containers or create kind:Binding', description: 'Note on manual pod scheduling' },
       ],
     },
     {
       title: 'Scheduling Commands',
       commands: [
         { command: 'k label nodes <node-name> <label-key>=<label-value>', description: 'Label nodes for selector' },
-        { command: 'nodeSelector: size: Large', description: 'Place nodeSelector in pod spec for scheduling' },
-        { command: 'affinity: ... matchExpressions: ...', description: 'Set node affinity in pod spec to schedule on different nodes (requiredDuringSchedulingIgnoredDuringExecution or preferredDuringSchedulingIgnoredDuringExecution)' },
+        { command: 'nodeSelector: size: Large', description: 'Place nodeSelector in pod spec' },
+        { command: 'affinity: ... matchExpressions: ... size NotIn Small / Exists', description: 'Set node affinity in pod spec (requiredDuringSchedulingIgnoredDuringExecution or preferredDuringSchedulingIgnoredDuringExecution)' },
+        { command: 'resources: requests: memory: "1Gi" cpu: "1", limits: memory: "2Gi" cpu: "2"', description: 'Set resource requirements and limits in pod spec' },
+        { command: 'ps -aux | grep kubelet', description: 'Get kubelet config path for static pods' },
       ],
     },
     {
       title: 'Network and Taint Commands',
       commands: [
         { command: 'k taint nodes node01 spray=mortein:NoSchedule', description: 'Taint node' },
+        { command: 'k taint nodes controlplane node-role.kubernetes.io=control-plane:NoSchedule-', description: 'Untaint control plane' },
         { command: 'k expose deployment nginx --name=nginx-service --port=80 --type=NodePort', description: 'Expose deployment as NodePort' },
+        { command: 'curl http://<ipofnode>:<nodePort>', description: 'Curl NodePort' },
+        { command: 'curl <pod-ip>', description: 'Curl pod IP' },
       ],
     },
     {
@@ -373,10 +376,10 @@ export default function CheatsheetsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-4">Kubernetes Cheatsheets</h1>
+    <main className="p-6 bg-gray-900 text-white ml-64 overflow-y-auto">
+      <h1 className="text-3xl font-bold mb-4">Kubernetes Cheatsheets</h1>
       <p className="mb-4">
-        Quick reference guides for common Kubernetes commands and configurations. Surprise: Added Favorites with starring, local storage persistence, and expanded categories with new SRE-focused commands from deep web searches (e.g., Reddit, Medium, Kubernetes docs, LinkedIn posts)!
+        Quick reference guides for common Kubernetes commands and configurations. Surprise: Thoroughly categorized and expanded with all commands from the provided file, plus additional best-practice commands from web searches (e.g., from Kubernetes docs, Reddit, Medium, LinkedIn posts on SRE tools in 2025).
       </p>
 
       <input
@@ -389,7 +392,7 @@ export default function CheatsheetsPage() {
 
       <div className="space-y-4">
         {filteredCategories.map((category) => (
-          <div key={category.title} className="bg-gray-900 rounded-lg shadow-md">
+          <div key={category.title} className="bg-gray-800 rounded-lg shadow-md">
             <button
               onClick={() => toggleSection(category.title)}
               className="flex items-center w-full p-4 text-left font-semibold text-purple-400 hover:bg-gray-700 transition-colors"
@@ -405,7 +408,6 @@ export default function CheatsheetsPage() {
                     <th className="p-3 text-left border-b border-gray-600">Command</th>
                     <th className="p-3 text-left border-b border-gray-600">Description</th>
                     <th className="p-3 text-left border-b border-gray-600">Action</th>
-                    <th className="p-3 text-left border-b border-gray-600">Favorite</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -422,11 +424,6 @@ export default function CheatsheetsPage() {
                           Copy
                         </button>
                       </td>
-                      <td className="p-3 border-b border-gray-600">
-                        <button onClick={() => toggleFavorite(cmd.command)}>
-                          {favorites[cmd.command] ? <StarSolidIcon className="w-5 h-5 text-yellow-400" /> : <StarOutlineIcon className="w-5 h-5 text-gray-400" />}
-                        </button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -435,6 +432,6 @@ export default function CheatsheetsPage() {
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
