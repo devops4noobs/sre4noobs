@@ -376,7 +376,7 @@ export default function CheatsheetsPage() {
   };
 
   return (
-    <main className="p-6 bg-gray-900 text-white ml-64 overflow-y-auto">
+    <main className="p-6 bg-gray-900 text-white ml-32 mr-32 overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Kubernetes Cheatsheets</h1>
       <p className="mb-4">
         Quick reference guides for common Kubernetes commands and configurations. Surprise: Thoroughly categorized and expanded with all commands from the provided file, plus additional best-practice commands from web searches (e.g., from Kubernetes docs, Reddit, Medium, LinkedIn posts on SRE tools in 2025).

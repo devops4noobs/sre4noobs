@@ -2,9 +2,20 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon, CubeIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { Icon } from '@heroicons/react/24/outline';
 
-const menuItems = [
+// Define TypeScript interface for menu items
+interface MenuItem {
+  label: string;
+  href?: string;
+  icon?: Icon;
+  isPremium?: boolean;
+  subItems?: MenuItem[];
+  children?: MenuItem[];
+}
+
+const menuItems: MenuItem[] = [
   { label: 'Home', href: '/', icon: HomeIcon },
   {
     label: 'SRE Fundamentals',
@@ -37,11 +48,27 @@ const menuItems = [
     ],
   },
   {
-    label: 'Kubernetes',
+    label: 'Technologies',
     subItems: [
-      { label: 'Fundamental Concepts', href: '/kubernetes/fundamental-concepts', icon: QuestionMarkCircleIcon },
-      { label: 'Cheatsheets', href: '/kubernetes/cheatsheets', icon: BookOpenIcon },
-      { label: 'Infra', href: '/kubernetes/infra', icon: CogIcon },
+      {
+        label: 'Kubernetes',
+        href: '/technologies/kubernetes',
+        icon: CubeIcon,
+        children: [
+          { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamentals', icon: AcademicCapIcon},
+          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon},
+          { label: 'CKA mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
+        ],
+      },
+      {
+        label: 'SignalFX',
+        href: '/technologies/signalfx',
+        icon: ChartPieIcon,
+        children: [
+          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon},
+          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon},
+        ],
+      },
     ],
   },
   {
@@ -81,57 +108,69 @@ export default function Sidebar() {
     );
   };
 
+  const renderMenuItem = (item: MenuItem, depth: number = 0) => {
+    const Icon = item.icon || null;
+    const isActive = pathname === item.href;
+    const hasChildren = (item.children && item.children.length > 0) || (item.subItems && item.subItems.length > 0);
+    const isExpanded = expandedSections.includes(item.label);
+
+    return (
+      <li key={item.label} className={depth > 1 ? `ml-4` : ''}>
+        <div className="flex items-center justify-between">
+          {item.href ? (
+            <Link
+              href={item.href}
+              className={`flex items-center flex-grow p-2 rounded-md transition-colors ${
+                isActive ? 'bg-purple-600 text-white' : 'hover:bg-gray-800 text-gray-300'
+              }`}
+              onClick={() => {
+                if (item.isPremium) {
+                  console.log(`Premium content: ${item.label}`); // Replace with redirect to /subscribe
+                }
+              }}
+            >
+              {Icon && <Icon className={`w-${depth === 0 ? 5 : 4} h-${depth === 0 ? 5 : 4} mr-2 ${depth === 0 ? 'text-purple-400' : 'text-gray-300'}`} />}
+              {item.label}
+              {item.isPremium && <LockClosedIcon className="w-4 h-4 ml-2 text-yellow-400" />}
+            </Link>
+          ) : (
+            <button
+              onClick={() => toggleSection(item.label)}
+              className="flex items-center w-full p-2 rounded-md hover:bg-gray-800 text-gray-300 transition-colors"
+              aria-expanded={isExpanded}
+            >
+              {Icon && <Icon className="w-5 h-5 mr-2 text-purple-400" />}
+              {item.label}
+            </button>
+          )}
+          {hasChildren && (
+            <ChevronDownIcon
+              onClick={() => toggleSection(item.label)}
+              className={`w-4 h-4 text-gray-400 transition-transform cursor-pointer ${
+                isExpanded ? 'rotate-180' : ''
+              }`}
+            />
+          )}
+        </div>
+        {isExpanded && item.subItems && (
+          <ul className="space-y-1 mt-1">
+            {item.subItems.map((subItem) => renderMenuItem(subItem, depth + 1))}
+          </ul>
+        )}
+        {isExpanded && item.children && (
+          <ul className="space-y-1 mt-1">
+            {item.children.map((child) => renderMenuItem(child, depth + 2))}
+          </ul>
+        )}
+      </li>
+    );
+  };
+
   return (
     <aside className="w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg">
       <nav>
         <ul className="space-y-2">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  className={`flex items-center p-2 rounded-md transition-colors ${
-                    pathname === item.href ? 'bg-purple-600 text-white' : 'hover:bg-gray-800 text-gray-300'
-                  }`}
-                >
-                  {item.icon && <item.icon className="w-5 h-5 mr-2 text-purple-400" />}
-                  {item.label}
-                </Link>
-              ) : (
-                <>
-                  <button
-                    onClick={() => toggleSection(item.label)}
-                    className="flex items-center w-full p-2 rounded-md hover:bg-gray-800 text-gray-300 transition-colors"
-                    aria-expanded={expandedSections.includes(item.label)}
-                  >
-                    {item.label}
-                    <ChevronDownIcon
-                      className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
-                        expandedSections.includes(item.label) ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {expandedSections.includes(item.label) && (
-                    <ul className="ml-4 space-y-1 mt-1">
-                      {item.subItems?.map((sub, subIndex) => (
-                        <li key={subIndex}>
-                          <Link
-                            href={sub.href}
-                            className={`flex items-center p-2 rounded-md transition-colors ${
-                              pathname === sub.href ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-gray-400'
-                            }`}
-                          >
-                            {sub.icon && <sub.icon className="w-4 h-4 mr-2 text-gray-300" />}
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </>
-              )}
-            </li>
-          ))}
+          {menuItems.map((item) => renderMenuItem(item))}
         </ul>
       </nav>
     </aside>
