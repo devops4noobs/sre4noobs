@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon, CubeIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon, CubeIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-
+// Define TypeScript interface for menu items
 interface MenuItem {
   label: string;
   href?: string;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>; // Use supertype directly
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   isPremium?: boolean;
   subItems?: MenuItem[];
   children?: MenuItem[];
@@ -54,8 +54,8 @@ const menuItems: MenuItem[] = [
         href: '/technologies/kubernetes',
         icon: CubeIcon,
         children: [
-          { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamentals', icon: AcademicCapIcon},
-          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon},
+          { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamental-concepts', icon: AcademicCapIcon },
+          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon },
           { label: 'CKA mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
         ],
       },
@@ -64,8 +64,8 @@ const menuItems: MenuItem[] = [
         href: '/technologies/signalfx',
         icon: ChartPieIcon,
         children: [
-          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon},
-          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon},
+          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
+          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
         ],
       },
     ],
@@ -112,7 +112,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     );
   };
 
-  const renderMenuItem = (item: MenuItem, depth: number = 0) => {
+  const renderMenuItem = (item: MenuItem, depth: number = 0): React.ReactNode => {
     const Icon = item.icon || null;
     const isActive = pathname === item.href;
     const hasChildren = (item.children && item.children.length > 0) || (item.subItems && item.subItems.length > 0);
@@ -171,7 +171,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   };
 
   return (
-    <aside className="w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg">
+    <aside className={`w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:block`}>
+      <div className="md:hidden flex justify-end mb-4">
+        <button onClick={onClose} aria-label="Close Sidebar">
+          <XMarkIcon className="w-6 h-6 text-white" />
+        </button>
+      </div>
       <nav>
         <ul className="space-y-2">
           {menuItems.map((item) => renderMenuItem(item))}
