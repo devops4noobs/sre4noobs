@@ -4,12 +4,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon, CubeIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 
-
+interface IconComponentType extends React.FC<React.SVGProps<SVGSVGElement>> {}
 // Define TypeScript interface for menu items
 interface MenuItem {
   label: string;
   href?: string;
-  icon?: React.ComponentType<any>;
+  icon?: IconComponentType;
   isPremium?: boolean;
   subItems?: MenuItem[];
   children?: MenuItem[];
