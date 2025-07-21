@@ -127,7 +127,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               className={`flex items-center flex-grow p-2 rounded-md transition-colors ${
                 isActive ? 'bg-purple-600 text-white' : 'hover:bg-gray-800 text-gray-300'
               }`}
-              onClick={(e) => {
+              onClick={() => {
                 if (item.isPremium) {
                   console.log(`Premium content: ${item.label}`); // Replace with redirect to /subscribe
                 } else {
