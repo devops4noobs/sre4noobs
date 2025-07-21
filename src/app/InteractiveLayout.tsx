@@ -18,21 +18,22 @@ export default function InteractiveLayout({ children }: { children: React.ReactN
   return (
     <>
       {/* Mobile Header with Toggle */}
-      <header className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 p-4 z-20 flex justify-between items-center border-b border-gray-700">
+      <header className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 p-4 z-30 flex justify-between items-center border-b border-gray-700">
         <h1 className="text-xl font-bold">SRE4Noobs</h1>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Toggle Sidebar">
+        <button onClick={() => { console.log('Toggle clicked'); setIsSidebarOpen(!isSidebarOpen); }} aria-label="Toggle Sidebar">
           {isSidebarOpen ? <XMarkIcon className="w-6 h-6 text-white" /> : <Bars3Icon className="w-6 h-6 text-white" />}
         </button>
       </header>
 
       {/* Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => { console.log('Close clicked'); setIsSidebarOpen(false); }} />
 
       {/* Overlay for Mobile Sidebar */}
       {isSidebarOpen && (
         <div 
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-10"
-          onClick={() => setIsSidebarOpen(false)}
+          className="md:hidden fixed inset-0 bg-black bg-opacity-30 z-20"
+          onClick={() => { console.log('Overlay clicked'); setIsSidebarOpen(false); }}
+          onTouchEnd={() => { console.log('Touch ended on overlay'); setIsSidebarOpen(false); }} // Fallback for touch devices
         />
       )}
 

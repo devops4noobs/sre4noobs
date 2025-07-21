@@ -127,9 +127,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               className={`flex items-center flex-grow p-2 rounded-md transition-colors ${
                 isActive ? 'bg-purple-600 text-white' : 'hover:bg-gray-800 text-gray-300'
               }`}
-              onClick={() => {
+              onClick={(e) => {
                 if (item.isPremium) {
                   console.log(`Premium content: ${item.label}`); // Replace with redirect to /subscribe
+                } else {
+                  onClose(); // Close sidebar on navigation
                 }
               }}
             >
@@ -171,7 +173,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   };
 
   return (
-    <aside className={`w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:block`}>
+    <aside className={`w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-30 shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:block`}>
       <div className="md:hidden flex justify-end mb-4">
         <button onClick={onClose} aria-label="Close Sidebar">
           <XMarkIcon className="w-6 h-6 text-white" />
