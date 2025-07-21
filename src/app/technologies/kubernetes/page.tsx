@@ -3,7 +3,7 @@
 
 export default function KubernetesPage() {
   return (
-    <main className="p-6 bg-gray-900 text-white ml-32 mr-32 overflow-y-auto">
+    <main className="p-6 bg-gray-900 text-white overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">About Kubernetes: Mastering Container Orchestration for SRE Excellence</h1>
       <p className="mb-4">
         Welcome to the Kubernetes section of Devops4Noobs – your ultimate guide to becoming a Site Reliability Engineer powerhouse! Kubernetes (often abbreviated as K8s) is the gold standard for managing containerized applications at scale. Whether you&apos;re a beginner DevOps engineer or an experienced SRE looking to optimize your infrastructure, this page will give you a solid foundation. Plus, unlock premium features like interactive cheatsheets, advanced infra tutorials, and SRE certifications to supercharge your learning and career.
