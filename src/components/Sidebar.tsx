@@ -41,6 +41,7 @@ const menuItems: MenuItem[] = [
     label: 'Practical Tools',
     subItems: [
       { label: 'Blameless Postmortems', href: '/tools/postmortem', icon: BookOpenIcon },
+      { label: 'RCA', href: '/tools/rca', icon: BookOpenIcon },
       { label: 'SLO Calculator', href: '/tools/slo-calculator', icon: ChartBarIcon },
       { label: 'Error Budget Tracker', href: '/tools/error-budget', icon: ShieldCheckIcon },
       { label: 'Incident Response Simulator', href: '/tools/incident-simulator', icon: BeakerIcon },
@@ -51,9 +52,8 @@ const menuItems: MenuItem[] = [
     subItems: [
       {
         label: 'Kubernetes',
-        href: '/technologies/kubernetes',
-        icon: CubeIcon,
         children: [
+          { label: 'About K8S', href: '/technologies/kubernetes', icon: AcademicCapIcon },
           { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamentals', icon: AcademicCapIcon },
           { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon },
           { label: 'CKA mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
@@ -61,13 +61,14 @@ const menuItems: MenuItem[] = [
       },
       {
         label: 'SignalFX',
-        href: '/technologies/signalfx',
-        icon: ChartPieIcon,
         children: [
+          { label: 'About SFX', href: '/technologies/signalfx', icon: ChartPieIcon },
           { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
           { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
         ],
       },
+      { label: 'Pager Duty', href: '/tools/pagerduty' },
+      { label: 'AWS', href: '/tools/aws'},
     ],
   },
   {
