@@ -1,6 +1,6 @@
 export default function FundamentalConceptsPage() {
   return (
-    <main className="p-6 bg-gray-900 text-white ml-32 mr-32 overflow-y-auto">
+    <main className="p-6 bg-gray-900 text-white overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Fundamental Kubernetes Concepts</h1>
       <p className="mb-4">
         Kubernetes (K8s) is the backbone of cloud-native computing, enabling SREs to automate, scale, and manage containerized applications. Understanding its fundamental concepts is crucial for designing reliable systems and mitigating issues like those outlined in incident reports (e.g., impact, root causes). Below are the core building blocks every SRE should master.
