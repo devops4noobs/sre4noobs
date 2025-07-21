@@ -69,7 +69,7 @@ export default function GitBestPractices() {
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">📐 Calculating Commit Health</h2>
         <p className="mb-4 italic">
           <strong>Health Score = (Atomic Commits × Review Coverage) / Total Changes</strong><br />
-          Example: 100 atomic commits, 90% reviewed, 120 changes = (100 × 0.9) / 120 = 0.75 – aim for >0.8.
+          Example: 100 atomic commits, 90% reviewed, 120 changes = (100 × 0.9) / 120 = 0.75 – aim for {">"}0.8.
         </p>
 
         <p className="text-gray-400 mt-6">

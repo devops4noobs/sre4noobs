@@ -5,7 +5,7 @@ export default function GitPage() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          Git is a distributed version control system that's fundamental to modern SRE practices. It enables teams to track changes, collaborate efficiently, and maintain reliable infrastructure through code versioning. This pillar ensures SREs can implement auditable changes, quick rollbacks, and seamless integration in CI/CD pipelines.
+          Git is a distributed version control system that&apos;s fundamental to modern SRE practices. It enables teams to track changes, collaborate efficiently, and maintain reliable infrastructure through code versioning. This pillar ensures SREs can implement auditable changes, quick rollbacks, and seamless integration in CI/CD pipelines.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Distributed Version Control</h2>
