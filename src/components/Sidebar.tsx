@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, LinkIcon, CodeBracketIcon, UserCircleIcon, CubeIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 
-// Define TypeScript interface for menu items
+
 interface MenuItem {
   label: string;
   href?: string;
@@ -54,8 +54,8 @@ const menuItems: MenuItem[] = [
         href: '/technologies/kubernetes',
         icon: CubeIcon,
         children: [
-          { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamental-concepts', icon: AcademicCapIcon },
-          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon },
+          { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamental-concepts', icon: AcademicCapIcon},
+          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon},
           { label: 'CKA mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
         ],
       },
@@ -64,8 +64,8 @@ const menuItems: MenuItem[] = [
         href: '/technologies/signalfx',
         icon: ChartPieIcon,
         children: [
-          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
-          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
+          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon},
+          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon},
         ],
       },
     ],
