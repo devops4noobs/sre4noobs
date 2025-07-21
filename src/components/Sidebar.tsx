@@ -67,6 +67,15 @@ const menuItems: MenuItem[] = [
           { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
         ],
       },
+      {
+        label: 'GIT',
+        children: [
+          { label: 'About GIT', href: '/technologies/git', icon: AcademicCapIcon },
+          { label: 'Cheatsheets', href: '/technologies/git/cheatsheets', icon: DocumentTextIcon },
+          { label: 'Branch Strategies', href: '/technologies/git/branch-strategies', icon: DocumentTextIcon },
+          { label: 'Best Practices', href: '/technologies/git/best-practices', icon: ServerIcon, isPremium: true },
+        ],
+      },
       { label: 'Pager Duty', href: '/tools/pagerduty' },
       { label: 'AWS', href: '/tools/aws'},
     ],
