@@ -170,8 +170,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     );
   };
 
-return (
-    <aside className={`fixed top-0 bottom-0 left-0 w-64 bg-gray-900 p-4 text-white border-r border-gray-700 z-10 shadow-lg transition-transform duration-300 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:block`}>
+  return (
+    <aside className="w-64 bg-gray-900 p-4 text-white border-r border-gray-700 fixed top-0 bottom-0 z-10 shadow-lg">
       <nav>
         <ul className="space-y-2">
           {menuItems.map((item) => renderMenuItem(item))}
