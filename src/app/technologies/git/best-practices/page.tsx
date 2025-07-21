@@ -5,12 +5,12 @@ export default function GitBestPractices() {
 
       <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
         <p className="mb-4">
-          Git best practices are vital for SRE teams to ensure code reliability, collaboration, and efficient deployments. They minimize errors in production, enable quick recoveries, and support scalable systems. Surprise: Integrated with emerging GitOps trends for automated IaC in 2025, drawing from production examples at companies like Google and Netflix.<grok-card data-id="d35aa7" data-type="citation_card"></grok-card><grok-card data-id="17b223" data-type="citation_card"></grok-card>
+          Git best practices are vital for SRE teams to ensure code reliability, collaboration, and efficient deployments. They minimize errors in production, enable quick recoveries, and support scalable systems. Surprise: Integrated with emerging GitOps trends for automated IaC in 2025, drawing from production examples at companies like Google and Netflix.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Efficient Version Control</h2>
         <p className="mb-4">
-          Best practices in Git focus on structured workflows, clear commits, and automation to maintain code integrity. In SRE, they align with principles like toil reduction and error budgeting, ensuring changes are traceable and reversible in production environments.<grok-card data-id="ba6ca2" data-type="citation_card"></grok-card>
+          Best practices in Git focus on structured workflows, clear commits, and automation to maintain code integrity. In SRE, they align with principles like toil reduction and error budgeting, ensuring changes are traceable and reversible in production environments.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🧠 Key Principles</h2>
@@ -40,19 +40,19 @@ export default function GitBestPractices() {
           <div className="flex items-start">
             <span className="text-indigo-400 mr-2">🌐</span>
             <p>
-              Google enforces conventional commits in monorepos, enabling traceable changes across millions of files.<grok-card data-id="eba9c0" data-type="citation_card"></grok-card>
+              Google enforces conventional commits in monorepos, enabling traceable changes across millions of files.
             </p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-400 mr-2">📱</span>
             <p>
-              Netflix uses GitOps with Argo CD for automated deployments, reducing manual toil in streaming services.<grok-card data-id="9a3a67" data-type="citation_card"></grok-card>
+              Netflix uses GitOps with Argo CD for automated deployments, reducing manual toil in streaming services.
             </p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-400 mr-2">🛒</span>
             <p>
-              Amazon integrates secret scanning in GitHub Enterprise, preventing leaks in AWS repos.<grok-card data-id="eadf92" data-type="citation_card"></grok-card>
+              Amazon integrates secret scanning in GitHub Enterprise, preventing leaks in AWS repos.
             </p>
           </div>
         </div>
