@@ -1,5 +1,4 @@
 'use client'; // Required for useState and motion
-import { FaChartLine, FaCogs, FaExclamationTriangle, FaRocket, FaTools } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState } from "react";
 

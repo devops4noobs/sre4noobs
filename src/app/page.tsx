@@ -141,12 +141,13 @@ export default function HomePage() {
           <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive labs!&quot;</blockquote>
           <span className="block text-indigo-400 font-semibold">— SRE Pro, July 23, 2025, 10:56 PM EEST</span>
           <motion.a
-            href="#get-started"
+            href="https://www.facebook.com/groups/755805476911003/?mibextid=wwXIfr"
+            target="_blank"
             className="mt-6 sm:mt-8 inline-block bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold px-6 py-2 sm:px-10 sm:py-4 rounded-full shadow-lg transition duration-300 text-base sm:text-xl hover:shadow-[0_0_15px_#facc15,0_0_30px_#facc15,0_0_45px_#facc15]"
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
           >
-            Ignite Your SRE Journey
+            Join the Community
           </motion.a>
         </div>
       </section>
