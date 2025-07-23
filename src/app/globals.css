@@ -20,3 +20,37 @@
   0%, 100% { text-shadow: 0 0 5px #facc15; }
   50% { text-shadow: 0 0 15px #facc15, 0 0 25px #facc15; }
 }
+
+/* Responsive helpers for custom text effects */
+.neon-text, .glow-text, .pulse-text {
+  font-size: 1.5rem;
+}
+@media (max-width: 640px) {
+  .neon-text, .glow-text, .pulse-text {
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+    word-break: break-word;
+  }
+}
+
+/* Responsive section padding and card helpers */
+.responsive-section {
+  padding: 3rem 2rem;
+}
+@media (max-width: 640px) {
+  .responsive-section {
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+.responsive-card {
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
+  padding: 2rem 1.5rem;
+}
+@media (max-width: 640px) {
+  .responsive-card {
+    padding: 1rem 0.5rem;
+    border-radius: 0.75rem;
+  }
+}
