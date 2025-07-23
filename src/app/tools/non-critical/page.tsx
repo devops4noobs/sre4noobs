@@ -20,7 +20,7 @@ export default function NonCriticalIssueTrackingProcess() {
         <ul className="list-disc list-inside space-y-2 mb-6">
             <li><strong>Transparency:</strong> Record all observed anomalies to keep the team informed.</li>
             <li><strong>Continuous Learning:</strong> Investigate underlying causes to reduce repeat issues.</li>
-            <li><strong>Appropriate Response:</strong> Apply this process to issues that don't need urgent escalation.</li>
+            <li><strong>Appropriate Response:</strong> Apply this process to issues that don&apos;t need urgent escalation.</li>
             <li><strong>Teamwork:</strong> Engage engineering teams for in-depth investigation as necessary.</li>
             <li><strong>Knowledge Sharing:</strong> Tag and distribute findings to enhance team expertise.</li>
             <li><strong>Streamlined Process:</strong> Use a consistent template to simplify ticket creation.</li>

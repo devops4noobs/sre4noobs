@@ -54,7 +54,7 @@ const menuItems: MenuItem[] = [
       {
         label: 'Kubernetes',
         children: [
-          { label: 'About K8S', href: '/technologies/kubernetes', icon: AcademicCapIcon },
+          { label: 'About K8S', href: '/technologies/kubernetes', icon: ChartPieIcon },
           { label: 'Fundamental Concepts', href: '/technologies/kubernetes/fundamentals', icon: AcademicCapIcon },
           { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon },
           { label: 'CKA mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
