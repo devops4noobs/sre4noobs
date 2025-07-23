@@ -82,7 +82,7 @@ export default function HomePage() {
 
       {/* What You'll Learn Section */}
       <section className="bg-gradient-to-br from-indigo-800/90 to-blue-900/80 p-12 rounded-3xl shadow-2xl max-w-6xl mx-auto text-justify mb-16 border border-white/10 animate-fade-in delay-400">
-        <h2 className="text-4xl font-extrabold text-yellow-200 mb-10 text-center tracking-tight">What You'll Learn on Devops4Noobs</h2>
+        <h2 className="text-4xl font-extrabold text-yellow-200 mb-10 text-center tracking-tight">What You&apos;ll Learn on Devops4Noobs</h2>
         <div className="grid md:grid-cols-2 gap-10">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3"><FaUsers className="text-indigo-200 text-2xl" /><span className="font-bold text-yellow-300 text-lg">Closer Dev-SRE Integration:</span></div>
