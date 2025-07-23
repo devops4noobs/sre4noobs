@@ -149,7 +149,7 @@ export default function HomePage() {
           </video>
         </div>
         <div className="relative z-10">
-          <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">"Devops4Noobs transformed my SRE career with its immersive labs!"</blockquote>
+          <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive labs!&quot;</blockquote>
           <span className="block text-indigo-400 font-semibold">— SRE Pro, July 23, 2025, 10:56 PM EEST</span>
           <motion.a
             href="#get-started"
