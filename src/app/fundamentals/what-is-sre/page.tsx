@@ -1,11 +1,10 @@
 'use client'; // Required for useState and motion
 import { FaChartLine, FaCogs, FaExclamationTriangle, FaRocket, FaTools } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function WhatIsSre() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0); // Progress bar for learning
 
   // Animation variants
   const cardVariants = {
@@ -13,13 +12,6 @@ export default function WhatIsSre() {
     visible: { scale: 1, opacity: 1, y: 0 },
     hover: { scale: 1.03, boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)" },
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 0 : prev + 1)); // Simulate learning progress
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
@@ -174,20 +166,9 @@ export default function WhatIsSre() {
           )}
         </motion.div>
 
-        {/* Progress Bar */}
-        <motion.div
-          className="w-full bg-gray-700 h-2 rounded-full mb-6"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.1 }}
-        >
-          <div className="h-2 bg-yellow-400 rounded-full" />
-        </motion.div>
-        <p className="text-indigo-100 text-sm mb-6">Learning Progress: {progress}%</p>
-
         {/* Footer Timestamp */}
         <p className="text-gray-400 text-xs mt-4 text-center">
-          Last updated: July 23, 2025, 11:36 PM EEST
+          Last updated: July 23, 2025, 11:44 PM EEST
         </p>
       </main>
     </div>
