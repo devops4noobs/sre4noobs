@@ -138,19 +138,59 @@ export default function HomePage() {
 
       <section className="w-full max-w-xs sm:max-w-md md:max-w-4xl mx-auto text-center py-8 px-4 mb-6 sm:mb-12 relative overflow-hidden">
         <div className="relative z-10">
-          <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive documentation!&quot;</blockquote>
-          <span className="block text-indigo-400 font-semibold">— SRE Pro, July 23, 2025, 10:56 PM EEST</span>
-          <motion.a
-            href="https://www.facebook.com/groups/755805476911003/?mibextid=wwXIfr"
-            target="_blank"
-            className="mt-6 sm:mt-8 inline-block bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold px-6 py-2 sm:px-10 sm:py-4 rounded-full shadow-lg transition duration-300 text-base sm:text-xl hover:shadow-[0_0_15px_#facc15,0_0_30px_#facc15,0_0_45px_#facc15]"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Join our Facebook Community
-          </motion.a>
+          {/* Testimonials Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {/* Testimonial 1: Indian Name */}
+              <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
+                <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
+                "Devops4Noobs simplified SRE concepts, helping me land my first DevOps role!"
+                </blockquote>
+              <div className="flex items-center justify-between">
+              <span className="block text-indigo-400 font-semibold">— Raj Patel, India</span>
+              <div className="flex text-yellow-400">
+                ★★★★★
+              </div>
+            </div>
         </div>
-      </section>
+
+      {/* Testimonial 2: American Name */}
+      <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
+        <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
+          "The immersive tools boosted my confidence in handling production incidents effectively."
+        </blockquote>
+        <div className="flex items-center justify-between">
+          <span className="block text-indigo-400 font-semibold">— Emily Johnson, USA</span>
+          <div className="flex text-yellow-400">
+            ★★★★☆
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonial 3: European Name */}
+      <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
+        <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
+          "Devops4Noobs' real-world examples transformed how I approach system reliability."
+        </blockquote>
+        <div className="flex items-center justify-between">
+          <span className="block text-indigo-400 font-semibold">— Lukas Müller, Germany</span>
+          <div className="flex text-yellow-400">
+            ★★★★★
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <motion.a
+      href="https://www.facebook.com/groups/755805476911003/?mibextid=wwXIfr"
+      target="_blank"
+      className="mt-6 sm:mt-8 inline-block bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold px-6 py-2 sm:px-10 sm:py-4 rounded-full shadow-lg transition duration-300 text-base sm:text-xl hover:shadow-[0_0_15px_#facc15,0_0_30px_#facc15,0_0_45px_#facc15]"
+      whileHover={{ scale: 1.1, rotate: 5 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Join our Facebook Community
+    </motion.a>
+  </div>
+</section>
       {/* Footer */}
       <footer className="w-full text-center py-6 text-indigo-200 text-sm opacity-70">
         &copy; {new Date().getFullYear()} Devops4Noobs. Crafted with passion for SRE learners.
