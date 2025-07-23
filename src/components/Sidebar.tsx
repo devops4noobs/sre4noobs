@@ -45,6 +45,7 @@ const menuItems: MenuItem[] = [
       { label: 'SLO Calculator', href: '/tools/slo-calculator', icon: ChartBarIcon },
       { label: 'Error Budget Tracker', href: '/tools/error-budget', icon: ShieldCheckIcon },
       { label: 'Incident Response Simulator', href: '/tools/incident-simulator', icon: BeakerIcon },
+      { label: 'Non-critical Incident', href: '/tools/non-critical', icon: BeakerIcon },
     ],
   },
   {
@@ -62,7 +63,6 @@ const menuItems: MenuItem[] = [
       {
         label: 'SignalFX',
         children: [
-          { label: 'About SFX', href: '/technologies/signalfx', icon: ChartPieIcon },
           { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
           { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
         ],

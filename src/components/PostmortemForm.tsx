@@ -91,12 +91,12 @@ ${data.timeline}
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
            <div>
              <label htmlFor="summary" className="block text-sm font-medium mb-1">
-               Issue Summary <span className="text-purple-400">*</span>
+               Summary <span className="text-purple-400">*</span>
              </label>
              <textarea
                id="summary"
                aria-describedby="summary-error"
-               {...register('issueSummary', { required: 'Issue Summary is required' })}
+               {...register('issueSummary', { required: 'Summary is required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
                rows={4}
                placeholder="Edit the predefined template below to describe the incident."
@@ -108,7 +108,7 @@ ${data.timeline}
               
            <div>
              <label htmlFor="issueStartDateTime" className="block text-sm font-medium mb-1">
-               Issue Start Date/Time (UTC) <span className="text-purple-400">*</span>
+               Start Date/Time (UTC) <span className="text-purple-400">*</span>
              </label>
              <input
                type="datetime-local"
@@ -120,12 +120,12 @@ ${data.timeline}
                <p id="issueStartDateTime-error" className="mt-1 text-sm text-red-400">{errors.issueStartDateTime.message}</p>
              )}
              <label htmlFor="issueResolutionDateTime" className="block text-sm font-medium mb-1">
-               Issue Resolution Date/Time (UTC) <span className="text-purple-400">*</span>
+               End Date/Time (UTC) <span className="text-purple-400">*</span>
              </label>
              <input
                type="datetime-local"
                id="issueResolutionDateTime"
-               {...register('issueResolutionDateTime', { required: 'Resolution Date/Time is required' })}
+               {...register('issueResolutionDateTime', { required: 'End Date/Time is required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
              />
              {errors.issueResolutionDateTime && (
@@ -135,12 +135,12 @@ ${data.timeline}
 
            <div>
              <label htmlFor="issueImpact" className="block text-sm font-medium mb-1">
-               Issue Impact <span className="text-purple-400">*</span>
+               Impact <span className="text-purple-400">*</span>
              </label>
              <textarea
                id="issueImpact"
                aria-describedby="issueImpact-error"
-               {...register('issueImpact', { required: 'Issue Impact is required' })}
+               {...register('issueImpact', { required: 'Impact is required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
                rows={4}
                placeholder="Quantify the impact (e.g., 10% users affected, service downtime)."
@@ -152,12 +152,12 @@ ${data.timeline}
 
            <div>
              <label htmlFor="issueDetails" className="block text-sm font-medium mb-1">
-               Issue Details <span className="text-purple-400">*</span>
+               Details <span className="text-purple-400">*</span>
              </label>
              <textarea
                id="issueDetails"
                aria-describedby="issueDetails-error"
-               {...register('issueDetails', { required: 'Issue Details is required' })}
+               {...register('issueDetails', { required: 'Details is required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
                rows={4}
                placeholder="Additional context or observations about the incident."
@@ -169,12 +169,12 @@ ${data.timeline}
 
            <div>
              <label htmlFor="preliminaryDirectCause" className="block text-sm font-medium mb-1">
-               Preliminary Direct Cause <span className="text-purple-400">*</span>
+               Direct Cause <span className="text-purple-400">*</span>
              </label>
              <textarea
                id="preliminaryDirectCause"
                aria-describedby="preliminaryDirectCause-error"
-               {...register('preliminaryDirectCause', { required: 'Preliminary Direct Cause is required' })}
+               {...register('preliminaryDirectCause', { required: 'Direct Cause is required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
                rows={4}
                placeholder="Initial identified cause (e.g., server overload)."
@@ -203,12 +203,12 @@ ${data.timeline}
 
            <div>
              <label htmlFor="processImprovements" className="block text-sm font-medium mb-1">
-               Process Improvements <span className="text-purple-400">*</span>
+               Improvements <span className="text-purple-400">*</span>
              </label>
              <textarea
                id="processImprovements"
                aria-describedby="processImprovements-error"
-               {...register('processImprovements', { required: 'Process Improvements are required' })}
+               {...register('processImprovements', { required: 'Improvements are required' })}
                className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
                rows={4}
                placeholder="Suggested changes to prevent recurrence (e.g., enhance monitoring)."
