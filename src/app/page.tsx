@@ -143,7 +143,7 @@ export default function HomePage() {
               {/* Testimonial 1: Indian Name */}
               <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
                 <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
-                "Devops4Noobs simplified SRE concepts, helping me land my first DevOps role!"
+                &quot;Devops4Noobs simplified SRE concepts, helping me land my first DevOps role!&quot;
                 </blockquote>
               <div className="flex items-center justify-between">
               <span className="block text-indigo-400 font-semibold">— Raj Patel, India</span>
@@ -156,7 +156,7 @@ export default function HomePage() {
       {/* Testimonial 2: American Name */}
       <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
         <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
-          "The immersive tools boosted my confidence in handling production incidents effectively."
+          &quot;The immersive tools boosted my confidence in handling production incidents effectively.&quot;
         </blockquote>
         <div className="flex items-center justify-between">
           <span className="block text-indigo-400 font-semibold">— Emily Johnson, USA</span>
@@ -169,7 +169,7 @@ export default function HomePage() {
       {/* Testimonial 3: European Name */}
       <div className="bg-gray-800 p-6 rounded-xl shadow-lg text-left">
         <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">
-          "Devops4Noobs' real-world examples transformed how I approach system reliability."
+          &quot;Devops4Noobs&apos; real-world examples transformed how I approach system reliability.&quot;
         </blockquote>
         <div className="flex items-center justify-between">
           <span className="block text-indigo-400 font-semibold">— Lukas Müller, Germany</span>
