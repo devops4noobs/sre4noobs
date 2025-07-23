@@ -137,17 +137,6 @@ export default function HomePage() {
       </section>
 
       <section className="w-full max-w-xs sm:max-w-md md:max-w-4xl mx-auto text-center py-8 px-4 mb-6 sm:mb-12 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            className="w-full h-full object-cover opacity-20 sm:opacity-30"
-            loading="lazy"
-          >
-            <source src="/videos/tech-loop.mp4" type="video/mp4" />
-          </video>
-        </div>
         <div className="relative z-10">
           <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive labs!&quot;</blockquote>
           <span className="block text-indigo-400 font-semibold">— SRE Pro, July 23, 2025, 10:56 PM EEST</span>
