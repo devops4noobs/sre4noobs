@@ -138,7 +138,7 @@ export default function HomePage() {
 
       <section className="w-full max-w-xs sm:max-w-md md:max-w-4xl mx-auto text-center py-8 px-4 mb-6 sm:mb-12 relative overflow-hidden">
         <div className="relative z-10">
-          <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive labs!&quot;</blockquote>
+          <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-4">&quot;Devops4Noobs transformed my SRE career with its immersive documentation!&quot;</blockquote>
           <span className="block text-indigo-400 font-semibold">— SRE Pro, July 23, 2025, 10:56 PM EEST</span>
           <motion.a
             href="https://www.facebook.com/groups/755805476911003/?mibextid=wwXIfr"
@@ -147,7 +147,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
           >
-            Join the Community
+            Join our Facebook Community
           </motion.a>
         </div>
       </section>
