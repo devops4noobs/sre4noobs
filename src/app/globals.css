@@ -1,1 +1,22 @@
 @import "tailwindcss";
+.neon-text {
+  text-shadow: 0 0 10px #facc15, 0 0 20px #facc15, 0 0 30px #facc15;
+}
+
+.glow-text {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.pulse-text {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #facc15, 0 0 10px #facc15; }
+  to { text-shadow: 0 0 10px #facc15, 0 0 20px #facc15, 0 0 30px #facc15; }
+}
+
+@keyframes pulse {
+  0%, 100% { text-shadow: 0 0 5px #facc15; }
+  50% { text-shadow: 0 0 15px #facc15, 0 0 25px #facc15; }
+}
