@@ -17,7 +17,7 @@ export default function InteractiveLayout({ children }: { children: React.ReactN
   return (
     <>
       <header className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 p-4 z-30 flex justify-between items-center border-b border-gray-700">
-        <a className="text-xl font-bold text-white" href="http://www.localhost:3000/">Home</a>
+        <a className="text-xl font-bold text-white" href="https://www.devops4noobs.com/">Home</a>
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Toggle Sidebar">
           {isSidebarOpen ? <XMarkIcon className="w-8 h-8 text-white" /> : <Bars3Icon className="w-8 h-8 text-white" />}
         </button>

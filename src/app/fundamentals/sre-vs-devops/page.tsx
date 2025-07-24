@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function SreVsDevOps() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
-  const [showFlipTooltip, setShowFlipTooltip] = useState(true); // One-time tooltip for mobile
+  const [setShowFlipTooltip] = useState(true); // One-time tooltip for mobile
 
   // Animation variants for cards
   const cardVariants = {
