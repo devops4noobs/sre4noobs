@@ -1,12 +1,11 @@
 'use client'; // Required for useState and motion
-import { FaBalanceScale, FaChartLine, FaCogs, FaRocket, FaUsers, FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
+import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function SreVsDevOps() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
-  const [sliderPosition, setSliderPosition] = useState(50); // For interactive comparison
   const [showFlipTooltip, setShowFlipTooltip] = useState(true); // One-time tooltip for mobile
 
   // Animation variants for cards
