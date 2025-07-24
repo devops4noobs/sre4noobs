@@ -175,17 +175,7 @@ export default function SreVsDevOps() {
                 >
                   <FaSyncAlt className="text-lg" />
                 </motion.button>
-                {showFlipTooltip && index === 0 && (
-                  <motion.div
-                    className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-yellow-900/70 text-white text-xs px-2 py-1 rounded opacity-90"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={() => setShowFlipTooltip(false)}
-                  >
-                    Tap to Flip
-                  </motion.div>
-                )}
+                
               </motion.div>
             ))}
           </div>
