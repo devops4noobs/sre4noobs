@@ -1,6 +1,6 @@
 'use client'; // Required for useState and motion
 import { FaChartLine, FaCloud, FaDatabase, FaChartBar, FaFileAlt, FaNetworkWired } from "react-icons/fa";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function ObservabilityVsMonitoring() {
