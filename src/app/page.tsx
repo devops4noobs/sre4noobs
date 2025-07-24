@@ -46,7 +46,7 @@ export default function HomePage() {
           Your Portal to Mastering <span className="font-bold text-yellow-200">Site Reliability Engineering</span>
         </motion.p>
         <motion.a
-          href="#"
+          href="#get-started"
           onClick={(e) => {
             e.preventDefault();
             handleLaunchClick();
