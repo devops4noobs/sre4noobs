@@ -184,16 +184,6 @@ export default function SreVsDevOps() {
               </motion.div>
             ))}
           </div>
-          {hoveredSection === "differences" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Click cards or button to flip and compare!
-            </motion.div>
-          )}
         </motion.div>
 
         {/* When to Use Each Card */}
