@@ -1,12 +1,12 @@
 'use client'; // Required for useState and motion
 import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function SreVsDevOps() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
-  const [setShowFlipTooltip] = useState(true); // One-time tooltip for mobile
+  const controls = useAnimation();
 
   // Animation variants for cards
   const cardVariants = {
@@ -29,6 +29,18 @@ export default function SreVsDevOps() {
     { aspect: "Risk Management", devops: "Emphasizes experimentation and fast feedback.", sre: "Uses error budgets to balance reliability and innovation." },
     { aspect: "Examples", devops: "Implementing CI/CD with Jenkins, using Docker/Kubernetes for orchestration.", sre: "Setting 99.9% uptime SLOs, conducting chaos engineering tests." },
   ];
+
+  // Trigger animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const insightsSection = document.getElementById("insights");
+      if (insightsSection && window.scrollY + window.innerHeight > insightsSection.offsetTop) {
+        controls.start({ opacity: 1, y: 0 });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
@@ -137,10 +149,7 @@ export default function SreVsDevOps() {
               <motion.div
                 key={index}
                 className="relative w-full h-48 cursor-pointer perspective-1000"
-                onClick={() => {
-                  setFlippedCard(flippedCard === index ? null : index);
-                  setShowFlipTooltip(false); // Hide tooltip after first interaction
-                }}
+                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
                 whileHover={{ scale: 1.02 }} // Hover effect only for flip cards
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -168,17 +177,23 @@ export default function SreVsDevOps() {
                   className="absolute bottom-2 left-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setFlippedCard(flippedCard === index ? null : index);
-                    setShowFlipTooltip(false); // Hide tooltip after first flip
-                  }}
+                  onClick={() => setFlippedCard(flippedCard === index ? null : index)}
                 >
                   <FaSyncAlt className="text-lg" />
                 </motion.button>
-                
               </motion.div>
             ))}
           </div>
+          {hoveredSection === "differences" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Click cards or button to flip and compare!
+            </motion.div>
+          )}
         </motion.div>
 
         {/* When to Use Each Card */}
@@ -258,7 +273,7 @@ export default function SreVsDevOps() {
 
         {/* Footer Timestamp */}
         <p className="text-gray-400 text-xs mt-4 text-center">
-          Last updated: July 24, 2025, 10:00 PM EEST
+          Last updated: July 24, 2025, 10:25 PM EEST
         </p>
       </main>
     </div>
