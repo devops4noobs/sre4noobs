@@ -7,8 +7,11 @@ import InteractiveLayout from "./InteractiveLayout"; // New client component
 const geist = GeistSans; // Simplified, no subsets needed for Geist
 
 export const metadata: Metadata = {
-  title: "SRE4Noobs",
+  title: "Devops4Noobs",
   description: "Site Reliability Engineering for Beginners",
+  icons: {
+    icon: '/logo.ico', // Path to your favicon in the public directory
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
