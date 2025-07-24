@@ -2,7 +2,6 @@
 import { FaChartLine, FaCloud, FaDatabase, FaChartBar, FaFileAlt, FaNetworkWired } from "react-icons/fa";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
-import Confetti from "react-confetti";
 
 export default function ObservabilityVsMonitoring() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
@@ -10,7 +9,6 @@ export default function ObservabilityVsMonitoring() {
   const [showConfetti, setShowConfetti] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  const progress = useTransform(scaleX, [0, 1], [0, 100]);
 
   // Animation variants for cards
   const cardVariants = {
@@ -95,7 +93,7 @@ export default function ObservabilityVsMonitoring() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              Hover tip: Monitoring tells "what", observability explains "why"!
+              Hover tip: Monitoring tells &quot;what&quot;, observability explains &quot;why&quot;!
             </motion.div>
           )}
         </motion.div>
