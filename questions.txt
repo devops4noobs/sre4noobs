@@ -1,0 +1,32 @@
+=== Beginner ===
+What is Site Reliability Engineering (SRE)?---
+SRE is a discipline that applies software engineering to improve the reliability and scalability of systems. For beginners, think of it as a bridge between development and operations to ensure services run smoothly.---
+Example Answer: "SRE focuses on automating operations tasks and using error budgets to balance reliability with innovation."---
+Tip: Mention tools like Prometheus or basic automation.
+
+What are SLIs and SLOs?---
+SLIs (Service Level Indicators) are metrics like uptime or latency, while SLOs (Service Level Objectives) are targets based on SLIs (e.g., 99.9% uptime). Beginners should know these guide reliability.---
+Example Answer: "An SLI might be response time, and an SLO could be 95% of requests under 200ms."---
+Tip: Link to a simple example from a personal project.
+
+=== Advanced ===
+How would you handle a production outage?---
+Handling a production outage involves identifying the issue, mitigating impact, and preventing recurrence. For advanced learners, this includes using monitoring tools and postmortems.---
+Example Answer: "I’d check logs with Splunk, roll back a recent change if needed, and document the root cause in a blameless postmortem."---
+Tip: Highlight a real or simulated scenario.
+
+Explain the concept of an error budget.---
+An error budget is the acceptable downtime based on your SLO (e.g., 0.1% for 99.9% uptime). Advanced users use it to decide when to innovate or stabilize.---
+Example Answer: "With a 99.9% SLO, I’d allow 43 minutes of downtime monthly and pause releases if it’s nearing."---
+Tip: Mention a trade-off decision.
+
+=== Expert ===
+Design a system to handle 1 million requests per day.---
+For experts, this involves load balancing, caching, and auto-scaling. Design a system with a CDN, microservices, and monitoring to handle scale.---
+Example Answer: "I’d use AWS ELB for load balancing, Redis for caching, and auto-scale with Kubernetes, monitored by Datadog."---
+Tip: Draw a diagram if allowed, or explain components clearly.
+
+How do you optimize incident response time?---
+Optimizing incident response involves automation, clear SLAs, and post-incident reviews. Experts focus on reducing MTTR (Mean Time to Resolve).---
+Example Answer: "I’d automate alerts with PagerDuty, define a 15-minute SLA, and use postmortems to refine processes."---
+Tip: Quantify improvements (e.g., 20% faster response).
