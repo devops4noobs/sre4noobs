@@ -137,7 +137,7 @@ export default function InterviewQuestionsPage() {
               {category} Questions
             </h2>
             <div className="space-y-4">
-              {items.map((item, itemIndex) => {
+              {items.map((item) => {
                 const globalIndex = items.findIndex(q => q.question === item.question) + catIndex * 10;
                 return (
                   <motion.div
