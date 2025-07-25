@@ -28,7 +28,7 @@ export default function InterviewQuestionsPage() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/devops4noobs/sre4noobs/refs/heads/main/questions.txt'); // Replace with your actual GitHub raw URL
+        const response = await fetch('https://raw.githubusercontent.com/devops4noobs/sre4noobs/refs/heads/main/questions.txt');
         if (!response.ok) {
           throw new Error('Failed to fetch questions.txt');
         }
@@ -119,7 +119,7 @@ export default function InterviewQuestionsPage() {
         </motion.section>
 
         {/* Categories Accordion */}
-        {Object.entries(groupedQuestions).map(([category, items], catIndex) => (
+        {Object.entries(groupedQuestions).map(([category], catIndex) => (
           <motion.div
             key={category}
             className="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 md:p-6 mb-6 shadow-lg relative"
@@ -137,11 +137,11 @@ export default function InterviewQuestionsPage() {
               {category} Questions
             </h2>
             <div className="space-y-4">
-              {items.map((item) => {
-                const globalIndex = items.findIndex(q => q.question === item.question) + catIndex * 10;
+              {groupedQuestions[category].map((item, itemIndex) => {
+                const globalIndex = questions.findIndex(q => q.question === item.question) + catIndex * 10;
                 return (
                   <motion.div
-                    key={item.question}
+                    key={item.question} // Unique key for each question
                     className="bg-indigo-900/60 rounded-lg p-4 cursor-pointer border border-indigo-500/40 hover:bg-indigo-800/80 transition-all duration-300"
                     initial="hidden"
                     animate="visible"
@@ -224,7 +224,7 @@ export default function InterviewQuestionsPage() {
 
         {/* Footer Timestamp */}
         <p className="text-gray-500 text-xs mt-4 text-center">
-          Last updated: July 25, 2025, 09:16 PM EEST
+          Last updated: July 25, 2025, 10:28 PM EEST
         </p>
       </main>
     </div>

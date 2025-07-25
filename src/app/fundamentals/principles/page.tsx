@@ -52,7 +52,7 @@ const principles = [
     ),
   },
   {
-    title: "📉 Embrace Risk with Error Budgets",
+    title: "Embrace Risk with Error Budgets",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -85,7 +85,7 @@ const principles = [
     ),
   },
   {
-    title: "⚙️ Automate Everything to Eliminate Toil",
+    title: "Automate Everything to Eliminate Toil",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -133,7 +133,7 @@ const principles = [
     ),
   },
   {
-    title: "🤝 Foster Collaboration Between Devs and Ops",
+    title: "Foster Collaboration Between Devs and Ops",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -173,7 +173,7 @@ const principles = [
     ),
   },
   {
-    title: "📝 Conduct Blameless Postmortems",
+    title: "Conduct Blameless Postmortems",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -212,7 +212,7 @@ const principles = [
     ),
   },
   {
-    title: "👁️ Monitor Distributed Systems",
+    title: "Monitor Distributed Systems",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -243,7 +243,7 @@ const principles = [
     ),
   },
   {
-    title: "🚀 Release Engineering",
+    title: "Release Engineering",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -267,7 +267,7 @@ const principles = [
     ),
   },
   {
-    title: "🧩 Simplicity",
+    title: "Simplicity",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
