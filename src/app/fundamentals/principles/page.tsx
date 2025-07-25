@@ -1,5 +1,6 @@
 'use client'; // Required for useState and motion
 import { ChevronDownIcon, ChevronUpIcon, SparklesIcon, DocumentTextIcon, Cog6ToothIcon, UserGroupIcon, EyeIcon, RocketLaunchIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 const principleIcons = [
@@ -13,13 +14,20 @@ const principleIcons = [
   <PuzzlePieceIcon key="simplicity" className="w-8 h-8 text-yellow-200" />, // Simplicity
 ];
 
+// Animation variants (to be defined if not already in scope)
+const cardVariants = {
+  hidden: { scale: 1, opacity: 0, y: 20 },
+  visible: { scale: 1, opacity: 1, y: 0 },
+  hover: { scale: 1.03, boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)" }, // Match observability-vs-monitoring
+};
+
 const principles = [
   {
-    title: "📏 What Are SLOs?",
+    title: "What Are SLOs?",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users. It&apos;s the reliability promise you make—like “99.9% of requests respond under 300ms.” SLOs are crucial for balancing risk, managing user expectations, and guiding engineering efforts.
+          <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users. It's the reliability promise you make—like “99.9% of requests respond under 300ms.” SLOs are crucial for balancing risk, managing user expectations, and guiding engineering efforts.
         </p>
         <p>
           SLOs are backed by <strong>SLIs</strong> (indicators like latency or error rate) and sometimes formalized into <strong>SLAs</strong> (legal agreements).
@@ -56,7 +64,7 @@ const principles = [
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>Error Budgets</strong> are a core SRE concept that balances reliability with innovation. Instead of aiming for perfect uptime, we define an acceptable amount of failure based on the service&apos;s <strong>SLO</strong>.
+          <strong>Error Budgets</strong> are a core SRE concept that balances reliability with innovation. Instead of aiming for perfect uptime, we define an acceptable amount of failure based on the service's <strong>SLO</strong>.
         </p>
         <p>
           The error budget is the difference between 100% and your SLO target. For example, if your SLO is 99.9% uptime, your error budget is 0.1%—about 43.2 minutes of downtime per month.
@@ -89,7 +97,7 @@ const principles = [
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>Toil</strong> is repetitive, manual, automatable work that doesn&apos;t improve systems. A core SRE principle is to <strong>identify and eliminate toil through automation</strong>, freeing engineers for impactful work.
+          <strong>Toil</strong> is repetitive, manual, automatable work that doesn't improve systems. A core SRE principle is to <strong>identify and eliminate toil through automation</strong>, freeing engineers for impactful work.
         </p>
         <h4 className="text-indigo-400 font-semibold">🔁 What Is Toil?</h4>
         <p>
@@ -127,7 +135,7 @@ const principles = [
           A company saved 780 hours/year by automating DNS updates with a Python Lambda, reinvesting time into CI/CD improvements.
         </p>
         <p className="text-gray-400 italic">
-          &quot;If it&apos;s boring, repetitive, and required—automate it.&quot;
+          "If it's boring, repetitive, and required—automate it."
         </p>
       </div>
     ),
@@ -148,7 +156,7 @@ const principles = [
         </ul>
         <h4 className="text-indigo-400 font-semibold">🔧 Why Collaboration Matters</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li><strong>Faster Resolution:</strong> Combines dev&apos;s code knowledge with ops&apos; infrastructure expertise.</li>
+          <li><strong>Faster Resolution:</strong> Combines dev's code knowledge with ops' infrastructure expertise.</li>
           <li><strong>Higher Quality:</strong> Better testing and deployment practices.</li>
           <li><strong>Innovation:</strong> Cross-team feedback improves scalability.</li>
           <li><strong>Reduced Toil:</strong> Ops automates with dev support.</li>
@@ -156,7 +164,7 @@ const principles = [
         <h4 className="text-indigo-400 font-semibold">🌟 Real-World Examples</h4>
         <div className="space-y-3">
           <div>🛠️ Google embeds SREs in dev teams for continuous improvement.</div>
-          <div>🚀 A startup&apos;s ops/dev sync reduced deployment failures by 40%.</div>
+          <div>🚀 A startup's ops/dev sync reduced deployment failures by 40%.</div>
           <div>🔄 Joint alert channels via Slack/Jira improve incident response.</div>
         </div>
         <h4 className="text-indigo-400 font-semibold">💡 How to Foster Collaboration</h4>
@@ -295,22 +303,44 @@ export default function PrinciplesPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-900 via-indigo-700 to-blue-900 flex flex-col items-center justify-start py-0 relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "20%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "30%", left: "70%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "60%", left: "40%" }}></div>
+      </div>
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto text-left">
       {/* Hero Section */}
-      <section className="w-full max-w-4xl mx-auto text-center py-16 px-4 mb-10 relative sm:py-10 sm:px-2">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-xl tracking-tight animate-fade-in sm:text-2xl">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-indigo-400 tracking-wide pr-2" style={{overflow: 'visible', display: 'inline-block'}}>SRE Principles</span>
-        </h1>
-        <p className="text-lg md:text-2xl text-indigo-100 mb-6 animate-fade-in delay-100 sm:text-base">
-          The core philosophies that power reliable, scalable, and innovative systems.
-        </p>
-      </section>
+      <motion.section
+                className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+                initial="hidden"
+                animate="visible"
+                variants={cardVariants}
+              >
+                <motion.h1
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl"
+                  initial={{ y: -30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  SRE Principles
+                </motion.h1>
+                <motion.p
+                  className="text-base sm:text-lg md:text-xl text-indigo-100 mb-4 sm:mb-6"
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  The core philosophies that power reliable, scalable, and innovative systems
+                </motion.p>
+              </motion.section>
 
       {/* Principles Accordion */}
       <div className="w-full max-w-3xl mx-auto space-y-6 px-2 pb-16">
         {principles.map((p, index) => (
           <div
-            key={index} // Added key prop to fix react/jsx-key errors
+            key={index}
             className={`bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-indigo-500/40 cursor-pointer transition-all duration-300 hover:bg-indigo-800/40 ${openIndex === index ? 'ring-2 ring-yellow-300/60' : ''}`}
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
@@ -338,6 +368,8 @@ export default function PrinciplesPage() {
           </div>
         ))}
       </div>
+      </main>
     </div>
   );
 }
+
