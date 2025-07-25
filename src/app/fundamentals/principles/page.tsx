@@ -1,10 +1,21 @@
 "use client";
 import { useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline"; // Ensure this is installed
+import { ChevronDownIcon, ChevronUpIcon, SparklesIcon, LightBulbIcon, Cog6ToothIcon, UserGroupIcon, DocumentTextIcon, EyeIcon, RocketLaunchIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline";
+
+const principleIcons = [
+  <SparklesIcon className="w-8 h-8 text-yellow-300" />, // SLOs
+  <DocumentTextIcon className="w-8 h-8 text-pink-300" />, // Error Budgets
+  <Cog6ToothIcon className="w-8 h-8 text-indigo-300" />, // Automate Toil
+  <UserGroupIcon className="w-8 h-8 text-blue-300" />, // Collaboration
+  <DocumentTextIcon className="w-8 h-8 text-green-300" />, // Postmortems
+  <EyeIcon className="w-8 h-8 text-indigo-400" />, // Monitoring
+  <RocketLaunchIcon className="w-8 h-8 text-pink-400" />, // Release Engineering
+  <PuzzlePieceIcon className="w-8 h-8 text-yellow-200" />, // Simplicity
+];
 
 const principles = [
   {
-    title: "📏 What Are SLOs?",
+    title: "What Are SLOs?",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -46,7 +57,7 @@ const principles = [
     ),
   },
   {
-    title: "📉 Embrace Risk with Error Budgets",
+    title: "Embrace Risk with Error Budgets",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -84,7 +95,7 @@ const principles = [
     ),
   },
   {
-    title: "⚙️ Automate Everything to Eliminate Toil",
+    title: "Automate Everything to Eliminate Toil",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -138,7 +149,7 @@ const principles = [
     ),
   },
   {
-    title: "🤝 Foster Collaboration Between Devs and Ops",
+    title: "Foster Collaboration Between Devs and Ops",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -183,7 +194,7 @@ const principles = [
     ),
   },
   {
-    title: "📝 Conduct Blameless Postmortems",
+    title: "Conduct Blameless Postmortems",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -227,7 +238,7 @@ const principles = [
     ),
   },
   {
-    title: "👁️ Monitor Distributed Systems",
+    title: "Monitor Distributed Systems",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -262,7 +273,7 @@ const principles = [
     ),
   },
   {
-    title: "🚀 Release Engineering",
+    title: "Release Engineering",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -289,7 +300,7 @@ const principles = [
     ),
   },
   {
-    title: "🧩 Simplicity",
+    title: "Simplicity",
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
@@ -320,29 +331,46 @@ export default function SREPrinciplesPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-indigo-400 mb-8">SRE Principles Overview</h1>
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-900 via-indigo-700 to-blue-900 flex flex-col items-center justify-start py-0 relative overflow-x-hidden">
+      {/* Hero Section */}
+      <section className="w-full max-w-4xl mx-auto text-center py-16 px-4 mb-10 relative sm:py-10 sm:px-2">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-xl tracking-tight animate-fade-in sm:text-2xl">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-indigo-400 tracking-wide pr-2" style={{overflow: 'visible', display: 'inline-block'}}>SRE Principles</span>
+        </h1>
+        <p className="text-lg md:text-2xl text-indigo-100 mb-6 animate-fade-in delay-100 sm:text-base">
+          The core philosophies that power reliable, scalable, and innovative systems.
+        </p>
+      </section>
 
-      <div className="space-y-6">
+      {/* Principles Accordion */}
+      <div className="w-full max-w-3xl mx-auto space-y-6 px-2 pb-16">
         {principles.map((p, index) => (
           <div
             key={index}
-            className="bg-gray-900 rounded-xl p-6 shadow-lg cursor-pointer transition-all duration-300 hover:bg-gray-800 border-2 border-indigo-500" // Added visible border
+            className={`bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-indigo-500/40 cursor-pointer transition-all duration-300 hover:bg-indigo-800/40 ${openIndex === index ? 'ring-2 ring-yellow-300/60' : ''}`}
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-indigo-300">{p.title}</h2>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-3">
+                <span>{principleIcons[index]}</span>
+                <h2 className="text-xl font-semibold text-indigo-100">{p.title}</h2>
+              </div>
               {openIndex === index ? (
-                <ChevronUpIcon className="w-5 h-5 text-indigo-400" />
+                <ChevronUpIcon className="w-6 h-6 text-yellow-300" />
               ) : (
-                <ChevronDownIcon className="w-5 h-5 text-indigo-400" />
+                <ChevronDownIcon className="w-6 h-6 text-indigo-300" />
               )}
             </div>
-            {openIndex === index && (
-              <div className="mt-4 animate-fade-in">
-                {p.content}
-              </div>
-            )}
+            <div
+              className={`overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-[1000px] mt-4 opacity-100' : 'max-h-0 opacity-0'}`}
+              style={{ willChange: 'max-height, opacity' }}
+            >
+              {openIndex === index && (
+                <div className="animate-fade-in">
+                  {p.content}
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
