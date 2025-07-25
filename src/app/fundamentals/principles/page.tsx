@@ -27,7 +27,7 @@ const principles = [
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users. It's the reliability promise you make—like “99.9% of requests respond under 300ms.” SLOs are crucial for balancing risk, managing user expectations, and guiding engineering efforts.
+          <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users. It&apos;s the reliability promise you make—like “99.9% of requests respond under 300ms.” SLOs are crucial for balancing risk, managing user expectations, and guiding engineering efforts.
         </p>
         <p>
           SLOs are backed by <strong>SLIs</strong> (indicators like latency or error rate) and sometimes formalized into <strong>SLAs</strong> (legal agreements).
@@ -64,7 +64,7 @@ const principles = [
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>Error Budgets</strong> are a core SRE concept that balances reliability with innovation. Instead of aiming for perfect uptime, we define an acceptable amount of failure based on the service's <strong>SLO</strong>.
+          <strong>Error Budgets</strong> are a core SRE concept that balances reliability with innovation. Instead of aiming for perfect uptime, we define an acceptable amount of failure based on the service&apos;s <strong>SLO</strong>.
         </p>
         <p>
           The error budget is the difference between 100% and your SLO target. For example, if your SLO is 99.9% uptime, your error budget is 0.1%—about 43.2 minutes of downtime per month.
@@ -97,7 +97,7 @@ const principles = [
     content: (
       <div className="space-y-4 text-gray-300">
         <p>
-          <strong>Toil</strong> is repetitive, manual, automatable work that doesn't improve systems. A core SRE principle is to <strong>identify and eliminate toil through automation</strong>, freeing engineers for impactful work.
+          <strong>Toil</strong> is repetitive, manual, automatable work that doesn&apos;t improve systems. A core SRE principle is to <strong>identify and eliminate toil through automation</strong>, freeing engineers for impactful work.
         </p>
         <h4 className="text-indigo-400 font-semibold">🔁 What Is Toil?</h4>
         <p>
@@ -135,7 +135,7 @@ const principles = [
           A company saved 780 hours/year by automating DNS updates with a Python Lambda, reinvesting time into CI/CD improvements.
         </p>
         <p className="text-gray-400 italic">
-          "If it's boring, repetitive, and required—automate it."
+          &quot;If it&apos;s boring, repetitive, and required—automate it.&quot;
         </p>
       </div>
     ),
@@ -156,7 +156,7 @@ const principles = [
         </ul>
         <h4 className="text-indigo-400 font-semibold">🔧 Why Collaboration Matters</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li><strong>Faster Resolution:</strong> Combines dev's code knowledge with ops' infrastructure expertise.</li>
+          <li><strong>Faster Resolution:</strong> Combines dev&apos;s code knowledge with ops&apos; infrastructure expertise.</li>
           <li><strong>Higher Quality:</strong> Better testing and deployment practices.</li>
           <li><strong>Innovation:</strong> Cross-team feedback improves scalability.</li>
           <li><strong>Reduced Toil:</strong> Ops automates with dev support.</li>
@@ -164,7 +164,7 @@ const principles = [
         <h4 className="text-indigo-400 font-semibold">🌟 Real-World Examples</h4>
         <div className="space-y-3">
           <div>🛠️ Google embeds SREs in dev teams for continuous improvement.</div>
-          <div>🚀 A startup's ops/dev sync reduced deployment failures by 40%.</div>
+          <div>🚀 A startup&apos;s ops/dev sync reduced deployment failures by 40%.</div>
           <div>🔄 Joint alert channels via Slack/Jira improve incident response.</div>
         </div>
         <h4 className="text-indigo-400 font-semibold">💡 How to Foster Collaboration</h4>
