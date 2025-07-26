@@ -9,7 +9,7 @@ export default function PostmortemPage() {
         Simulate writing a blameless postmortem to learn from incidents without pointing fingers. Fill out the form below and download your report.
       </p>
       <ErrorBoundary>
-        <PostmortemForm />
+        
       </ErrorBoundary>
     </main>
   );
