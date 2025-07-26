@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function ObservabilityVsMonitoring() {
+  
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [expandedNode, setExpandedNode] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
