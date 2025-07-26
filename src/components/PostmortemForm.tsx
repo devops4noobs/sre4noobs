@@ -3,7 +3,6 @@
    import { useForm } from 'react-hook-form';
    import { saveAs } from 'file-saver';
    import { useState } from 'react';
-   import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
    interface PostmortemFormData {
      issueSummary: string;
@@ -83,7 +82,6 @@ ${data.timeline}
        <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 p-6 rounded-lg shadow-lg text-white space-y-6">
          {blamelessWarning && (
            <div className="p-4 bg-yellow-900 text-yellow-200 rounded flex items-center">
-             <InformationCircleIcon className="w-5 h-5 mr-2" />
              {blamelessWarning}
            </div>
          )}
