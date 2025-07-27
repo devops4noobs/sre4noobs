@@ -211,7 +211,7 @@ export default function SLOCalculator() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Error Budgets in SRE</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
-            An error budget is the allowable unreliability (1 - SLO). It represents the 'room for error' in your system, balancing reliability with innovation. For example, a 99.9% SLO gives a 0.1% error budget.
+            An error budget is the allowable unreliability (1 - SLO). It represents the &apos;room for error&apos; in your system, balancing reliability with innovation. For example, a 99.9% SLO gives a 0.1% error budget.
           </p>
           {hoveredSection === "budget" && (
             <motion.div
