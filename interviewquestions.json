@@ -1,14 +1,26 @@
 [
   {
-    "question": "What is the difference between an SLI, SLO, and SLA?",
-    "answer": "An **SLI** (Service Level Indicator) is a measurable metric, like uptime or latency. An **SLO** (Service Level Objective) is a target value for an SLI, e.g., 99.9% uptime. An **SLA** (Service Level Agreement) is a contractual agreement with consequences for missing SLOs, often involving penalties."
+    "question": "What is Site Reliability Engineering (SRE) and how does it differ from DevOps?",
+    "answer": "Site Reliability Engineering (SRE) applies software engineering practices to operations and infrastructure to build highly reliable systems. While DevOps fosters collaboration between dev and ops, SRE formalizes that collaboration with metrics like SLIs, SLOs, error budgets, and automation to manage reliability systematically. SRE is often viewed as a concrete implementation of DevOps philosophies. (Sources summarizing definitions including reliability targets and automation emphasis) :contentReference[oaicite:1]{index=1}"
   },
   {
-    "question": "How do you calculate an error budget?",
-    "answer": "An error budget is calculated as 100% minus the SLO target. For example, if the SLO is 99.9% uptime, the error budget is 0.1%, which translates to approximately 43.2 minutes of downtime per month."
+    "question": "Explain SLIs, SLOs, and error budgets. How do they drive reliability?",
+    "answer": "An SLI (Service Level Indicator) is a metric such as latency, error rate, or availability. An SLO (Service Level Objective) is a target for that metric (e.g. 99.9% uptime). The error budget is 100% minus the SLO—for example, 0.1% downtime allowed. Together they balance innovation and reliability: staying within the error budget lets teams ship quickly; exceeding it triggers risk controls. :contentReference[oaicite:2]{index=2}"
   },
   {
-    "question": "What is toil, and how can it be reduced?",
-    "answer": "Toil is repetitive, manual, automatable work with no lasting value. It can be reduced by automating tasks like deployments (using CI/CD pipelines), monitoring (with auto-remediation), and infrastructure management (with tools like Terraform)."
+    "question": "Describe a time you implemented automation to reduce toil. What was the impact?",
+    "answer": "Automation reduces repetitive, manual tasks that add no long-term value (“toil”). Examples include full CI/CD pipelines, automated recovery for crashed services, and infrastructure as code (e.g. Terraform). Automating these tasks improves reliability and frees engineers to focus on higher-value activities. :contentReference[oaicite:3]{index=3}"
+  },
+  {
+    "question": "How do you design an incident response process including blameless postmortems?",
+    "answer": "Incident response should include defined roles (like Incident Commander), clear communication channels, and documented runbooks. After resolution, conduct blameless postmortems: focus on system failures rather than individuals, map incident timelines, assess impact, perform root cause analysis, and derive action items to prevent recurrence. This helps teams learn safely and improve system resilience. :contentReference[oaicite:4]{index=4}"
+  },
+  {
+    "question": "How do you implement monitoring and observability in distributed systems?",
+    "answer": "Monitoring should cover the Four Golden Signals—latency, traffic, errors, and saturation—via real metrics, logs, and tracing. Use tools like Prometheus, Grafana, OpenTelemetry. Ensure alerts are actionable and dashboards reflect user impact. Observability enables querying unknown failure modes without predefined metrics. :contentReference[oaicite:5]{index=5}"
+  },
+  {
+    "question": "What deployment strategies do you use to minimize downtime?",
+    "answer": "Reliable deployment strategies include blue‑green deployments, canary releases, rolling updates, and feature flags. These approaches minimize user impact by gradually introducing changes, monitoring health, and rolling back if necessary. This helps manage risk while shipping new features safely and scaling reliably. :contentReference[oaicite:6]{index=6}"
   }
 ]
