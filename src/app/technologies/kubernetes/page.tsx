@@ -43,7 +43,7 @@ export default function KubernetesPage() {
 
       <h3 className="text-xl font-bold mb-2">High-Level Architecture Schema</h3>
       <img 
-        src="https://kubernetes.io/images/docs/components-of-kubernetes.svg" 
+        src="/images/components-of-k8s.png" 
         alt="Kubernetes High-Level Architecture Diagram" 
         className="w-full max-w-3xl mx-auto mb-4 " 
       />
@@ -63,7 +63,7 @@ export default function KubernetesPage() {
 
       <h3 className="text-xl font-bold mb-2">Advanced Infra Schema: Scaling and Reliability</h3>
       <img 
-        src="https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg" 
+        src="/images/k8s-cluster-architecture.png" 
         alt="Kubernetes Multi-Node Cluster Diagram" 
         className="w-full max-w-3xl mx-auto mb-4" 
       />
