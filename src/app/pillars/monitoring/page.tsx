@@ -272,7 +272,7 @@ export default function MonitoringDistributedSystems() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              Hover tip: Customize this for your system's needs!
+              Hover tip: Customize this for your system&apos;s needs!
             </motion.div>
           )}
         </motion.div>
