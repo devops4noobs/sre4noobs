@@ -89,7 +89,7 @@ export default function InterviewQuestionsPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Real questions dynamically loaded from GitHub for up-to-date preparation
+            Crack the Interview. Land Your Next SRE Role with Confidence.
           </motion.p>
         </motion.section>
 
