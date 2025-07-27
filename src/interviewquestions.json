@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is the difference between an SLI, SLO, and SLA?",
+    "answer": "An **SLI** (Service Level Indicator) is a measurable metric, like uptime or latency. An **SLO** (Service Level Objective) is a target value for an SLI, e.g., 99.9% uptime. An **SLA** (Service Level Agreement) is a contractual agreement with consequences for missing SLOs, often involving penalties."
+  },
+  {
+    "question": "How do you calculate an error budget?",
+    "answer": "An error budget is calculated as 100% minus the SLO target. For example, if the SLO is 99.9% uptime, the error budget is 0.1%, which translates to approximately 43.2 minutes of downtime per month."
+  },
+  {
+    "question": "What is toil, and how can it be reduced?",
+    "answer": "Toil is repetitive, manual, automatable work with no lasting value. It can be reduced by automating tasks like deployments (using CI/CD pipelines), monitoring (with auto-remediation), and infrastructure management (with tools like Terraform)."
+  }
+]

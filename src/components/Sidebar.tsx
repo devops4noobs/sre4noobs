@@ -23,6 +23,7 @@ const menuItems: MenuItem[] = [
       { label: 'SRE vs. DevOps', href: '/fundamentals/sre-vs-devops', icon: ScaleIcon },
       { label: 'Observability vs. Monitoring', href: '/fundamentals/observability-vs-monitoring', icon: EyeIcon },
       { label: 'Key Principles Overview', href: '/fundamentals/principles', icon: KeyIcon },
+      { label: 'Interview questions', href: '/fundamentals/interviewfundamentals', icon: KeyIcon },
 
     ],
   },
