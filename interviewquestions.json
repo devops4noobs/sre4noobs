@@ -1,11 +1,159 @@
 [
   {
-    "question": "What is Site Reliability Engineering (SRE) and how does it differ from DevOps?",
-    "answer": "Site Reliability Engineering (SRE) applies software engineering practices to operations and infrastructure to build highly reliable systems. While DevOps fosters collaboration between dev and ops, SRE formalizes that collaboration with metrics like SLIs, SLOs, error budgets, and automation to manage reliability systematically. SRE is often viewed as a concrete implementation of DevOps philosophies. (Sources summarizing definitions including reliability targets and automation emphasis) :contentReference[oaicite:1]{index=1}"
+    "question": "How does SRE differ from DevOps?",
+    "answer": "SRE is more focused on reliability engineering with specific practices like SLOs, error budgets, and blameless postmortems, often treating operations as a software problem. DevOps emphasizes cultural change, collaboration between dev and ops, and continuous delivery. SRE can be seen as an implementation of DevOps principles with a strong engineering focus on reliability."
   },
   {
-    "question": "Explain SLIs, SLOs, and error budgets. How do they drive reliability?",
-    "answer": "An SLI (Service Level Indicator) is a metric such as latency, error rate, or availability. An SLO (Service Level Objective) is a target for that metric (e.g. 99.9% uptime). The error budget is 100% minus the SLO—for example, 0.1% downtime allowed. Together they balance innovation and reliability: staying within the error budget lets teams ship quickly; exceeding it triggers risk controls. :contentReference[oaicite:2]{index=2}"
+    "question": "What are the key responsibilities of an SRE?",
+    "answer": "Key responsibilities include ensuring system reliability, defining and monitoring SLOs, managing incidents, automating toil, conducting postmortems, capacity planning, and collaborating with development teams to improve system resilience and performance."
+  },
+  {
+    "question": "Explain the concept of Service Level Objective (SLO).",
+    "answer": "A Service Level Objective (SLO) is a measurable target for a service's reliability, such as '99.9% of requests complete in under 200ms over a 30-day period.' It defines the acceptable level of performance from the user's perspective and guides engineering decisions."
+  },
+  {
+    "question": "What is an Error Budget?",
+    "answer": "An Error Budget is the allowable amount of unreliability for a service, calculated as 100% minus the SLO target. For a 99.9% SLO, the error budget is 0.1%. It allows teams to balance innovation (e.g., new features) with reliability."
+  },
+  {
+    "question": "What is the role of monitoring in SRE?",
+    "answer": "Monitoring in SRE involves tracking SLIs to ensure SLOs are met, detecting issues early, and providing data for capacity planning and incident response. It focuses on the 'four golden signals': latency, traffic, errors, and saturation."
+  },
+  {
+    "question": "What tools are commonly used in SRE for monitoring?",
+    "answer": "Common tools include Prometheus for metrics collection, Grafana for visualization, ELK Stack (Elasticsearch, Logstash, Kibana) for logging, Jaeger or Zipkin for tracing, and alerting tools like Alertmanager or PagerDuty."
+  },
+  {
+    "question": "Explain the difference between proactive and reactive monitoring.",
+    "answer": "Proactive monitoring anticipates issues by analyzing trends and anomalies before they impact users, using predictive analytics. Reactive monitoring responds to alerts after an issue occurs, focusing on immediate detection and resolution."
+  },
+  {
+    "question": "What is incident management in the context of SRE?",
+    "answer": "Incident management in SRE involves detecting, responding to, and resolving disruptions to service reliability. It includes on-call rotations, escalation procedures, communication, and post-incident reviews to prevent recurrence."
+  },
+  {
+    "question": "Describe the concept of blameless postmortems.",
+    "answer": "Blameless postmortems are reviews conducted after incidents to analyze what went wrong without assigning blame. The focus is on systemic issues, learning lessons, and implementing improvements to enhance reliability."
+  },
+  {
+    "question": "What is a runbook?",
+    "answer": "A runbook is a documented set of procedures for handling common operations or incidents, such as troubleshooting steps, deployment processes, or recovery actions. It helps standardize responses and reduce resolution time."
+  },
+  {
+    "question": "How do you prioritize tasks and incidents in SRE?",
+    "answer": "Prioritization is based on impact to SLOs, user experience, and business objectives. Use severity levels (e.g., P0 for critical outages), error budget consumption, and tools like PagerDuty for alerting and triage."
+  },
+  {
+    "question": "What is Chaos Engineering?",
+    "answer": "Chaos Engineering is the practice of intentionally introducing faults into systems (e.g., killing servers, injecting latency) to test resilience and identify weaknesses before they cause real outages."
+  },
+  {
+    "question": "How do you implement SLOs and SLIs in a new service?",
+    "answer": "Identify key user journeys, define SLIs (e.g., latency, error rate), set SLO targets based on user needs and historical data, instrument monitoring, and review regularly to adjust as the service evolves."
+  },
+  {
+    "question": "Explain the concept of capacity planning in SRE.",
+    "answer": "Capacity planning involves forecasting resource needs based on usage trends, growth projections, and performance metrics to ensure the system can handle load without violating SLOs, often using tools like Prometheus."
+  },
+  {
+    "question": "What is the significance of automation in SRE?",
+    "answer": "Automation reduces toil (manual, repetitive work), improves consistency, speeds up responses, and allows SREs to focus on engineering tasks. It's key to scaling operations and maintaining reliability."
+  },
+  {
+    "question": "How do you handle on-call rotations in SRE?",
+    "answer": "Use tools like PagerDuty or OpsGenie for scheduling, ensure fair distribution, provide training and runbooks, limit shift lengths to prevent burnout, and conduct reviews to improve alerting accuracy."
+  },
+  {
+    "question": "What strategies do you use to reduce downtime during deployments?",
+    "answer": "Use blue-green deployments, canary releases, feature flags, automated testing in CI/CD pipelines, monitoring during rollout, and rollback mechanisms to minimize impact."
+  },
+  {
+    "question": "What is the purpose of a Service Level Agreement (SLA)?",
+    "answer": "An SLA is a formal contract defining the expected service reliability (often based on SLOs), with penalties for breaches. It sets customer expectations and provides accountability."
+  },
+  {
+    "question": "How do you measure and improve system reliability?",
+    "answer": "Measure using SLIs/SLOs, MTBF/MTTR, and error rates. Improve through automation, chaos testing, postmortems, capacity planning, and iterative engineering."
+  },
+  {
+    "question": "What is the role of version control in SRE?",
+    "answer": "Version control (e.g., Git) tracks changes to code, configurations, and infrastructure, enabling collaboration, rollbacks, and auditing, which are crucial for reliable operations."
+  },
+  {
+    "question": "Explain the concept of infrastructure as code (IaC).",
+    "answer": "IaC treats infrastructure provisioning as software, using tools like Terraform or Ansible to define resources in code, enabling version control, automation, and consistent environments."
+  },
+  {
+    "question": "Describe a script you've developed to solve a problem. What language did you use and why?",
+    "answer": "I developed a Python script to automate alert triage using machine learning to classify incidents. Python was chosen for its rich libraries (e.g., scikit-learn) and readability."
+  },
+  {
+    "question": "How do you ensure your code is clean, maintainable, and efficient?",
+    "answer": "Follow PEP8 or similar standards, use meaningful names, write tests, refactor regularly, conduct code reviews, and profile for performance bottlenecks."
+  },
+  {
+    "question": "What is your experience with using version control systems such as Git?",
+    "answer": "Extensive experience with Git for branching, merging, rebasing, and collaborating via GitHub/GitLab. Used for IaC, scripts, and application code in SRE roles."
+  },
+  {
+    "question": "What is multithreading?",
+    "answer": "Multithreading is executing multiple threads (sub-processes) concurrently within a single process to improve performance, common in I/O-bound tasks."
+  },
+  {
+    "question": "Explain the difference between a process and a thread in a Linux system.",
+    "answer": "A process is an independent execution unit with its own memory space. A thread is a lightweight sub-process sharing memory with its parent process, allowing faster context switching."
+  },
+  {
+    "question": "Describe how you would use cgroups in Linux for resource management.",
+    "answer": "Cgroups (control groups) limit and monitor resource usage (CPU, memory) for processes. Use via systemd or cgcreate/cgset to isolate workloads and prevent resource starvation."
+  },
+  {
+    "question": "Explain the differences between NFS and SAN storage solutions.",
+    "answer": "NFS (Network File System) is file-level storage over network, easier to manage but slower. SAN (Storage Area Network) is block-level, faster for high-performance needs like databases, but more complex."
+  },
+  {
+    "question": "Explain the difference between UDP and TCP. How does each affect web application performance and reliability?",
+    "answer": "TCP is connection-oriented, reliable with error-checking and ordering. UDP is connectionless, faster but unreliable. TCP ensures reliability but adds latency; UDP suits real-time apps like video streaming."
+  },
+  {
+    "question": "How do you manage package dependencies and updates in a production environment?",
+    "answer": "Use tools like apt/yum with pinning, test updates in staging, automate via Ansible, monitor for vulnerabilities with tools like Trivy, and schedule maintenance windows."
+  },
+  {
+    "question": "How do you decide when a task should be automated? What factors do you consider?",
+    "answer": "Automate if repetitive, time-consuming, error-prone, or scalable. Consider ROI, complexity, frequency, and impact on reliability/toil reduction."
+  },
+  {
+    "question": "What’s your experience with configuration management tools?",
+    "answer": "Experience with Ansible for orchestration, Puppet/Chef for config management, focusing on idempotency and versioned playbooks for consistent environments."
+  },
+  {
+    "question": "Explain the concept of infrastructure as code (IaC). How can it be applied in managing cloud resources?",
+    "answer": "IaC defines infrastructure in code for automation. Apply with Terraform to provision AWS/GCP resources, enabling versioning, testing, and reproducible setups."
+  },
+  {
+    "question": "What specific strategies do you use to make your automation scripts maintainable and scalable?",
+    "answer": "Modular design, error handling, logging, parameterization, version control, testing, and documentation to ensure scripts adapt to growth."
+  },
+  {
+    "question": "How do you approach cost optimization for cloud resources?",
+    "answer": "Monitor usage with CloudWatch, right-size instances, use spot/reserved instances, auto-scale, delete unused resources, and leverage serverless where possible."
+  },
+  {
+    "question": "Explain the differences between IaaS, PaaS, and SaaS. When would you use each?",
+    "answer": "IaaS (e.g., EC2) provides infrastructure, use for custom control. PaaS (e.g., Heroku) manages runtime, use for quick development. SaaS (e.g., Gmail) is fully managed, use for off-the-shelf solutions."
+  },
+  {
+    "question": "What tools and technologies are commonly used in SRE?",
+    "answer": "Monitoring: Prometheus, Grafana. Orchestration: Kubernetes. IaC: Terraform. CI/CD: Jenkins, GitHub Actions. Logging: ELK. Alerting: PagerDuty."
+  },
+  {
+    "question": "What is Chaos Engineering, and how is it used in SRE?",
+    "answer": "Chaos Engineering tests system resilience by injecting failures. In SRE, tools like Chaos Monkey simulate outages to validate SLOs and improve fault tolerance."
+  },
+  {
+    "question": "Describe how you would create a post-incident report.",
+    "answer": "Include timeline, impact, root cause, mitigation steps, lessons learned, and action items. Conduct blamelessly, share widely, and track follow-ups."
   },
   {
     "question": "Describe a time you implemented automation to reduce toil. What was the impact?",
