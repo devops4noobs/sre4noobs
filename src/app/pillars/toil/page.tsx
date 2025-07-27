@@ -111,35 +111,6 @@ export default function EliminatingToil() {
           )}
         </motion.div>
 
-        {/* Characteristics of Toil Card */}
-        <motion.div
-          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          onHoverStart={() => setHoveredSection("characteristics")}
-          onHoverEnd={() => setHoveredSection(null)}
-        >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🛠️ Characteristics of Toil</h2>
-          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
-            <li><strong>Manual:</strong> Requires human intervention rather than automation.</li>
-            <li><strong>Repetitive:</strong> Occurs regularly with little variation.</li>
-            <li><strong>Reactive:</strong> Responds to incidents rather than preventing them.</li>
-            <li><strong>Interrupt-Driven:</strong> Disrupts planned work with urgent tasks.</li>
-            <li><strong>No Lasting Value:</strong> Doesn’t improve the system long-term.</li>
-          </ul>
-          {hoveredSection === "characteristics" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Hover tip: Identify these traits to spot toil early!
-            </motion.div>
-          )}
-        </motion.div>
-
         {/* Examples of Toil - Flip Cards with Flip Button */}
         <motion.div
           className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
@@ -203,43 +174,12 @@ export default function EliminatingToil() {
           )}
         </motion.div>
 
-        {/* Automation Strategies Card */}
+        {/* Real-World Examples */}
         <motion.div
           className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
           initial="hidden"
           animate="visible"
           variants={cardVariants}
-          onHoverStart={() => setHoveredSection("automation")}
-          onHoverEnd={() => setHoveredSection(null)}
-        >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🤖 Automation Strategies</h2>
-          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
-            <li><strong>Auto-Recovery:</strong> Scripts to restart failed services automatically.</li>
-            <li><strong>CI/CD Pipelines:</strong> Automate code deployment with testing.</li>
-            <li><strong>Infrastructure as Code:</strong> Use tools like Terraform for provisioning.</li>
-            <li><strong>Alert-Driven Remediation:</strong> Trigger fixes based on monitoring alerts.</li>
-          </ul>
-          {hoveredSection === "automation" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Hover tip: Start automating high-impact tasks first!
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Real-World Examples - Flip Cards with Flip Button */}
-        <motion.div
-          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          whileHover="hover"
-          onHoverStart={() => setHoveredSection("real-world")}
-          onHoverEnd={() => setHoveredSection(null)}
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🌟 Real-World Examples</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -282,75 +222,7 @@ export default function EliminatingToil() {
               </motion.div>
             ))}
           </div>
-          {hoveredSection === "real-world" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Hover tip: See how companies eliminated toil!
-            </motion.div>
-          )}
         </motion.div>
-
-        {/* Best Practices Card */}
-        <motion.div
-          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          onHoverStart={() => setHoveredSection("practices")}
-          onHoverEnd={() => setHoveredSection(null)}
-        >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
-          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
-            <li>Identify toil by tracking time spent on manual tasks weekly.</li>
-            <li>Prioritize automation for high-frequency toil first.</li>
-            <li>Validate automation with testing to ensure reliability.</li>
-            <li>Monitor automation outcomes to refine processes.</li>
-            <li>Train teams to recognize and report toil opportunities.</li>
-          </ul>
-          {hoveredSection === "practices" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Hover tip: Start small to build automation momentum!
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Closing Card */}
-        <motion.div
-          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          onHoverStart={() => setHoveredSection("closing")}
-          onHoverEnd={() => setHoveredSection(null)}
-        >
-          <p className="text-indigo-100 text-sm sm:text-base">
-            Eliminating toil is a continuous effort that enhances efficiency, reliability, and team morale, paving the way for a more innovative SRE practice.
-          </p>
-          {hoveredSection === "closing" && (
-            <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Hover tip: Make toil elimination a team habit!
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Footer Timestamp */}
-        <p className="text-gray-400 text-xs mt-4 text-center">
-          Last updated: July 27, 2025
-        </p>
       </main>
     </div>
   );
