@@ -22,7 +22,7 @@ export default function InterviewQuestionsPage() {
         const response = await fetch(
           "https://raw.githubusercontent.com/devops4noobs/sre4noobs/main/interviewquestions.json"
         );
-        if (!response.ok) {
+        if (!response.ok) { 
           throw new Error("Failed to fetch questions");
         }
         const data: InterviewQuestion[] = await response.json();
