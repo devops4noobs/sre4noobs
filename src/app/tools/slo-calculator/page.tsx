@@ -1,248 +1,235 @@
-   'use client';
+"use client";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
-   import { useForm } from 'react-hook-form';
-   import { saveAs } from 'file-saver';
-   import { useState } from 'react';
-   import { InformationCircleIcon } from '@heroicons/react/24/outline';
+export default function SLOCalculator() {
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [slo, setSlo] = useState(99.9);
+  const [period, setPeriod] = useState('month'); // 'day', 'week', 'month', 'year'
 
-   interface PostmortemFormData {
-     issueSummary: string;
-     issueStartDateTime: string;
-     issueResolutionDateTime: string;
-     issueImpact: string;
-     issueDetails: string;
-     preliminaryDirectCause: string;
-     mitigationSteps: string;
-     processImprovements: string;
-     timeline: string;
-   }
+  const calculateDowntime = () => {
+    const errorBudget = (100 - slo) / 100;
+    let totalMinutes = 0;
+    if (period === 'day') totalMinutes = 24 * 60;
+    else if (period === 'week') totalMinutes = 7 * 24 * 60;
+    else if (period === 'month') totalMinutes = 30 * 24 * 60;
+    else if (period === 'year') totalMinutes = 365 * 24 * 60;
 
-   export default function PostmortemForm() {
-       const { register, handleSubmit, formState: { errors } } = useForm<PostmortemFormData>({
-    defaultValues: {
-      issueSummary: '',
-      issueStartDateTime: '',
-      issueResolutionDateTime: '',
-      timeline: '',
-    },
-  });
-     const [blamelessWarning, setBlamelessWarning] = useState('');
+    const downtimeMinutes = errorBudget * totalMinutes;
+    const days = Math.floor(downtimeMinutes / (24 * 60));
+    const hours = Math.floor((downtimeMinutes % (24 * 60)) / 60);
+    const minutes = Math.floor(downtimeMinutes % 60);
+    const seconds = Math.floor((downtimeMinutes - Math.floor(downtimeMinutes)) * 60);
 
-     const onSubmit = (data: PostmortemFormData) => {
-       const blameWords = ['fault', 'blame', 'mistake', 'error by'];
-       const fields = [
-         data.issueSummary, data.issueImpact, data.issueDetails, data.preliminaryDirectCause,
-         data.mitigationSteps, data.processImprovements, data.timeline, 
-       ];
-       const hasBlame = fields.some(field => 
-         blameWords.some(word => field?.toLowerCase().includes(word))
-       );
-       if (hasBlame) {
-         setBlamelessWarning('Avoid blame words like "fault" or "mistake". Use systemic terms like "system issue".');
-         return;
-       }
-       setBlamelessWarning('');
+    return { days, hours, minutes, seconds };
+  };
 
-       const markdown = `
-# Blameless Postmortem Report
+  const { days, hours, minutes, seconds } = calculateDowntime();
 
-## Issue Start Date/Time (UTC)
-${data.issueStartDateTime}
+  const commonSLOs = [
+    { slo: 99, year: '3 days 15 hours', month: '7 hours 18 minutes', week: '1 hour 41 minutes', day: '14 minutes 24 seconds' },
+    { slo: 99.5, year: '1 day 19 hours', month: '3 hours 39 minutes', week: '50 minutes 24 seconds', day: '7 minutes 12 seconds' },
+    { slo: 99.9, year: '8 hours 46 minutes', month: '43 minutes 12 seconds', week: '10 minutes 5 seconds', day: '1 minute 26 seconds' },
+    { slo: 99.95, year: '4 hours 23 minutes', month: '21 minutes 36 seconds', week: '5 minutes 2 seconds', day: '43 seconds' },
+    { slo: 99.99, year: '52 minutes 36 seconds', month: '4 minutes 19 seconds', week: '1 minute', day: '8 seconds' },
+    { slo: 99.999, year: '5 minutes 16 seconds', month: '25 seconds', week: '6 seconds', day: '0.86 seconds' },
+  ];
 
-## Issue Resolution Date/Time (UTC)
-${data.issueResolutionDateTime}
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
-## Issue Summary
-${data.issueSummary}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
+      </div>
 
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <motion.section
+          className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl">
+              SLO Calculator
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-100">
+              Compute Downtime and Error Budgets
+            </p>
+          </motion.div>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-indigo-200 mt-4 sm:mt-6"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Estimate reliability targets for your services
+          </motion.p>
+        </motion.section>
 
-## Issue Impact
-${data.issueImpact}
+        {/* SLO Explanation Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("explanation")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">What is an SLO?</h2>
+          <p className="text-indigo-100 mb-4 text-sm sm:text-base">
+            A Service Level Objective (SLO) is a measurable target for service reliability, such as 99.9% uptime. It defines acceptable performance levels based on user expectations. The error budget is the complement (1 - SLO), representing allowed downtime.
+          </p>
+          {hoveredSection === "explanation" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: SLOs balance reliability and innovation!
+            </motion.div>
+          )}
+        </motion.div>
 
-## Issue Details
-${data.issueDetails}
+        {/* Interactive Calculator Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("calculator")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">SLO Downtime Calculator</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-indigo-100 mb-2">SLO Percentage:</label>
+              <input
+                type="number"
+                value={slo}
+                onChange={(e) => setSlo(parseFloat(e.target.value))}
+                min={0}
+                max={100}
+                step={0.001}
+                className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600"
+              />
+            </div>
+            <div>
+              <label className="block text-indigo-100 mb-2">Time Period:</label>
+              <select
+                value={period}
+                onChange={(e) => setPeriod(e.target.value)}
+                className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600"
+              >
+                <option value="day">Day</option>
+                <option value="week">Week</option>
+                <option value="month">Month (30 days)</option>
+                <option value="year">Year (365 days)</option>
+              </select>
+            </div>
+            <div className="bg-gray-900 p-4 rounded-lg">
+              <p className="text-indigo-100">Allowed Downtime: {days} days, {hours} hours, {minutes} minutes, {seconds} seconds</p>
+            </div>
+          </div>
+          {hoveredSection === "calculator" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Adjust SLO to see downtime changes!
+            </motion.div>
+          )}
+        </motion.div>
 
-## Preliminary Direct Cause
-${data.preliminaryDirectCause}
+        {/* Common SLO Table Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("table")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Common SLO Downtime Table</h2>
+          <table className="w-full text-indigo-100 text-sm sm:text-base">
+            <thead>
+              <tr className="border-b border-gray-600">
+                <th className="p-2 text-left">SLO</th>
+                <th className="p-2 text-left">Year</th>
+                <th className="p-2 text-left">Month</th>
+                <th className="p-2 text-left">Week</th>
+                <th className="p-2 text-left">Day</th>
+              </tr>
+            </thead>
+            <tbody>
+              {commonSLOs.map((row, index) => (
+                <tr key={index} className="border-b border-gray-700">
+                  <td className="p-2">{row.slo}%</td>
+                  <td className="p-2">{row.year}</td>
+                  <td className="p-2">{row.month}</td>
+                  <td className="p-2">{row.week}</td>
+                  <td className="p-2">{row.day}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {hoveredSection === "table" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Reference for standard reliability targets!
+            </motion.div>
+          )}
+        </motion.div>
 
-## Mitigation Steps
-${data.mitigationSteps}
+        {/* Error Budget Explanation Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("budget")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Error Budgets in SRE</h2>
+          <p className="text-indigo-100 mb-4 text-sm sm:text-base">
+            An error budget is the allowable unreliability (1 - SLO). It represents the 'room for error' in your system, balancing reliability with innovation. For example, a 99.9% SLO gives a 0.1% error budget.
+          </p>
+          {hoveredSection === "budget" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Use error budgets to guide development!
+            </motion.div>
+          )}
+        </motion.div>
 
-## Process Improvements
-${data.processImprovements}
-
-## Timeline
-${data.timeline}
-       `.trim();
-
-       const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
-       saveAs(blob, 'postmortem-report.md');
-     };
-
-     return (
-       <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 p-6 rounded-lg shadow-lg text-white space-y-6">
-         {blamelessWarning && (
-           <div className="p-4 bg-yellow-900 text-yellow-200 rounded flex items-center">
-             <InformationCircleIcon className="w-5 h-5 mr-2" />
-             {blamelessWarning}
-           </div>
-         )}
-
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-           <div>
-             <label htmlFor="summary" className="block text-sm font-medium mb-1">
-               Summary <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="summary"
-               aria-describedby="summary-error"
-               {...register('issueSummary', { required: 'Summary is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Edit the predefined template below to describe the incident."
-             />
-             {errors.issueSummary && (
-               <p id="summary-error" className="mt-1 text-sm text-red-400">{errors.issueSummary.message}</p>
-             )}
-           </div>
-              
-           <div>
-             <label htmlFor="issueStartDateTime" className="block text-sm font-medium mb-1">
-               Start Date/Time (UTC) <span className="text-purple-400">*</span>
-             </label>
-             <input
-               type="datetime-local"
-               id="issueStartDateTime"
-               {...register('issueStartDateTime', { required: 'Start Date/Time is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-             />
-             {errors.issueStartDateTime && (
-               <p id="issueStartDateTime-error" className="mt-1 text-sm text-red-400">{errors.issueStartDateTime.message}</p>
-             )}
-             <label htmlFor="issueResolutionDateTime" className="block text-sm font-medium mb-1">
-               End Date/Time (UTC) <span className="text-purple-400">*</span>
-             </label>
-             <input
-               type="datetime-local"
-               id="issueResolutionDateTime"
-               {...register('issueResolutionDateTime', { required: 'End Date/Time is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-             />
-             {errors.issueResolutionDateTime && (
-               <p id="issueResolutionDateTime-error" className="mt-1 text-sm text-red-400">{errors.issueResolutionDateTime.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="issueImpact" className="block text-sm font-medium mb-1">
-               Impact <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="issueImpact"
-               aria-describedby="issueImpact-error"
-               {...register('issueImpact', { required: 'Impact is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Quantify the impact (e.g., 10% users affected, service downtime)."
-             />
-             {errors.issueImpact && (
-               <p id="issueImpact-error" className="mt-1 text-sm text-red-400">{errors.issueImpact.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="issueDetails" className="block text-sm font-medium mb-1">
-               Details <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="issueDetails"
-               aria-describedby="issueDetails-error"
-               {...register('issueDetails', { required: 'Details is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Additional context or observations about the incident."
-             />
-             {errors.issueDetails && (
-               <p id="issueDetails-error" className="mt-1 text-sm text-red-400">{errors.issueDetails.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="preliminaryDirectCause" className="block text-sm font-medium mb-1">
-               Direct Cause <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="preliminaryDirectCause"
-               aria-describedby="preliminaryDirectCause-error"
-               {...register('preliminaryDirectCause', { required: 'Direct Cause is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Initial identified cause (e.g., server overload)."
-             />
-             {errors.preliminaryDirectCause && (
-               <p id="preliminaryDirectCause-error" className="mt-1 text-sm text-red-400">{errors.preliminaryDirectCause.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="mitigationSteps" className="block text-sm font-medium mb-1">
-               Mitigation Steps <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="mitigationSteps"
-               aria-describedby="mitigationSteps-error"
-               {...register('mitigationSteps', { required: 'Mitigation Steps are required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Actions taken to resolve the incident (e.g., restart service)."
-             />
-             {errors.mitigationSteps && (
-               <p id="mitigationSteps-error" className="mt-1 text-sm text-red-400">{errors.mitigationSteps.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="processImprovements" className="block text-sm font-medium mb-1">
-               Improvements <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="processImprovements"
-               aria-describedby="processImprovements-error"
-               {...register('processImprovements', { required: 'Improvements are required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="Suggested changes to prevent recurrence (e.g., enhance monitoring)."
-             />
-             {errors.processImprovements && (
-               <p id="processImprovements-error" className="mt-1 text-sm text-red-400">{errors.processImprovements.message}</p>
-             )}
-           </div>
-
-           <div>
-             <label htmlFor="timeline" className="block text-sm font-medium mb-1">
-               Timeline <span className="text-purple-400">*</span>
-             </label>
-             <textarea
-               id="timeline"
-               aria-describedby="timeline-error"
-               {...register('timeline', { required: 'Timeline is required' })}
-               className="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:border-purple-500 focus:ring-purple-500 text-gray-100"
-               rows={4}
-               placeholder="List key events (e.g., 09:00 - Alert triggered, 09:15 - Team paged)."
-             />
-             {errors.timeline && (
-               <p id="timeline-error" className="mt-1 text-sm text-red-400">{errors.timeline.message}</p>
-             )}
-           </div>
-
-         </div>
-
-         <button
-           type="submit"
-           className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-md shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 mt-6"
-         >
-           Download Postmortem Report
-         </button>
-       </form>
-     );
-   }
+        {/* Footer Timestamp */}
+        <p className="text-gray-400 text-xs mt-4 text-center">
+          Last updated: July 27, 2025
+        </p>
+      </main>
+    </div>
+  );
+}
