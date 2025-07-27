@@ -1,351 +1,364 @@
-"use client";
-import { useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline"; // Ensure this is installed
+"use client"; // Required for useState and motion
+import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
+import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const principles = [
   {
-    title: "📏 What Are SLOs??",
+    title: "📏 Defining SLOs for Reliability",
+    summary: "Set clear, measurable targets to ensure your service meets user expectations reliably.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          <strong>SLO</strong> (Service Level Objective) is a measurable reliability target that defines how well a service must perform for users. It&apos;s the reliability promise you make—like “99.9% of requests respond under 300ms.” SLOs are crucial for balancing risk, managing user expectations, and guiding engineering efforts.
+          <strong>Service Level Objectives (SLOs)</strong> are precise reliability goals, like ensuring “99.9% of requests complete in under 300ms.” They anchor SRE by aligning engineering efforts with user needs.
         </p>
-
         <p>
-          SLOs are backed by <strong>SLIs</strong> (indicators like latency or error rate) and sometimes formalized into <strong>SLAs</strong> (legal agreements).
+          SLOs rely on <strong>Service Level Indicators (SLIs)</strong>, such as latency or uptime, and may feed into <strong>Service Level Agreements (SLAs)</strong> for contractual commitments.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🧠 Core Principles of SLOs</h4>
+        <h4 className="text-indigo-400 font-semibold">🧠 Key Attributes</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li><strong>User-Centric:</strong> Reflect what matters to users.</li>
-          <li><strong>Balance Risk & Reliability:</strong> Avoid over-engineering or underperforming.</li>
-          <li><strong>Measure & Monitor:</strong> Track performance against SLOs.</li>
-          <li><strong>Reviewed Regularly:</strong> Adapt to changing conditions and needs.</li>
-          <li><strong>Focused:</strong> Track a few key metrics, not dozens.</li>
-          <li><strong>Continuous Improvement:</strong> Drive ongoing enhancements.</li>
+          <li><strong>User-Focused:</strong> Prioritize metrics that impact user experience.</li>
+          <li><strong>Balanced:</strong> Optimize reliability without over-engineering.</li>
+          <li><strong>Trackable:</strong> Continuously monitor performance against targets.</li>
+          <li><strong>Adaptive:</strong> Adjust SLOs as system needs evolve.</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🎯 Example</h4>
+        <h4 className="text-indigo-400 font-semibold">🎯 Examples</h4>
         <ul className="list-disc list-inside italic space-y-2">
-          <li>“99.95% of API responses must complete under 300ms over a 30-day period.”</li>
-          <li>“90% of critical incidents must be resolved within 60 minutes over the last 30 days.”</li>
+          <li>“99.95% API uptime over 30 days.”</li>
+          <li>“95% of queries return in under 200ms.”</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">📊 Typical SLO Types</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li><strong>Availability:</strong> % of successful requests</li>
-          <li><strong>Latency:</strong> Response time under a threshold</li>
-          <li><strong>Error Rate:</strong> Fewer 5xx errors</li>
-          <li><strong>Freshness:</strong> Real-time or near real-time data</li>
-        </ul>
-
         <p>
-          SLOs are the foundation of SRE—they guide decisions, incident response, and engineering priorities.
+          SLOs drive decision-making, prioritize incidents, and ensure consistent reliability.
         </p>
       </div>
     ),
+    hoverTip: "SLOs guide reliability with precision!",
   },
   {
-    title: "📉 Embrace Risk with Error Budgets",
+    title: "📉 Balancing Risk with Error Budgets",
+    summary: "Use error budgets to safely innovate while maintaining system stability.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          <strong>Error Budgets</strong> are a core SRE concept that balances reliability with innovation. Instead of aiming for perfect uptime, we define an acceptable amount of failure based on the service&apos;s <strong>SLO</strong>.
+          <strong>Error Budgets</strong> allow controlled risk by defining acceptable failure levels based on SLOs. For a 99.9% uptime SLO, the error budget is 0.1%, or ~43 minutes of downtime monthly.
         </p>
-
-        <p>
-          The error budget is the difference between 100% and your SLO target. For example, if your SLO is 99.9% uptime, your error budget is 0.1%—about 43.2 minutes of downtime per month.
-        </p>
-
-        <h4 className="text-indigo-400 font-semibold">🧠 Why It Matters</h4>
-        <div className="space-y-2">
-          <div>✅ <strong>Encourages Calculated Risk:</strong> Ship faster if within budget.</div>
-          <div>✅ <strong>Triggers Caution:</strong> Pause releases if the budget is exhausted.</div>
-          <div>✅ <strong>Data-Driven Decisions:</strong> Removes emotion from go/no-go calls.</div>
-        </div>
-
-        <h4 className="text-indigo-400 font-semibold">📊 Real-World Examples</h4>
+        <h4 className="text-indigo-400 font-semibold">🧠 Why It Works</h4>
+        <ul className="list-disc list-inside space-y-2">
+          <li><strong>Promotes Innovation:</strong> Safe to deploy within budget.</li>
+          <li><strong>Enforces Discipline:</strong> Pause releases if budget is low.</li>
+          <li><strong>Data-Driven:</strong> Objective release decisions.</li>
+        </ul>
+        <h4 className="text-indigo-400 font-semibold">📊 Use Cases</h4>
         <div className="space-y-3">
-          <div>☁️ <strong>Cloud Service:</strong> A storage team pauses feature deployments after using 80% of their 99.95% availability budget.</div>
-          <div>🚀 <strong>Frontend App:</strong> Runs chaos tests during low traffic, using budget strategically.</div>
-          <div>🧪 <strong>AI Team:</strong> Launches a new ML model with only 10% budget used.</div>
+          <div>☁️ <strong>Cloud Platform:</strong> Halts rollouts after 75% budget use.</div>
+          <div>🚀 <strong>Web App:</strong> Tests features during off-peak hours.</div>
         </div>
-
-        <h4 className="text-indigo-400 font-semibold">📐 Formula</h4>
         <p className="italic">
-          <strong>Error Budget = 100% – SLO Target</strong><br />
-          Example: 100% – 99.9% = 0.1% allowable errors
+          <strong>Formula:</strong> Error Budget = 100% – SLO Target
         </p>
-
-        <p className="text-gray-400">
-          Embracing risk means using data to make smart trade-offs between stability and speed.
+        <p>
+          Error budgets align reliability with rapid development.
         </p>
       </div>
     ),
+    hoverTip: "Error budgets fuel safe innovation!",
   },
   {
-    title: "⚙️ Automate Everything to Eliminate Toil",
+    title: "⚙️ Eliminating Toil Through Automation",
+    summary: "Automate repetitive tasks to free engineers for strategic work.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          <strong>Toil</strong> is repetitive, manual, automatable work that doesn&apos;t improve systems. A core SRE principle is to <strong>identify and eliminate toil through automation</strong>, freeing engineers for impactful work.
+          <strong>Toil</strong> refers to manual, repetitive tasks that lack lasting value. SREs aim to automate toil to enhance efficiency and reliability.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🔁 What Is Toil?</h4>
+        <h4 className="text-indigo-400 font-semibold">🔁 Characteristics of Toil</h4>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Manual and repetitive</li>
+          <li>Reactive, not proactive</li>
+          <li>Short-term fixes</li>
+        </ul>
+        <h4 className="text-indigo-400 font-semibold">🤖 Automation Examples</h4>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Auto-scaling cloud resources</li>
+          <li>CI/CD pipelines for deployments</li>
+          <li>Automated alert responses</li>
+        </ul>
+        <h4 className="text-indigo-400 font-semibold">📉 Benefits</h4>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Consistent system performance</li>
+          <li>More time for innovation</li>
+          <li>Reduced team burnout</li>
+        </ul>
         <p>
-          Google SRE defines toil as work that is:
-        </p>
-        <ul className="space-y-1 pl-2">
-          <li>— Manual</li>
-          <li>— Repetitive</li>
-          <li>— Reactive</li>
-          <li>— Interrupt-driven</li>
-          <li>— Lacks long-term value</li>
-        </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🛠️ Examples of Toil</h4>
-        <div className="space-y-3">
-          <div>🔁 Manually restarting failed services</div>
-          <div>📦 Deploying code via SSH</div>
-          <div>📈 Creating dashboards for each service</div>
-          <div>📨 Handling low-priority night pages</div>
-        </div>
-
-        <h4 className="text-indigo-400 font-semibold">🤖 Automation in Action</h4>
-        <ul className="space-y-2">
-          <li>✅ Auto-recovery for crashed services</li>
-          <li>✅ CI/CD pipelines for deployments</li>
-          <li>✅ Terraform for infrastructure</li>
-          <li>✅ Auto-remediation via alerts</li>
-        </ul>
-
-        <h4 className="text-indigo-400 font-semibold">📉 Why Eliminate Toil?</h4>
-        <ul className="space-y-2">
-          <li>✅ <strong>Improves Reliability:</strong> Automation is consistent.</li>
-          <li>✅ <strong>Frees Engineers:</strong> Focus on innovation.</li>
-          <li>✅ <strong>Prevents Burnout:</strong> Reduces repetitive tasks.</li>
-        </ul>
-
-        <h4 className="text-indigo-400 font-semibold">📚 Real-World Story</h4>
-        <p>
-          A company saved 780 hours/year by automating DNS updates with a Python Lambda, reinvesting time into CI/CD improvements.
-        </p>
-
-        <p className="text-gray-400 italic">
-          “If it&apos;s boring, repetitive, and required—automate it.”
+          A team automated server restarts, saving 500 hours annually, boosting productivity.
         </p>
       </div>
     ),
+    hoverTip: "Automation transforms toil into progress!",
   },
   {
-    title: "🤝 Foster Collaboration Between Devs and Ops",
+    title: "🤝 Unifying Devs and Ops",
+    summary: "Break silos with shared goals to boost reliability and speed.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          Traditional IT silos between development (dev) and operations (ops) cause delays and reliability issues. A core SRE principle is to <strong>bridge this gap with collaboration and shared responsibility</strong>.
+          Collaboration between developers and operations eliminates delays and enhances system reliability through shared ownership.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🤝 What Collaboration Means</h4>
+        <h4 className="text-indigo-400 font-semibold">🤝 Collaboration Practices</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li>Shared ownership of services</li>
-          <li>Joint accountability for reliability</li>
-          <li>Open communication channels</li>
-          <li>Collabora#tive planning for capacity and incidents</li>
+          <li>Shared service responsibility</li>
+          <li>Joint incident response</li>
+          <li>Unified communication tools</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🔧 Why Collaboration Matters</h4>
+        <h4 className="text-indigo-400 font-semibold">🌟 Impact</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li><strong>Faster Resolution:</strong> Combines dev&apos;s code knowledge with ops&apos; infrastructure expertise.</li>
-          <li><strong>Higher Quality:</strong> Better testing and deployment practices.</li>
-          <li><strong>Innovation:</strong> Cross-team feedback improves scalability.</li>
-          <li><strong>Reduced Toil:</strong> Ops automates with dev support.</li>
+          <li>Faster issue resolution</li>
+          <li>Improved deployment quality</li>
+          <li>Enhanced system scalability</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🌟 Real-World Examples</h4>
-        <div className="space-y-3">
-          <div>🛠️ Google embeds SREs in dev teams for continuous improvement.</div>
-          <div>🚀 A startup&apos;s ops/dev sync reduced deployment failures by 40%.</div>
-          <div>🔄 Joint alert channels via Slack/Jira improve incident response.</div>
-        </div>
-
-        <h4 className="text-indigo-400 font-semibold">💡 How to Foster Collaboration</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Shared on-call rotations</li>
-          <li>Blameless postmortems with all stakeholders</li>
-          <li>Cross-training sessions</li>
-          <li>Collaboration tools and dashboards</li>
-        </ul>
-
-        <p className="text-gray-400 italic">
-          Collaboration binds development velocity with operational stability.
+        <p>
+          A startup’s Dev/Ops sync cut deployment errors by 35% via shared tools.
         </p>
       </div>
     ),
+    hoverTip: "Collaboration drives system excellence!",
   },
   {
-    title: "📝 Conduct Blameless Postmortems",
+    title: "📝 Learning from Blameless Postmortems",
+    summary: "Analyze incidents without blame to improve systems continuously.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          Blameless postmortems are a cornerstone of SRE, enabling learning from incidents without blame. The focus is on <strong>what happened</strong> and <strong>how to prevent it</strong>, not who caused it.
+          <strong>Blameless Postmortems</strong> focus on understanding incidents to prevent recurrence, fostering a culture of learning over blame.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🔍 Why Blameless Postmortems Matter</h4>
+        <h4 className="text-indigo-400 font-semibold">🔍 Core Elements</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li>Encourages honest discussion about failures.</li>
-          <li>Fosters continuous improvement.</li>
-          <li>Reduces fear around reporting.</li>
-          <li>Identifies systemic issues.</li>
+          <li>Timeline of events</li>
+          <li>Impact analysis</li>
+          <li>Root cause identification</li>
+          <li>Preventive actions</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🛠️ Key Components</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li><strong>Incident Timeline:</strong> What happened and when.</li>
-          <li><strong>Impact Assessment:</strong> Who and what was affected.</li>
-          <li><strong>Root Cause Analysis:</strong> Underlying factors.</li>
-          <li><strong>Mitigation Steps:</strong> Response during the incident.</li>
-          <li><strong>Action Items:</strong> Tasks to prevent recurrence.</li>
-        </ul>
-
-        <h4 className="text-indigo-400 font-semibold">📚 Real-World Example</h4>
+        <h4 className="text-indigo-400 font-semibold">📚 Example</h4>
         <p>
-          After a misconfigured deployment outage, a team identified monitoring gaps and added automated checks, preventing future incidents.
+          A team fixed a database outage by adding automated failover after a postmortem revealed configuration gaps.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">💡 Best Practices</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Focus on systems, not individuals.</li>
-          <li>Use a standard template.</li>
-          <li>Share postmortems widely.</li>
-          <li>Conduct timely reviews.</li>
-        </ul>
-
-        <p className="text-gray-400 italic">
-          The goal is growth and resilience, not blame.
+        <p>
+          Postmortems ensure systems grow stronger with each incident.
         </p>
       </div>
     ),
+    hoverTip: "Postmortems turn failures into growth!",
   },
   {
-    title: "👁️ Monitor Distributed Systems",
+    title: "👁️ Monitoring Distributed Systems",
+    summary: "Track key signals to maintain system health and catch issues early.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          Monitoring distributed systems is essential to ensure reliability and detect issues early. SREs use the “four golden signals”—latency, traffic, errors, and saturation—to gain actionable insights.
+          Effective monitoring uses the <strong>four golden signals</strong>—latency, traffic, errors, and saturation—to ensure system reliability.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🧠 The Four Golden Signals</h4>
+        <h4 className="text-indigo-400 font-semibold">🧠 Golden Signals</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li><strong>Latency:</strong> Time to service a request.</li>
-          <li><strong>Traffic:</strong> Volume of requests or data.</li>
-          <li><strong>Errors:</strong> Rate of failed requests.</li>
-          <li><strong>Saturation:</strong> Resource utilization (e.g., CPU, memory).</li>
+          <li><strong>Latency:</strong> Request response time</li>
+          <li><strong>Traffic:</strong> Request volume</li>
+          <li><strong>Errors:</strong> Failure rate</li>
+          <li><strong>Saturation:</strong> Resource usage</li>
         </ul>
-
-        <h4 className="text-indigo-400 font-semibold">🔧 Best Practices</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Use dashboards with real-time data (e.g., Grafana).</li>
-          <li>Set meaningful alerts, avoiding noise.</li>
-          <li>Monitor end-user experience, not just infrastructure.</li>
-          <li>Log and analyze trends over time.</li>
-        </ul>
-
         <h4 className="text-indigo-400 font-semibold">📊 Example</h4>
         <p>
-          A team notices high latency (500ms) and 5% errors during peak traffic. They adjust load balancers and scale resources, restoring performance.
+          High latency alerts prompted a team to optimize load balancers, cutting response times by 40%.
         </p>
-
-        <p className="text-gray-400 italic">
-          Effective monitoring prevents outages and guides optimization.
+        <p>
+          Monitoring empowers proactive system management.
         </p>
       </div>
     ),
+    hoverTip: "Monitoring keeps systems in check!",
   },
   {
-    title: "🚀 Release Engineering",
+    title: "🚀 Streamlining Release Engineering",
+    summary: "Deploy reliably with practices that minimize risks and outages.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          Release engineering ensures safe, reliable software deployments. SREs integrate reliability into the release process, minimizing outages caused by changes.
+          <strong>Release Engineering</strong> ensures safe deployments through automation and careful testing.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🧠 Key Practices</h4>
+        <h4 className="text-indigo-400 font-semibold">🧠 Practices</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li>Use canary releases to test on a subset of users.</li>
-          <li>Implement progressive rollouts with feature flags.</li>
-          <li>Automate testing and validation in CI/CD pipelines.</li>
-          <li>Monitor post-release health with SLOs.</li>
+          <li>Canary releases for small-scale testing</li>
+          <li>Feature flags for controlled rollouts</li>
+          <li>Automated CI/CD validation</li>
         </ul>
-
         <h4 className="text-indigo-400 font-semibold">📊 Example</h4>
         <p>
-          A team rolls out a new feature to 5% of users, detects a 2% error rate, and rolls back before wider impact.
+          A 5% canary release caught a bug, preventing a full outage.
         </p>
-
-        <p className="text-gray-400 italic">
-          Reliable releases balance speed and stability.
+        <p>
+          Reliable releases maintain system stability.
         </p>
       </div>
     ),
+    hoverTip: "Smooth releases prevent chaos!",
   },
   {
-    title: "🧩 Simplicity",
+    title: "🧩 Prioritizing Simplicity",
+    summary: "Keep systems simple to enhance reliability and ease maintenance.",
     content: (
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-indigo-100">
         <p>
-          Simplicity is a guiding principle in SRE—complex systems are harder to maintain and more prone to failure. Keeping designs and processes simple enhances reliability.
+          <strong>Simplicity</strong> reduces complexity, making systems easier to manage and scale.
         </p>
-
-        <h4 className="text-indigo-400 font-semibold">🧠 Why Simplicity Matters</h4>
+        <h4 className="text-indigo-400 font-semibold">🧠 Benefits</h4>
         <ul className="list-disc list-inside space-y-2">
-          <li>Reduces debugging time and human error.</li>
-          <li>Improves scalability and maintainability.</li>
-          <li>Lowers the cognitive load on teams.</li>
+          <li>Faster debugging</li>
+          <li>Improved scalability</li>
+          <li>Lower team stress</li>
         </ul>
-
         <h4 className="text-indigo-400 font-semibold">📊 Example</h4>
         <p>
-          A team replaces a multi-layer caching system with a single, well-tuned cache, reducing latency and outages.
+          Simplifying a caching layer cut outages by 20%.
         </p>
-
-        <p className="text-gray-400 italic">
-          Simplicity is the ultimate sophistication.
+        <p>
+          Simple systems are robust systems.
         </p>
       </div>
     ),
+    hoverTip: "Simplicity is reliability’s best friend!",
   },
 ];
 
 export default function SREPrinciplesPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const controls = useAnimation();
+
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { scale: 1, opacity: 0, y: 20 },
+    visible: { scale: 1, opacity: 1, y: 0 },
+  };
+
+  // Trigger animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const insightsSection = document.getElementById("insights");
+      if (insightsSection && window.scrollY + window.innerHeight > insightsSection.offsetTop) {
+        controls.start({ opacity: 1, y: 0 });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-indigo-400 mb-8">SRE Principles Overview</h1>
-
-      <div className="space-y-6">
-        {principles.map((p, index) => (
-          <div
-            key={index}
-            className="bg-gray-900 rounded-xl p-6 shadow-lg cursor-pointer transition-all duration-300 hover:bg-gray-800 border-2 border-indigo-500" // Added visible border
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-          >
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-indigo-300">{p.title}</h2>
-              {openIndex === index ? (
-                <ChevronUpIcon className="w-5 h-5 text-indigo-400" />
-              ) : (
-                <ChevronDownIcon className="w-5 h-5 text-indigo-400" />
-              )}
-            </div>
-            {openIndex === index && (
-              <div className="mt-4 animate-fade-in">
-                {p.content}
-              </div>
-            )}
-          </div>
-        ))}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
       </div>
+
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <motion.section
+          className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl">
+              SRE Principles
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-100">
+              Building Reliable Systems
+            </p>
+          </motion.div>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-indigo-200 mt-4 sm:mt-6"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Discover the core principles that power Site Reliability Engineering
+          </motion.p>
+        </motion.section>
+
+        {/* Table of Contents Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("toc")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Explore Principles</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-indigo-100 text-sm sm:text-base">
+            {principles.map((p, index) => (
+              <li key={index}>
+                <a href={`#principle-${index}`} className="hover:underline">
+                  {p.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {hoveredSection === "toc" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-4 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Navigate to any principle to dive in!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Principles Sections */}
+        <div id="insights" className="space-y-8">
+          {principles.map((p, index) => (
+            <motion.div
+              key={index}
+              id={`principle-${index}`}
+              className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg"
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              transition={{ delay: index * 0.1 }}
+              onHoverStart={() => setHoveredSection(`principle-${index}`)}
+              onHoverEnd={() => setHoveredSection(null)}
+            >
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-2 glow-text">{p.title}</h2>
+              <p className="text-indigo-200 mb-4 text-sm sm:text-base">{p.summary}</p>
+              {p.content}
+              <div className="mt-6 bg-gray-900 p-4 rounded-lg">
+                <strong className="text-indigo-400">Apply It:</strong>
+                <p className="text-indigo-200 mt-2">Identify one way to implement this principle in your work today.</p>
+              </div>
+              {hoveredSection === `principle-${index}` && (
+                <motion.div
+                  className="bg-yellow-900/50 rounded p-2 mt-4 text-white text-xs sm:text-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Key takeaway: {p.hoverTip}
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer Timestamp */}
+        <p className="text-gray-400 text-xs mt-8 text-center">
+          Last updated: July 27, 2025, 5:44 PM EEST
+        </p>
+      </main>
     </div>
   );
 }
