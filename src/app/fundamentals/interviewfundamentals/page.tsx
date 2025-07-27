@@ -22,14 +22,19 @@ export default function InterviewQuestionsPage() {
         const response = await fetch(
           "https://raw.githubusercontent.com/devops4noobs/sre4noobs/main/interviewquestions.json"
         );
-        if (!response.ok) { 
+        if (!response.ok) {
           throw new Error("Failed to fetch questions");
         }
         const data: InterviewQuestion[] = await response.json();
         setQuestions(data);
         setRevealedAnswers(new Array(data.length).fill(false)); // Initialize revealed state
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        // Use unknown instead of any to satisfy @typescript-eslint/no-explicit-any
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
       } finally {
         setLoading(false);
       }
@@ -133,7 +138,7 @@ export default function InterviewQuestionsPage() {
 
         {/* Footer Timestamp */}
         <p className="text-gray-400 text-xs mt-8 text-center">
-          Last updated: July 27, 2025, 6:08 PM EEST
+          Last updated: July 27, 2025, 6:35 PM EEST
         </p>
       </main>
     </div>
