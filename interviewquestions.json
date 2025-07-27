@@ -21,7 +21,7 @@
   },
   {
     "question": "What tools are commonly used in SRE for monitoring?",
-    "answer": "Common tools include Prometheus for metrics collection, Grafana for visualization, ELK Stack (Elasticsearch, Logstash, Kibana) for logging, Jaeger or Zipkin for tracing, and alerting tools like Alertmanager or PagerDuty."
+    "answer": "Common tools include Prometheus, SignalFX for metrics collection, Grafana for visualization, ELK Stack, AWS Cloudwatch (Elasticsearch, Logstash, Kibana) for logging, Jaeger or Zipkin for tracing, and alerting tools like Alertmanager or PagerDuty."
   },
   {
     "question": "Explain the difference between proactive and reactive monitoring.",
@@ -41,7 +41,7 @@
   },
   {
     "question": "How do you prioritize tasks and incidents in SRE?",
-    "answer": "Prioritization is based on impact to SLOs, user experience, and business objectives. Use severity levels (e.g., P0 for critical outages), error budget consumption, and tools like PagerDuty for alerting and triage."
+    "answer": "Prioritization is based on impact to SLOs, user experience, and business objectives. Use severity levels (e.g., P0 for security incidents, P1 for critical outages, P2 for high priority), error budget consumption, and tools like PagerDuty for alerting and triage."
   },
   {
     "question": "What is Chaos Engineering?",
@@ -96,26 +96,6 @@
     "answer": "Extensive experience with Git for branching, merging, rebasing, and collaborating via GitHub/GitLab. Used for IaC, scripts, and application code in SRE roles."
   },
   {
-    "question": "What is multithreading?",
-    "answer": "Multithreading is executing multiple threads (sub-processes) concurrently within a single process to improve performance, common in I/O-bound tasks."
-  },
-  {
-    "question": "Explain the difference between a process and a thread in a Linux system.",
-    "answer": "A process is an independent execution unit with its own memory space. A thread is a lightweight sub-process sharing memory with its parent process, allowing faster context switching."
-  },
-  {
-    "question": "Describe how you would use cgroups in Linux for resource management.",
-    "answer": "Cgroups (control groups) limit and monitor resource usage (CPU, memory) for processes. Use via systemd or cgcreate/cgset to isolate workloads and prevent resource starvation."
-  },
-  {
-    "question": "Explain the differences between NFS and SAN storage solutions.",
-    "answer": "NFS (Network File System) is file-level storage over network, easier to manage but slower. SAN (Storage Area Network) is block-level, faster for high-performance needs like databases, but more complex."
-  },
-  {
-    "question": "Explain the difference between UDP and TCP. How does each affect web application performance and reliability?",
-    "answer": "TCP is connection-oriented, reliable with error-checking and ordering. UDP is connectionless, faster but unreliable. TCP ensures reliability but adds latency; UDP suits real-time apps like video streaming."
-  },
-  {
     "question": "How do you manage package dependencies and updates in a production environment?",
     "answer": "Use tools like apt/yum with pinning, test updates in staging, automate via Ansible, monitor for vulnerabilities with tools like Trivy, and schedule maintenance windows."
   },
@@ -145,7 +125,7 @@
   },
   {
     "question": "What tools and technologies are commonly used in SRE?",
-    "answer": "Monitoring: Prometheus, Grafana. Orchestration: Kubernetes. IaC: Terraform. CI/CD: Jenkins, GitHub Actions. Logging: ELK. Alerting: PagerDuty."
+    "answer": "Monitoring: Prometheus, Grafana, SignalFX. Orchestration: Kubernetes. IaC: Terraform. CI/CD: Jenkins, GitHub Actions, Gitlab. Logging: ELK. Alerting: PagerDuty."
   },
   {
     "question": "What is Chaos Engineering, and how is it used in SRE?",
@@ -153,22 +133,22 @@
   },
   {
     "question": "Describe how you would create a post-incident report.",
-    "answer": "Include timeline, impact, root cause, mitigation steps, lessons learned, and action items. Conduct blamelessly, share widely, and track follow-ups."
+    "answer": "Include start date/time, end date/time, incident summary, incident impact, root cause, mitigation steps, lessons learned, action items and timeline. Conduct blamelessly, share widely, and track follow-ups."
   },
   {
     "question": "Describe a time you implemented automation to reduce toil. What was the impact?",
-    "answer": "Automation reduces repetitive, manual tasks that add no long-term value (“toil”). Examples include full CI/CD pipelines, automated recovery for crashed services, and infrastructure as code (e.g. Terraform). Automating these tasks improves reliability and frees engineers to focus on higher-value activities. :contentReference[oaicite:3]{index=3}"
+    "answer": "Automation reduces repetitive, manual tasks that add no long-term value (“toil”). Examples include full CI/CD pipelines, automated recovery for crashed services, and infrastructure as code (e.g. Terraform). Automating these tasks improves reliability and frees engineers to focus on higher-value activities."
   },
   {
     "question": "How do you design an incident response process including blameless postmortems?",
-    "answer": "Incident response should include defined roles (like Incident Commander), clear communication channels, and documented runbooks. After resolution, conduct blameless postmortems: focus on system failures rather than individuals, map incident timelines, assess impact, perform root cause analysis, and derive action items to prevent recurrence. This helps teams learn safely and improve system resilience. :contentReference[oaicite:4]{index=4}"
+    "answer": "Incident response should include defined roles (like Incident Commander), clear communication channels, and documented runbooks. After resolution, conduct blameless postmortems: focus on system failures rather than individuals, map incident timelines, assess impact, perform root cause analysis, and derive action items to prevent recurrence. This helps teams learn safely and improve system resilience."
   },
   {
     "question": "How do you implement monitoring and observability in distributed systems?",
-    "answer": "Monitoring should cover the Four Golden Signals—latency, traffic, errors, and saturation—via real metrics, logs, and tracing. Use tools like Prometheus, Grafana, OpenTelemetry. Ensure alerts are actionable and dashboards reflect user impact. Observability enables querying unknown failure modes without predefined metrics. :contentReference[oaicite:5]{index=5}"
+    "answer": "Monitoring should cover the Four Golden Signals—latency, traffic, errors, and saturation—via real metrics, logs, and tracing. Use tools like Prometheus, Grafana, OpenTelemetry. Ensure alerts are actionable and dashboards reflect user impact. Observability enables querying unknown failure modes without predefined metrics."
   },
   {
     "question": "What deployment strategies do you use to minimize downtime?",
-    "answer": "Reliable deployment strategies include blue‑green deployments, canary releases, rolling updates, and feature flags. These approaches minimize user impact by gradually introducing changes, monitoring health, and rolling back if necessary. This helps manage risk while shipping new features safely and scaling reliably. :contentReference[oaicite:6]{index=6}"
+    "answer": "Reliable deployment strategies include blue‑green deployments, canary releases, rolling updates, and feature flags. These approaches minimize user impact by gradually introducing changes, monitoring health, and rolling back if necessary. This helps manage risk while shipping new features safely and scaling reliably."
   }
 ]
