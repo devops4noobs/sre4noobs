@@ -18,7 +18,7 @@ const sections = [
     content: (
       <div className="space-y-4 text-indigo-100">
         <p>
-          Kubernetes is an open-source platform designed to automate deploying, scaling, and operating application containers. Originating from Google\'s internal systems (Borg), it was open-sourced in 2014 and has since become the de facto standard for container orchestration. In SRE terms, Kubernetes helps you maintain high availability, minimize downtime, and enforce reliability principles like SLOs (Service Level Objectives) through automation and self-healing.
+          Kubernetes is an open-source platform designed to automate deploying, scaling, and operating application containers. Originating from Google&apos;s internal systems (Borg), it was open-sourced in 2014 and has since become the de facto standard for container orchestration. In SRE terms, Kubernetes helps you maintain high availability, minimize downtime, and enforce reliability principles like SLOs (Service Level Objectives) through automation and self-healing.
         </p>
         <ul className="list-disc pl-5 space-y-2 mb-4">
           <li><strong>Portability:</strong> Run your apps consistently across on-premises, hybrid, or public clouds (AWS, GCP, Azure).</li>
@@ -37,10 +37,10 @@ const sections = [
     content: (
       <div className="space-y-4 text-indigo-100">
         <p>
-          Kubernetes builds on containers (e.g., Docker) to manage workloads efficiently. Here\'s a breakdown:
+          Kubernetes builds on containers (e.g., Docker) to manage workloads efficiently. Here&apos;s a breakdown:
         </p>
         <ul className="list-disc pl-5 space-y-2 mb-4">
-          <li><strong>Containers:</strong> Lightweight, isolated environments that package code, dependencies, and configs. They solve \"it works on my machine\" issues by ensuring consistency from dev to prod.</li>
+          <li><strong>Containers:</strong> Lightweight, isolated environments that package code, dependencies, and configs. They solve &quot;it works on my machine&quot; issues by ensuring consistency from dev to prod.</li>
           <li><strong>Pods:</strong> The smallest deployable unit in Kubernetes – a group of one or more containers sharing storage and network. Pods are ephemeral; if one fails, Kubernetes replaces it automatically.</li>
           <li><strong>Nodes:</strong> Worker machines (VMs or physical servers) that run pods. Each node has a kubelet (agent) for communication with the control plane.</li>
           <li><strong>Services:</strong> Abstractions for exposing pods to the network, enabling load balancing and service discovery.</li>
@@ -84,7 +84,7 @@ const sections = [
           <li>— <strong>Kubelet:</strong> Ensures pods are running and healthy.</li>
           <li>— <strong>Container Runtime:</strong> Executes containers (e.g., containerd, CRI-O).</li>
           <li>— <strong>Kube Proxy:</strong> Manages network rules for service abstraction.</li>
-          <li><strong>Pods & Infra Flow:</strong> Pods are scheduled on nodes via \"bin packing\" (efficient resource use). Self-healing restarts failed pods, and scaling adjusts replicas based on metrics (e.g., CPU usage).</li>
+          <li><strong>Pods & Infra Flow:</strong> Pods are scheduled on nodes via &quot;bin packing&quot; (efficient resource use). Self-healing restarts failed pods, and scaling adjusts replicas based on metrics (e.g., CPU usage).</li>
         </ul>
 
         <h4 className="text-indigo-400 font-semibold">Advanced Infra Schema: Scaling and Reliability</h4>
@@ -112,7 +112,7 @@ const sections = [
     content: (
       <div className="space-y-4 text-indigo-100">
         <p>
-          Kubernetes isn\'t just tech; it\'s a game-changer for reliability:
+          Kubernetes isn&apos;t just tech; it&apos;s a game-changer for reliability:
         </p>
         <ul className="list-disc pl-5 space-y-2 mb-4">
           <li><strong>Self-Healing:</strong> Automatically restarts failed containers and reschedules pods.</li>
