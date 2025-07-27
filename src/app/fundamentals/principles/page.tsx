@@ -1,5 +1,4 @@
 "use client"; // Required for useState and motion
-import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 
