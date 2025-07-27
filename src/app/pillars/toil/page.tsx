@@ -1,98 +1,357 @@
+"use client"; // Required for useState and motion
+import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
+import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from "react";
+
 export default function EliminatingToil() {
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
+  const controls = useAnimation();
+
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { scale: 1, opacity: 0, y: 20 },
+    visible: { scale: 1, opacity: 1, y: 0 }, // Static state for non-flip cards
+  };
+
+  // Flip card variants
+  const flipVariants = {
+    front: { rotateY: 0 },
+    back: { rotateY: 180 },
+  };
+
+  // Data for flip cards (Examples of Toil)
+  const toilExamplesData = [
+    { title: "Manually Restarting Servers", scenario: "Manually restarting a server after a crash every few hours.", details: "This repetitive task disrupts workflow and can be automated with monitoring tools that detect and restart failed services." },
+    { title: "Copying Files via SSH", scenario: "Copying files via SSH to deploy new code versions.", details: "Automate with CI/CD pipelines like Jenkins or GitHub Actions to streamline deployments." },
+    { title: "Building Custom Dashboards", scenario: "Building custom dashboards for each new service from scratch.", details: "Use templated solutions in Grafana or Prometheus to reduce manual configuration." },
+    { title: "Handling Low-Priority Alerts", scenario: "Responding to low-priority alerts during off-hours.", details: "Implement auto-remediation scripts or adjust alert thresholds to minimize interruptions." },
+  ];
+
+  // Data for flip cards (Real-World Examples)
+  const realWorldExamplesData = [
+    { title: "Financial Firm Patching", scenario: "A financial firm automated server patching.", details: "Reduced manual effort by 200 hours annually, allowing focus on security improvements." },
+    { title: "E-commerce Auto-Scaling", scenario: "An e-commerce site implemented auto-scaling scripts.", details: "Cut response times to incidents from 30 minutes to 2 minutes, enhancing user experience." },
+    { title: "SaaS Deployment Pipeline", scenario: "A SaaS company used a deployment pipeline.", details: "Eliminated manual rollbacks, saving 50 hours per quarter and reducing errors." },
+  ];
+
+  // Trigger animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const insightsSection = document.getElementById("insights");
+      if (insightsSection && window.scrollY + window.innerHeight > insightsSection.offsetTop) {
+        controls.start({ opacity: 1, y: 0 });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-indigo-400 mb-8">Eliminating Toil</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
+      </div>
 
-      <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
-        <p className="mb-4">
-          The `&quot;`Eliminating Toil`&quot;` pillar of Site Reliability Engineering (SRE) emphasizes reducing repetitive, manual tasks that offer little long-term value. By automating toil, SRE teams free up engineers to focus on innovation, improve system reliability, and prevent burnout, aligning with the goal of scalable and efficient operations.
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto">
+        {/* Hero Section with Centered Multi-Line Title */}
+        <motion.section
+          className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl">
+              Eliminating Toil
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-100">
+              Automating Repetitive Tasks in SRE
+            </p>
+          </motion.div>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-indigo-200 mt-4 sm:mt-6"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Free engineers to focus on innovation and reliability
+          </motion.p>
+        </motion.section>
+
+        {/* Core Concept Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("core")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Defining Toil</h2>
+          <p className="text-indigo-100 mb-4 text-sm sm:text-base">
+            Toil is work that is manual, repetitive, reactive, interrupt-driven, and lacks enduring benefit. According to Google SRE practices, if a task is performed more than once, it’s a candidate for automation. Eliminating toil is about transforming operational overhead into strategic improvement.
+          </p>
+          {hoveredSection === "core" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Automate once, benefit forever!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Characteristics of Toil Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("characteristics")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🛠️ Characteristics of Toil</h2>
+          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
+            <li><strong>Manual:</strong> Requires human intervention rather than automation.</li>
+            <li><strong>Repetitive:</strong> Occurs regularly with little variation.</li>
+            <li><strong>Reactive:</strong> Responds to incidents rather than preventing them.</li>
+            <li><strong>Interrupt-Driven:</strong> Disrupts planned work with urgent tasks.</li>
+            <li><strong>No Lasting Value:</strong> Doesn’t improve the system long-term.</li>
+          </ul>
+          {hoveredSection === "characteristics" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Identify these traits to spot toil early!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Examples of Toil - Flip Cards with Flip Button */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          whileHover="hover"
+          onHoverStart={() => setHoveredSection("toil-examples")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📋 Examples of Toil</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {toilExamplesData.map((data, index) => (
+              <motion.div
+                key={index}
+                className="relative w-full h-48 cursor-pointer perspective-1000"
+                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                whileHover={{ scale: 1.02 }} // Hover effect only for flip cards
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-indigo-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "back" : "front"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.title}: Scenario</h3>
+                  <p className="text-center">{data.scenario}</p>
+                </motion.div>
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-blue-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "front" : "back"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.title}: Solution</h3>
+                  <p className="text-center">{data.details}</p>
+                </motion.div>
+                <motion.button
+                  className="absolute bottom-2 left-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                >
+                  <FaSyncAlt className="text-lg" />
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+          {hoveredSection === "toil-examples" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Flip to see automation solutions!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Automation Strategies Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("automation")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🤖 Automation Strategies</h2>
+          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
+            <li><strong>Auto-Recovery:</strong> Scripts to restart failed services automatically.</li>
+            <li><strong>CI/CD Pipelines:</strong> Automate code deployment with testing.</li>
+            <li><strong>Infrastructure as Code:</strong> Use tools like Terraform for provisioning.</li>
+            <li><strong>Alert-Driven Remediation:</strong> Trigger fixes based on monitoring alerts.</li>
+          </ul>
+          {hoveredSection === "automation" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Start automating high-impact tasks first!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Real-World Examples - Flip Cards with Flip Button */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          whileHover="hover"
+          onHoverStart={() => setHoveredSection("real-world")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🌟 Real-World Examples</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {realWorldExamplesData.map((data, index) => (
+              <motion.div
+                key={index}
+                className="relative w-full h-48 cursor-pointer perspective-1000"
+                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                whileHover={{ scale: 1.02 }} // Hover effect only for flip cards
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-indigo-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "back" : "front"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.title}: Scenario</h3>
+                  <p className="text-center">{data.scenario}</p>
+                </motion.div>
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-blue-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "front" : "back"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.title}: Impact</h3>
+                  <p className="text-center">{data.details}</p>
+                </motion.div>
+                <motion.button
+                  className="absolute bottom-2 left-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                >
+                  <FaSyncAlt className="text-lg" />
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+          {hoveredSection === "real-world" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: See how companies eliminated toil!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Best Practices Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("practices")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
+            <li>Identify toil by tracking time spent on manual tasks weekly.</li>
+            <li>Prioritize automation for high-frequency toil first.</li>
+            <li>Validate automation with testing to ensure reliability.</li>
+            <li>Monitor automation outcomes to refine processes.</li>
+            <li>Train teams to recognize and report toil opportunities.</li>
+          </ul>
+          {hoveredSection === "practices" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Start small to build automation momentum!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Closing Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("closing")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <p className="text-indigo-100 text-sm sm:text-base">
+            Eliminating toil is a continuous effort that enhances efficiency, reliability, and team morale, paving the way for a more innovative SRE practice.
+          </p>
+          {hoveredSection === "closing" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Make toil elimination a team habit!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Footer Timestamp */}
+        <p className="text-gray-400 text-xs mt-4 text-center">
+          Last updated: July 27, 2025
         </p>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Defining Toil</h2>
-        <p className="mb-4">
-          Toil is work that is manual, repetitive, reactive, interrupt-driven, and lacks enduring benefit. According to Google SRE practices, if a task is performed more than once, it’s a candidate for automation. Eliminating toil is about transforming operational overhead into strategic improvement.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🛠️ Characteristics of Toil</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Manual:</strong> Requires human intervention rather than automation.</li>
-          <li><strong>Repetitive:</strong> Occurs regularly with little variation.</li>
-          <li><strong>Reactive:</strong> Responds to incidents rather than preventing them.</li>
-          <li><strong>Interrupt-Driven:</strong> Disrupts planned work with urgent tasks.</li>
-          <li><strong>No Lasting Value:</strong> Doesn’t improve the system long-term.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">📋 Examples of Toil</h2>
-        <div className="space-y-4 mb-6">
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">🔄</span>
-            <p>
-              Manually restarting a server after a crash every few hours.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">📦</span>
-            <p>
-              Copying files via SSH to deploy new code versions.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">📊</span>
-            <p>
-              Building custom dashboards for each new service from scratch.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">📞</span>
-            <p>
-              Responding to low-priority alerts during off-hours.
-            </p>
-          </div>
-        </div>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🤖 Automation Strategies</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Auto-Recovery:</strong> Scripts to restart failed services automatically.</li>
-          <li><strong>CI/CD Pipelines:</strong> Automate code deployment with testing.</li>
-          <li><strong>Infrastructure as Code:</strong> Use tools like Terraform for provisioning.</li>
-          <li><strong>Alert-Driven Remediation:</strong> Trigger fixes based on monitoring alerts.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🌟 Real-World Examples</h2>
-        <div className="space-y-4 mb-6">
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">💻</span>
-            <p>
-              A financial firm automated server patching, reducing manual effort by 200 hours annually.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">⏱️</span>
-            <p>
-              An e-commerce site implemented auto-scaling scripts, cutting response times to incidents from 30 minutes to 2 minutes.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">📈</span>
-            <p>
-              A SaaS company used a deployment pipeline to eliminate manual rollbacks, saving 50 hours per quarter.
-            </p>
-          </div>
-        </div>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">💡 Best Practices</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li>Identify toil by tracking time spent on manual tasks weekly.</li>
-          <li>Prioritize automation for high-frequency toil first.</li>
-          <li>Validate automation with testing to ensure reliability.</li>
-          <li>Monitor automation outcomes to refine processes.</li>
-          <li>Train teams to recognize and report toil opportunities.</li>
-        </ul>
-
-        <p className="text-gray-400 mt-6">
-          Eliminating toil is a continuous effort that enhances efficiency, reliability, and team morale, paving the way for a more innovative SRE practice.
-        </p>
-      </section>
+      </main>
     </div>
   );
 }
