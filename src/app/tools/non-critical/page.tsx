@@ -1,114 +1,290 @@
+"use client";
+import { FaSyncAlt, FaShieldAlt, FaLightbulb, FaBug, FaChartLine } from "react-icons/fa"; // Added FaChartLine for new principle
+import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from "react";
+
 export default function NonCriticalIssueTrackingProcess() {
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
+  const controls = useAnimation();
+
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { scale: 1, opacity: 0, y: 20 },
+    visible: { scale: 1, opacity: 1, y: 0 },
+  };
+
+  // Flip card variants
+  const flipVariants = {
+    front: { rotateY: 0 },
+    back: { rotateY: 180 },
+  };
+
+  // Data for flip cards (Process Workflow Steps)
+  const processStepsData = [
+    {
+      title: "Detect & Triage",
+      scenario: "Identify an anomaly and perform a quick investigation.",
+      details: "Use monitoring tools like Prometheus or logs to spot issues and assess their severity."
+    },
+    {
+      title: "Decide",
+      scenario: "Confirm it’s not a Critical Incident using a triage flowchart.",
+      details: "Follow a decision tree to determine if the issue requires escalation or non-critical tracking."
+    },
+    {
+      title: "Log",
+      scenario: "Create a JIRA ticket using the standard template.",
+      details: "Document the issue with details like impact, logs, and initial analysis for tracking."
+    },
+    {
+      title: "Analyze & Resolve",
+      scenario: "Assign for deep analysis or document the resolution.",
+      details: "Investigate root causes and implement fixes or note self-resolution steps."
+    },
+    {
+      title: "Tag & Share",
+      scenario: "Tag the ticket and share key findings.",
+      details: "Add relevant tags and publish insights to a knowledge base to prevent recurrence."
+    },
+  ];
+
+  // Trigger animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const insightsSection = document.getElementById("insights");
+      if (insightsSection && window.scrollY + window.innerHeight > insightsSection.offsetTop) {
+        controls.start({ opacity: 1, y: 0 });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-indigo-400 mb-8">Non-Critical Issue Tracking Process (SRE)</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
+      </div>
 
-      <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
-        <p className="mb-4">
-          The Non-Critical Issue Tracking Process provides a systematic method for the SRE team to address issues that do not rise to the level of critical incidents. It enhances transparency, fosters knowledge acquisition, and supports proactive risk mitigation by recording and evaluating irregularities, self-correcting recoveries, and concerns raised by engineering teams.
-        </p>
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <motion.section
+          className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl">
+              Non-Critical Issue Tracking
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-100">
+              Learn from Small Failures
+            </p>
+          </motion.div>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-indigo-200 mt-4 sm:mt-6"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            A systematic SRE approach to prevent big issues
+          </motion.p>
+        </motion.section>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Proactive Reliability</h2>
-        <p className="mb-4">
-          By systematically recording non-critical issues, this process helps prevent minor irregularities from escalating. It supports SRE best practices by emphasizing learning from small incidents and strengthening reliability, all without the need for a full incident response.
-        </p>
-        <p className="mb-4">
-          This process also tracks recurring issues, serving as a reference for future incidents. As a result, investigations can build on prior knowledge instead of starting from scratch.
-        </p>
+        {/* At a Glance Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("glance")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">At a Glance</h2>
+          <div className="grid md:grid-cols-3 gap-6 text-center">
+            <div className="bg-gray-700/50 p-4 rounded-md">
+              <h3 className="font-bold text-lg text-white">WHAT</h3>
+              <p className="text-indigo-100 text-sm sm:text-base">A process to formally track issues that are not critical incidents but offer learning opportunities.</p>
+            </div>
+            <div className="bg-gray-700/50 p-4 rounded-md">
+              <h3 className="font-bold text-lg text-white">WHY</h3>
+              <p className="text-indigo-100 text-sm sm:text-base">To prevent issue recurrence, share knowledge, and proactively improve system reliability.</p>
+            </div>
+            <div className="bg-gray-700/50 p-4 rounded-md">
+              <h3 className="font-bold text-lg text-white">WHEN</h3>
+              <p className="text-indigo-100 text-sm sm:text-base">For self-recovering errors, minor performance dips, or anomalies not requiring urgent escalation.</p>
+            </div>
+          </div>
+          {hoveredSection === "glance" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-4 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Understand the scope of non-critical tracking!
+            </motion.div>
+          )}
+        </motion.div>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🧠 Key Principles</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-            <li><strong>Transparency:</strong> Record all observed anomalies to keep the team informed.</li>
-            <li><strong>Continuous Learning:</strong> Investigate underlying causes to reduce repeat issues.</li>
-            <li><strong>Appropriate Response:</strong> Apply this process to issues that don&apos;t need urgent escalation.</li>
-            <li><strong>Teamwork:</strong> Engage engineering teams for in-depth investigation as necessary.</li>
-            <li><strong>Knowledge Sharing:</strong> Tag and distribute findings to enhance team expertise.</li>
-            <li><strong>Streamlined Process:</strong> Use a consistent template to simplify ticket creation.</li>
-        </ul>
+        {/* Main Content Grid */}
+        <div id="insights" className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column: Flowchart and Process Workflow */}
+          <div className="lg:col-span-2 space-y-8">
+            
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">
-          <span role="img" aria-label="Bar chart" className="mr-2">📊</span>
-          When to Use This Process
-        </h2>
-        <ul className="list-disc list-inside space-y-2 mb-4">
-            <li><strong>Detected anomaly:</strong> An error, performance issue, or irregularity is noticed through monitoring or manual checks.</li>
-            <li><strong>No urgent escalation:</strong> The situation does not require a full incident response or immediate escalation.</li>
-            <li><strong>Self-resolving or minor intervention:</strong> The issue resolved itself or was fixed with minimal effort.</li>
-            <li><strong>Opportunity for learning:</strong> SRE review can help prevent recurrence or provide insights into underlying causes.</li>
-        </ul>
+            {/* Process Workflow Card */}
+            <motion.div
+              className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg"
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              whileHover="hover"
+              onHoverStart={() => setHoveredSection("workflow")}
+              onHoverEnd={() => setHoveredSection(null)}
+            >
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🎯 Process Workflow</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {processStepsData.map((data, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative w-full h-48 cursor-pointer perspective-1000"
+                    onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                    whileHover={{ scale: 1.02 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <motion.div
+                      className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-indigo-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                      animate={flippedCard === index ? "back" : "front"}
+                      variants={flipVariants}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <h3 className="font-bold mb-2">{data.title}</h3>
+                      <p className="text-center">{data.scenario}</p>
+                    </motion.div>
+                    <motion.div
+                      className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-blue-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                      animate={flippedCard === index ? "front" : "back"}
+                      variants={flipVariants}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <h3 className="font-bold mb-2">{data.title}: Details</h3>
+                      <p className="text-center">{data.details}</p>
+                    </motion.div>
+                    <motion.button
+                      className="absolute top-2 right-2 w-6 h-6 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                    >
+                      <FaSyncAlt className="text-sm" />
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </div>
+              {hoveredSection === "workflow" && (
+                <motion.div
+                  className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Hover tip: Flip to explore each step!
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🎯 Process Overview</h2>
-        <div className="space-y-4 mb-6">
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">1.</span>
-            <p>
-              <strong>Detection:</strong> Identify the issue through monitoring tools (e.g., SignalFx, CloudWatch Logs), alerts, or manual checks.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">2.</span>
-            <p>
-              <strong>Triage:</strong> SRE performs an initial investigation to assess the scope, impact, and recovery status.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">3.</span>
-            <p>
-              <strong>Decision Point:</strong> Evaluate if the issue qualifies as a Critical Incident (CI). If not, proceed with this process.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">4.</span>
-            <p>
-              <strong>JIRA Ticket Creation:</strong> Log the issue using the Non-Critical Issue Template in JIRA.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">5.</span>
-            <p>
-              <strong>Assignment:</strong> Assign the ticket to the appropriate engineering team for further analysis or resolution, or close if resolved.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">6.</span>
-            <p>
-              <strong>Follow-up & Closure:</strong> Update the ticket with investigation results, lessons learned, and any remediation steps.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">7.</span>
-            <p>
-              <strong>Tagging & Knowledge Sharing:</strong> Tag the ticket and share findings with the team to promote learning.
-            </p>
+          {/* Right Column: Principles */}
+          <div className="space-y-8">
+            {/* Key Principles Card */}
+            <motion.div
+              className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border-indigo-500" // Added border-b-2 border-indigo-500 to match workflow card bottom border
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              onHoverStart={() => setHoveredSection("principles")}
+              onHoverEnd={() => setHoveredSection(null)}
+            >
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧠 Key Principles</h2>
+              <ul className="space-y-3 text-indigo-100 text-sm sm:text-base">
+                <li className="flex items-start">
+                  <FaShieldAlt className="w-5 h-5 mr-3 mt-1 text-indigo-400 shrink-0" />
+                  <span><strong>Proactive Reliability:</strong> Learn from small signals to prevent large-scale failures.</span>
+                </li>
+                <li className="flex items-start">
+                  <FaLightbulb className="w-5 h-5 mr-3 mt-1 text-indigo-400 shrink-0" />
+                  <span><strong>Continuous Learning:</strong> Every anomaly is a chance to improve systems and processes.</span>
+                </li>
+                <li className="flex items-start">
+                  <FaBug className="w-5 h-5 mr-3 mt-1 text-indigo-400 shrink-0" />
+                  <span><strong>Blameless Analysis:</strong> Focus on systemic causes, not individual errors.</span>
+                </li>
+                <li className="flex items-start">
+                  <FaChartLine className="w-5 h-5 mr-3 mt-1 text-indigo-400 shrink-0" />
+                  <span><strong>Data-Driven Insights:</strong> Use metrics and logs for evidence-based analysis to drive improvements.</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">💡 JIRA Ticket Template</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Title:</strong> The ticket title should follow the format: [Tenant Name] - [Issue Title].</li>
-          <li><strong>Summary:</strong> Provide a brief description of what was observed and what triggered the investigation.</li>
-          <li><strong>Impact:</strong> Detail the impacted events, endpoints, or services, including any customer-facing effects.</li>
-          <li><strong>Initial SRE Analysis:</strong> Describe how the issue was discovered, the checks performed, any logs or metrics reviewed, and how the issue was confirmed.</li>
-          <li><strong>Root Cause:</strong> Include detailed information about the error, relevant metrics, numbers, and the timeframe of the issue.</li>
-          <li><strong>Acceptance Criteria:</strong> Outline the next steps, such as monitoring for a specific duration or passing the ticket to the engineering team for further investigation.</li>
-          <li><strong>Actions Taken:</strong> Document any immediate actions taken, such as restarting services, rotating containers, or applying temporary fixes.</li>
-          <li><strong>Other Information:</strong> Add any additional context or useful information that could aid in resolving or understanding the issue.</li>
-          <li><strong>Tags:</strong> Suggest relevant tags to categorize the ticket for easier tracking and knowledge sharing.</li>
-          <li><strong>Lessons Learned:</strong> Summarize key takeaways or insights gained from the issue to prevent recurrence.</li>
-        </ul>
+        {/* JIRA Template Card - Moved below the grid */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mt-8 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("template")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 JIRA Ticket Template</h2>
+          <div className="bg-gray-900 p-4 rounded-md font-mono text-sm text-indigo-100 overflow-x-auto">
+            <pre>
+              <code>
+                <span className="text-white">Title:</span> [App Name] - [Brief, Clear Issue Title]<br /><br />
+                <span className="text-white">## Summary</span><br/>
+                (What was observed? What triggered this ticket?)<br/><br/>
+                <span className="text-white">## Impact</span><br/>
+                (Services, endpoints, or customers affected. State "None" if applicable.)<br/><br/>
+                <span className="text-white">## Initial Analysis</span><br/>
+                (How was it found? Links to logs/metrics. Confirmation steps.)<br/><br/>
+                <span className="text-white">## Actions Taken</span><br/>
+                (e.g., Service restarted, container rotated, etc. State "None" if self-resolved.)<br/><br/>
+                <span className="text-white">## Next Steps / Acceptance Criteria</span><br/>
+                (e.g., Monitor for 24 hours, assign to team-X for analysis, close ticket.)<br/><br/>
+                <span className="text-white">Tags:</span> [non-critical] [service-name] [error-type]
+              </code>
+            </pre>
+          </div>
+          {hoveredSection === "template" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Use this template for consistent documentation!
+            </motion.div>
+          )}
+        </motion.div>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">📐 Related Content</h2>
-        <p className="mb-4 italic">
-          - Critical Incident (CI) Process<br />
-          - Support Escalation<br />
-          - Quicker Engineering Tip Sheet - Critical Incident (CI) Handling by Engineers<br />
-          - Critical Issues and Support Escalation Ticket Labels - Engineering
+        {/* Footer Timestamp */}
+        <p className="text-gray-400 text-xs mt-8 text-center">
+          Last updated: July 28, 2025
         </p>
-
-        <p className="text-gray-400 mt-6">
-          This process empowers SRE teams to proactively manage non-critical issues, fostering a culture of continuous improvement and risk mitigation.
-        </p>
-      </section>
+      </main>
     </div>
   );
 }
