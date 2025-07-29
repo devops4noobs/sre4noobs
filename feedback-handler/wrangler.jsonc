@@ -16,5 +16,15 @@
       // Optional: preview_id used when running `wrangler dev` for local dev
       "preview_id": "<ID_OF_PREVIEW_KV_NAMESPACE_FOR_LOCAL_DEVELOPMENT>"
     }
-  ]
+  ],
+  "routes": [
+  {
+    "pattern": "feedback-handler.devops4noobs.workers.dev/submit-feedback",
+    "zone_name": "devops4noobs.workers.dev"
+  },
+  {
+    "pattern": "www.devops4noobs.com/feedback-handler.devops4noobs.workers.dev/submit-feedback",
+    "zone_name": "devops4noobs.com"
+  }
+]
 }
