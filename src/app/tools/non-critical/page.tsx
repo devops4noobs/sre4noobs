@@ -257,11 +257,11 @@ export default function NonCriticalIssueTrackingProcess() {
                 <span className="text-white">## Summary</span><br/>
                 (What was observed? What triggered this ticket?)<br/><br/>
                 <span className="text-white">## Impact</span><br/>
-                (Services, endpoints, or customers affected. State "None" if applicable.)<br/><br/>
+                (Services, endpoints, or customers affected. State &quot;None&quot; if applicable.)<br/><br/>
                 <span className="text-white">## Initial Analysis</span><br/>
                 (How was it found? Links to logs/metrics. Confirmation steps.)<br/><br/>
                 <span className="text-white">## Actions Taken</span><br/>
-                (e.g., Service restarted, container rotated, etc. State "None" if self-resolved.)<br/><br/>
+                (e.g., Service restarted, container rotated, etc. State &quot;None&quot; if self-resolved.)<br/><br/>
                 <span className="text-white">## Next Steps / Acceptance Criteria</span><br/>
                 (e.g., Monitor for 24 hours, assign to team-X for analysis, close ticket.)<br/><br/>
                 <span className="text-white">Tags:</span> [non-critical] [service-name] [error-type]
