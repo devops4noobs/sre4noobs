@@ -22,9 +22,6 @@
     "pattern": "feedback-handler.devops4noobs.workers.dev/submit-feedback",
     "zone_name": "devops4noobs.workers.dev"
   },
-  {
-    "pattern": "www.devops4noobs.com/feedback-handler.devops4noobs.workers.dev/submit-feedback",
-    "zone_name": "devops4noobs.com"
-  }
+  
 ]
 }
