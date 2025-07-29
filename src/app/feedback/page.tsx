@@ -13,8 +13,9 @@ interface FeedbackFormData {
 
 export default function FeedbackPage() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
-  const [rating, setRating] = useState<number>(0); // Tracks selected star rating
-  const [hoverRating, setHoverRating] = useState<number>(0); // Tracks hover state for stars
+  const [rating, setRating] = useState<number>(0);
+  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
   const controls = useAnimation();
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FeedbackFormData>({
@@ -26,11 +27,21 @@ export default function FeedbackPage() {
     },
   });
 
-  const onSubmit = (data: FeedbackFormData) => {
-    // Log feedback to console (extendable for backend integration)
-    console.log("Feedback Submitted:", { ...data, rating });
-    // Simulate a thank-you message (could be a modal or toast in a real app)
-    alert("Thank you for your feedback!");
+  const onSubmit = async (data: FeedbackFormData) => {
+    try {
+      const response = await fetch('feedback-handler.devops4noobs.workers.dev/submit-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, rating, timestamp: new Date().toISOString() }),
+      });
+      if (response.ok) {
+        setSubmissionStatus('Thank you for your feedback!');
+      } else {
+        setSubmissionStatus('Failed to submit feedback. Please try again.');
+      }
+    } catch (error) {
+      setSubmissionStatus('Error submitting feedback. Please try again.');
+    }
   };
 
   // Trigger animation on scroll
@@ -54,13 +65,13 @@ export default function FeedbackPage() {
   // Handle star rating click
   const handleStarClick = (value: number) => {
     setRating(value);
-    setValue("rating", value); // Update form value
+    setValue("rating", value);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
       {/* Animated Background Particles */}
-      <div className="absolute inset-0 inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
         <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
         <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
@@ -110,6 +121,20 @@ export default function FeedbackPage() {
             <FaComment className="inline mr-2" /> Provide Your Feedback
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-white">
+            {/* Submission Status */}
+            {submissionStatus && (
+              <motion.div
+                className={`p-4 rounded flex items-center ${
+                  submissionStatus.includes("Thank") ? "bg-green-900 text-green-200" : "bg-red-900 text-red-200"
+                }`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {submissionStatus}
+              </motion.div>
+            )}
+
             {/* Feedback Message */}
             <div>
               <label htmlFor="message" className="block text-sm font-medium mb-1 text-indigo-100">
@@ -205,7 +230,7 @@ export default function FeedbackPage() {
 
         {/* Footer Timestamp */}
         <p className="text-gray-400 text-xs mt-8 text-center">
-          Last updated: July 29, 2025, 6:56 PM EEST
+          Last updated: July 29, 2025, 7:32 PM EEST
         </p>
       </main>
     </div>
