@@ -39,7 +39,7 @@ export default function FeedbackPage() {
       } else {
         setSubmissionStatus('Failed to submit feedback. Please try again.');
       }
-    } catch () {
+    } catch {
       setSubmissionStatus('Error submitting feedback. Please try again.');
     }
   };
