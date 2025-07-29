@@ -99,12 +99,7 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
-    label: 'Community & Resources',
-    subItems: [
-      { label: 'Forum/Discussions', href: '/community/forum', icon: ChatBubbleLeftRightIcon },
-      { label: 'External Links', href: '/resources/links', icon: LinkIcon },
-      { label: 'Contribute', href: 'https://github.com/devops4noobs/sre4noobs', icon: CodeBracketIcon },
-    ],
+    label: 'Feedback',href: '/feedback', icon: ChatBubbleLeftRightIcon
   },
   { label: 'About/Contact', href: '/about', icon: UserCircleIcon },
 ];
