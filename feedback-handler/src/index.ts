@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 export {};
 
 interface FeedbackData {
@@ -13,7 +14,7 @@ declare global {
   const FEEDBACK_KV: KVNamespace;
 }
 
-addEventListener('fetch', event => {
+addEventListener('fetch', (event: FetchEvent) => {
   event.respondWith(handleRequest(event.request));
 });
 
@@ -51,7 +52,7 @@ async function handleRequest(request: Request): Promise<Response> {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Failed to save feedback' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
