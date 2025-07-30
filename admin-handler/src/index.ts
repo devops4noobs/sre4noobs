@@ -12,7 +12,7 @@ interface FeedbackData {
 }
 
 declare global {
-  const FEEDBACK_KV: KVNamespace;
+  var FEEDBACK_KV: KVNamespace;
 }
 
 export default {

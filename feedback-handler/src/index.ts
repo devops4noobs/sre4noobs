@@ -11,7 +11,7 @@ interface FeedbackData {
 }
 
 declare global {
-  const FEEDBACK_KV: KVNamespace;
+  var FEEDBACK_KV: KVNamespace;
 }
 
 import { handleContactRequest } from './email-handler';
