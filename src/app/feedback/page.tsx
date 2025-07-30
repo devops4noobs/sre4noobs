@@ -45,7 +45,7 @@ export default function FeedbackPage() {
         setSubmitStatus("Failed to send feedback. Please try again later.");
       }
     } catch (err) {
-      setSubmitStatus("Failed to send feedback. Please try again later.");
+      setSubmitStatus("Failed to send feedback. Please try again later.", + err);
     }
   };
 
