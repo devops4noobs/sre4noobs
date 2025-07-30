@@ -14,7 +14,6 @@ declare global {
   const FEEDBACK_KV: KVNamespace;
 }
 
-
 addEventListener('fetch', (event: FetchEvent) => {
   event.respondWith(handleEvent(event));
 });
@@ -22,14 +21,19 @@ addEventListener('fetch', (event: FetchEvent) => {
 async function handleEvent(event: FetchEvent): Promise<Response> {
   const request = event.request;
   const url = new URL(request.url);
+  
+  // Normalize pathname by removing the '/feedback-handler' prefix if present
+  let path = url.pathname.replace(/^\/feedback-handler/, '');
+
   if (request.method === 'OPTIONS') {
     return new Response(null, {
       status: 204,
       headers: corsHeaders(),
     });
   }
-  // GET /feedbacks returns recent feedbacks as JSON
-  if (request.method === 'GET' && url.pathname === '/feedbacks') {
+  
+  // GET /feedback-handler/feedbacks returns recent feedbacks as JSON
+  if (request.method === 'GET' && path === '/feedbacks') {
     try {
       const list = await FEEDBACK_KV.list({ prefix: 'feedback_', limit: 20 });
       const feedbacks = await Promise.all(
@@ -54,10 +58,12 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
       );
     }
   }
-  // POST /submit-feedback
-  if (request.method === 'POST' && url.pathname === '/submit-feedback') {
+  
+  // POST /feedback-handler/submit-feedback
+  if (request.method === 'POST' && path === '/submit-feedback') {
     return await handleRequest(request);
   }
+  
   // Fallback for other routes
   return addCorsToResponse(new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
 }
