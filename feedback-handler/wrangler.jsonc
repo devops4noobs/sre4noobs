@@ -21,6 +21,9 @@
   {
     "pattern": "www.devops4noobs.com/feedback-handler/feedbacks",
     "zone_name": "devops4noobs.com"
+  },{
+    "pattern": "www.devops4noobs.com/contact-handler/submit-message",
+    "zone_name": "devops4noobs.com"
   }
 ]
 }

@@ -14,6 +14,8 @@ declare global {
   const FEEDBACK_KV: KVNamespace;
 }
 
+import { handleContactRequest } from './email-handler';
+
 addEventListener('fetch', (event: FetchEvent) => {
   event.respondWith(handleEvent(event));
 });
@@ -21,7 +23,6 @@ addEventListener('fetch', (event: FetchEvent) => {
 async function handleEvent(event: FetchEvent): Promise<Response> {
   const request = event.request;
   const url = new URL(request.url);
-  
   // Normalize pathname by removing the '/feedback-handler' prefix if present
   let path = url.pathname.replace(/^\/feedback-handler/, '');
 
@@ -31,7 +32,7 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
       headers: corsHeaders(),
     });
   }
-  
+
   // GET /feedback-handler/feedbacks returns recent feedbacks as JSON
   if (request.method === 'GET' && path === '/feedbacks') {
     try {
@@ -58,12 +59,18 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
       );
     }
   }
-  
+
+  // POST /contact-handler/submit-message (new contact form route)
+  if (request.method === 'POST' && url.pathname.endsWith('/contact-handler/submit-message')) {
+    // Use env for secrets in module Worker, or globalThis for service Worker
+    return await handleContactRequest(request, globalThis);
+  }
+
   // POST /feedback-handler/submit-feedback
   if (request.method === 'POST' && path === '/submit-feedback') {
     return await handleRequest(request);
   }
-  
+
   // Fallback for other routes
   return addCorsToResponse(new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
 }
