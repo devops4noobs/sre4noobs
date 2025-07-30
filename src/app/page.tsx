@@ -3,6 +3,14 @@ import { FaRobot, FaUserCheck, FaCogs, FaChartLine, FaRocket } from "react-icons
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
+interface FeedbackData {
+  message: string;
+  rating: number;
+  name?: string;
+  email?: string;
+  timestamp?: string;
+}
+
 export default function HomePage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const getStartedRef = useRef<HTMLDivElement>(null); // Ref to scroll to the target section
@@ -19,7 +27,7 @@ export default function HomePage() {
   };
 
   // Fetch feedbacks for testimonials
-  const [feedbacks, setFeedbacks] = useState<any[]>([]);
+  const [feedbacks, setFeedbacks] = useState<FeedbackData[]>([]);
   useEffect(() => {
     fetch("https://www.devops4noobs.com/feedback-handler/feedbacks")
       .then(res => res.ok ? res.json() : [])
