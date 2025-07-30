@@ -90,7 +90,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             SRE and DevOps both aim to improve software delivery and reliability, but SRE focuses on engineering precision while DevOps emphasizes cultural change.
           </p>
@@ -115,7 +115,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("similarities")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Similarities</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Similarities</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Both emphasize automation, collaboration, and continuous improvement.</li>
             <li>They aim to reduce silos between teams and accelerate delivery.</li>
@@ -143,7 +143,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("differences")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Key Differences</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Key Differences</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {differencesData.map((data, index) => (
               <motion.div
@@ -195,7 +195,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("usage")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">When to Use Each</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">When to Use Each</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             DevOps is ideal for organizations starting their transformation journey, focusing on culture and automation. SRE is better suited for mature teams needing precise reliability engineering, often building on DevOps foundations.
           </p>
@@ -220,7 +220,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("example")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Real-World Example</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Real-World Example</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             At Google, SRE teams manage Gmail with error budgets—high reliability allows feature pushes, while low reliability shifts focus to stability.
           </p>
@@ -245,7 +245,7 @@ export default function SreVsDevOps() {
           onHoverStart={() => setHoveredSection("reading")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Further Reading</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Further Reading</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Check out the SRE Pillars section for deeper dives into SRE-specific practices.
           </p>

@@ -99,7 +99,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Safe and Reliable Releases</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Safe and Reliable Releases</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Release engineering in SRE involves designing processes to deploy code changes with minimal risk. This includes automated testing, staged rollouts, and post-release monitoring, transforming releases from potential disruption points into opportunities for improvement and innovation.
           </p>
@@ -124,7 +124,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🚀 Key Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🚀 Key Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Canary Releases:</strong> Deploy to a small subset of users to test stability.</li>
             <li><strong>Progressive Rollouts:</strong> Gradually increase deployment scope with feature flags.</li>
@@ -154,7 +154,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📋 Examples of Release Engineering</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📋 Examples of Release Engineering</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {releaseExamplesData.map((data, index) => (
               <motion.div
@@ -216,7 +216,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("benefits")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🤖 Benefits of Release Engineering</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🤖 Benefits of Release Engineering</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Reduced Risk:</strong> Minimizes outages with staged deployments.</li>
             <li><strong>Faster Delivery:</strong> Accelerates feature rollouts with confidence.</li>
@@ -245,7 +245,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("best-practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Automate the entire release pipeline, from build to deploy.</li>
             <li>Test in production-like environments before rollouts.</li>
@@ -274,7 +274,7 @@ export default function ReleaseEngineering() {
           onHoverStart={() => setHoveredSection("workflow")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📝 Sample Release Workflow</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📝 Sample Release Workflow</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Canary Deployment Steps:</strong><br />
             1. Deploy to 1% of traffic.<br />

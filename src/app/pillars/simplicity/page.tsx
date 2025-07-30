@@ -99,7 +99,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Complexity as a Liability</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Complexity as a Liability</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Complex systems are prone to failures, harder to debug, and more resource-intensive to maintain. Simplicity in SRE means stripping away unnecessary layers, optimizing designs, and prioritizing clarity, ensuring systems remain robust and manageable as they grow.
           </p>
@@ -124,7 +124,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧩 Key Principles</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧩 Key Principles</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Minimal Design:</strong> Use the fewest components necessary to achieve functionality.</li>
             <li><strong>Clarity:</strong> Ensure code and configurations are readable and well-documented.</li>
@@ -154,7 +154,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📋 Examples of Simplicity in Practice</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📋 Examples of Simplicity in Practice</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {simplicityExamplesData.map((data, index) => (
               <motion.div
@@ -216,7 +216,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("benefits")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🤖 Benefits of Simplicity</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🤖 Benefits of Simplicity</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Improved Reliability:</strong> Fewer components mean fewer failure points.</li>
             <li><strong>Faster Debugging:</strong> Easier to identify and fix issues in simple systems.</li>
@@ -245,7 +245,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Evaluate complexity before adding new features or tools.</li>
             <li>Refactor legacy systems to remove redundant code or processes.</li>
@@ -274,7 +274,7 @@ export default function Simplicity() {
           onHoverStart={() => setHoveredSection("checklist")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📝 Simplicity Checklist</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📝 Simplicity Checklist</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Before Deployment:</strong><br />
             - Does this add unnecessary complexity?<br />

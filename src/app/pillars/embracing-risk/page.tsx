@@ -87,7 +87,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Risk as a Trade-Off</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Risk as a Trade-Off</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Rather than avoiding failure entirely, SRE teams embrace the idea that some downtime or errors are inevitable. The key is to define an acceptable risk threshold and manage it proactively. This approach contrasts with traditional operations, where the focus might be on avoiding all risk at the expense of progress.
           </p>
@@ -112,7 +112,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧠 Key Principles</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧠 Key Principles</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Acceptable Failure:</strong> Define how much failure is tolerable based on user needs.</li>
             <li><strong>Error Budgets:</strong> Use a quantifiable allowance for outages to guide decision-making.</li>
@@ -140,7 +140,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("budget")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📊 How Error Budgets Work</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📊 How Error Budgets Work</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             An error budget is the maximum amount of time a service can be unavailable or perform poorly while still meeting its Service Level Objective (SLO). For example:
           </p>
@@ -173,7 +173,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🌟 Real-World Examples</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🌟 Real-World Examples</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {examplesData.map((data, index) => (
               <motion.div
@@ -235,7 +235,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Establish clear SLOs and communicate error budgets to all teams.</li>
             <li>Monitor budget usage in real-time with dashboards (e.g., Prometheus, Grafana).</li>
@@ -263,7 +263,7 @@ export default function EmbracingRisk() {
           onHoverStart={() => setHoveredSection("formula")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📐 Formula for Error Budget</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📐 Formula for Error Budget</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Error Budget = 100% – SLO Target</strong><br />
             Example: 100% – 99.9% = 0.1% (43.2 minutes/month for a 30-day period)

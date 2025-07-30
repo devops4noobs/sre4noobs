@@ -87,7 +87,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Visibility into Complexity</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Visibility into Complexity</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Distributed systems, with their multiple services, nodes, and dependencies, require robust monitoring to track performance and identify failures. SRE emphasizes the “four golden signals”—latency, traffic, errors, and saturation—as a foundation for effective oversight, ensuring teams can respond proactively rather than reactively.
           </p>
@@ -112,7 +112,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("signals")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧠 The Four Golden Signals</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧠 The Four Golden Signals</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Latency:</strong> The time taken to service a request, including queue and processing delays.</li>
             <li><strong>Traffic:</strong> The volume of requests or data flowing through the system.</li>
@@ -140,7 +140,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("tools")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📊 Monitoring Tools and Techniques</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📊 Monitoring Tools and Techniques</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Dashboards:</strong> Real-time views (e.g., Grafana, Kibana) for tracking signals.</li>
             <li><strong>Alerts:</strong> Configured to notify on significant deviations, avoiding alert fatigue.</li>
@@ -169,7 +169,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🌟 Real-World Examples</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🌟 Real-World Examples</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {realWorldExamplesData.map((data, index) => (
               <motion.div
@@ -231,7 +231,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Focus on end-user experience, not just system metrics.</li>
             <li>Implement hierarchical alerts (e.g., critical, warning) to reduce noise.</li>
@@ -260,7 +260,7 @@ export default function MonitoringDistributedSystems() {
           onHoverStart={() => setHoveredSection("setup")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📈 Example Monitoring Setup</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📈 Example Monitoring Setup</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Alert Rule:</strong> Trigger if latency &gt; 300ms for 5% of requests over 5 minutes.<br />
             <strong>Dashboard Metric:</strong> Display traffic (requests/sec) and error rate (%) on a single pane.

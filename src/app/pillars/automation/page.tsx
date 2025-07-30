@@ -87,7 +87,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Efficiency Through Automation</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Efficiency Through Automation</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Automation replaces manual, error-prone tasks with reliable, repeatable processes. In SRE, this means scripting deployments, auto-scaling resources, and triggering remediation actions, ensuring systems operate smoothly with minimal human intervention while maintaining high standards of reliability.
           </p>
@@ -112,7 +112,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("areas")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🛠️ Key Areas for Automation</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🛠️ Key Areas for Automation</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Deployment:</strong> Automate code releases with CI/CD pipelines.</li>
             <li><strong>Incident Response:</strong> Trigger auto-recovery or notifications based on alerts.</li>
@@ -142,7 +142,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📋 Examples of Automation in Action</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📋 Examples of Automation in Action</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {automationExamplesData.map((data, index) => (
               <motion.div
@@ -204,7 +204,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("benefits")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🤖 Benefits of Automation</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🤖 Benefits of Automation</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Consistency:</strong> Reduces human error in repetitive tasks.</li>
             <li><strong>Speed:</strong> Accelerates response times and deployments.</li>
@@ -233,7 +233,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Start with high-impact areas, like incident response or deployments.</li>
             <li>Test automation scripts in a staging environment before production.</li>
@@ -262,7 +262,7 @@ export default function Automation() {
           onHoverStart={() => setHoveredSection("script")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📝 Sample Automation Script</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📝 Sample Automation Script</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Auto-Restart Script (Pseudo-Code):</strong><br />
             <code>{`

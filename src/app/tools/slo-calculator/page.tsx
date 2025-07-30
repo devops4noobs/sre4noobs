@@ -88,7 +88,7 @@ export default function SLOCalculator() {
           onHoverStart={() => setHoveredSection("explanation")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">What is an SLO?</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">What is an SLO?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             A Service Level Objective (SLO) is a measurable target for service reliability, such as 99.9% uptime. It defines acceptable performance levels based on user expectations. The error budget is the complement (1 - SLO), representing allowed downtime.
           </p>
@@ -113,7 +113,7 @@ export default function SLOCalculator() {
           onHoverStart={() => setHoveredSection("calculator")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">SLO Downtime Calculator</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">SLO Downtime Calculator</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-indigo-100 mb-2">SLO Percentage:</label>
@@ -165,7 +165,7 @@ export default function SLOCalculator() {
           onHoverStart={() => setHoveredSection("table")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Common SLO Downtime Table</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Common SLO Downtime Table</h2>
           <table className="w-full text-indigo-100 text-sm sm:text-base">
             <thead>
               <tr className="border-b border-gray-600">
@@ -209,7 +209,7 @@ export default function SLOCalculator() {
           onHoverStart={() => setHoveredSection("budget")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Error Budgets in SRE</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Error Budgets in SRE</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             An error budget is the allowable unreliability (1 - SLO). It represents the &apos;room for error&apos; in your system, balancing reliability with innovation. For example, a 99.9% SLO gives a 0.1% error budget.
           </p>

@@ -109,7 +109,7 @@ export default function NonCriticalIssueTrackingProcess() {
           onHoverStart={() => setHoveredSection("glance")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">At a Glance</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">At a Glance</h2>
           <div className="grid md:grid-cols-3 gap-6 text-center">
             <div className="bg-gray-700/50 p-4 rounded-md">
               <h3 className="font-bold text-lg text-white">WHAT</h3>
@@ -152,7 +152,7 @@ export default function NonCriticalIssueTrackingProcess() {
               onHoverStart={() => setHoveredSection("workflow")}
               onHoverEnd={() => setHoveredSection(null)}
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🎯 Process Workflow</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🎯 Process Workflow</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {processStepsData.map((data, index) => (
                   <motion.div
@@ -217,7 +217,7 @@ export default function NonCriticalIssueTrackingProcess() {
               onHoverStart={() => setHoveredSection("principles")}
               onHoverEnd={() => setHoveredSection(null)}
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧠 Key Principles</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧠 Key Principles</h2>
               <ul className="space-y-3 text-indigo-100 text-sm sm:text-base">
                 <li className="flex items-start">
                   <FaShieldAlt className="w-5 h-5 mr-3 mt-1 text-indigo-400 shrink-0" />
@@ -249,7 +249,7 @@ export default function NonCriticalIssueTrackingProcess() {
           onHoverStart={() => setHoveredSection("template")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 JIRA Ticket Template</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 JIRA Ticket Template</h2>
           <div className="bg-gray-900 p-4 rounded-md font-mono text-sm text-indigo-100 overflow-x-auto">
             <pre>
               <code>

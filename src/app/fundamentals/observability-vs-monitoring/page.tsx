@@ -83,7 +83,7 @@ export default function ObservabilityVsMonitoring() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             In today&apos;s fast-paced digital landscape, ensuring system reliability is critical across industries. Organizations strive to deliver seamless user experiences while maintaining operational transparency. To meet these demands, robust monitoring and observability strategies are essential. Though often confused, monitoring and observability serve distinct yet complementary roles. Monitoring focuses on tracking predefined metrics to detect known issues, such as CPU usage spikes or error rates crossing a threshold. Observability, however, goes deeper, enabling teams to explore a system&apos;s internal state to diagnose complex, unpredictable problems by correlating metrics, logs, and traces.
           </p>
@@ -109,7 +109,7 @@ export default function ObservabilityVsMonitoring() {
           onHoverStart={() => setHoveredSection("distinction")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Monitoring vs. Observability: A Clear Distinction</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Monitoring vs. Observability: A Clear Distinction</h2>
           <div className="space-y-4">
             <div className="flex items-start gap-2">
               <span className="text-indigo-400">📊</span>
@@ -160,7 +160,7 @@ export default function ObservabilityVsMonitoring() {
           onHoverStart={() => setHoveredSection("tech-stack")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Modern Tech Stack for Observability</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Modern Tech Stack for Observability</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             To achieve robust observability, organizations rely on a modern tech stack tailored to collect, analyze, and visualize system data. Here’s how leading tools contribute:
           </p>
@@ -213,7 +213,7 @@ export default function ObservabilityVsMonitoring() {
           onHoverStart={() => setHoveredSection("why")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Why Observability Matters</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Why Observability Matters</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             While monitoring ensures systems stay operational by catching known issues, observability empowers teams to understand and resolve unpredictable problems in dynamic environments. Together, they build resilient systems that not only stay online but also adapt to evolving challenges. By leveraging tools like SignalFX, Prometheus, Grafana, Kibana, and OpenTelemetry, organizations can create transparent, intelligent systems that maintain user trust and operational efficiency.
           </p>

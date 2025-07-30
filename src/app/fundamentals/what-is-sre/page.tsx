@@ -57,7 +57,7 @@ export default function WhatIsSre() {
           onHoverStart={() => setHoveredSection("what-is-sre")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">What is SRE?</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">What is SRE?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Site Reliability Engineering (SRE) merges software and systems expertise to craft scalable, dependable systems. SRE professionals focus on automating operations, boosting reliability, and minimizing manual effort, ensuring seamless service delivery.
           </p>

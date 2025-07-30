@@ -95,7 +95,7 @@ export default function EliminatingToil() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Defining Toil</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Defining Toil</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Toil is work that is manual, repetitive, reactive, interrupt-driven, and lacks enduring benefit. According to Google SRE practices, if a task is performed more than once, it’s a candidate for automation. Eliminating toil is about transforming operational overhead into strategic improvement.
           </p>
@@ -121,7 +121,7 @@ export default function EliminatingToil() {
           onHoverStart={() => setHoveredSection("toil-examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📋 Examples of Toil</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📋 Examples of Toil</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {toilExamplesData.map((data, index) => (
               <motion.div
@@ -181,7 +181,7 @@ export default function EliminatingToil() {
           animate="visible"
           variants={cardVariants}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🌟 Real-World Examples</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🌟 Real-World Examples</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {realWorldExamplesData.map((data, index) => (
               <motion.div

@@ -100,7 +100,7 @@ export default function ErrorBudgetTracker() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Managing Acceptable Failure</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Managing Acceptable Failure</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             An error budget is the allowable unreliability in a system, calculated as 100% minus the SLO. It serves as a control mechanism to balance service reliability with the pace of innovation, allowing teams to take risks when the budget is healthy and focus on stability when depleted.
           </p>
@@ -125,7 +125,7 @@ export default function ErrorBudgetTracker() {
           onHoverStart={() => setHoveredSection("tracker")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Error Budget Tracker</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Error Budget Tracker</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-indigo-100 mb-2">SLO Percentage:</label>
@@ -189,7 +189,7 @@ export default function ErrorBudgetTracker() {
           onHoverStart={() => setHoveredSection("approaches")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Approaches to Managing Error Budgets</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Approaches to Managing Error Budgets</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {approachesData.map((data, index) => (
               <motion.div
@@ -251,7 +251,7 @@ export default function ErrorBudgetTracker() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices for Error Budgets</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices for Error Budgets</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Align error budgets with business goals and SLOs.</li>
             <li>Monitor consumption in real-time with dashboards.</li>

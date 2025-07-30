@@ -87,7 +87,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Core Concept: Defining Reliability</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Defining Reliability</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             SLOs are specific, measurable goals that quantify how reliable a service should be, such as uptime, latency, or error rates. They are derived from Service Level Indicators (SLIs) and may be part of Service Level Agreements (SLAs) for contractual commitments. This pillar ensures teams have a clear target to strive for and a framework to assess performance.
           </p>
@@ -112,7 +112,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🧠 Key Principles</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧠 Key Principles</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>User-Centric:</strong> Reflect what users value, like fast response times or availability.</li>
             <li><strong>Measurable:</strong> Based on quantifiable SLIs (e.g., 99.9% uptime).</li>
@@ -142,7 +142,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("types")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📊 Types of SLOs</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📊 Types of SLOs</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             SLOs can cover various aspects of service performance. Common types include:
           </p>
@@ -175,7 +175,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">🎯 Real-World Examples</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🎯 Real-World Examples</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {realWorldExamplesData.map((data, index) => (
               <motion.div
@@ -237,7 +237,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">💡 Best Practices</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Define SLOs based on user experience, not just technical metrics.</li>
             <li>Use SLIs to track progress and trigger alerts when thresholds are at risk.</li>
@@ -266,7 +266,7 @@ export default function SLOs() {
           onHoverStart={() => setHoveredSection("formula")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">📐 Calculating SLO Impact</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📐 Calculating SLO Impact</h2>
           <p className="text-indigo-100 italic mb-4 text-sm sm:text-base">
             <strong>Downtime Allowance = (1 – SLO Target) × Total Time</strong><br />
             Example: For a 99.9% SLO over 30 days (43,200 minutes), allowance = (1 – 0.999) × 43,200 = 43.2 minutes.

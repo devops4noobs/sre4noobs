@@ -296,7 +296,7 @@ export default function SREPrinciplesPage() {
           onHoverStart={() => setHoveredSection("toc")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">Explore Principles</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Explore Principles</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-indigo-100 text-sm sm:text-base">
             {principles.map((p, index) => (
               <li key={index}>
@@ -332,7 +332,7 @@ export default function SREPrinciplesPage() {
               onHoverStart={() => setHoveredSection(`principle-${index}`)}
               onHoverEnd={() => setHoveredSection(null)}
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-2 glow-text">{p.title}</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">{p.title}</h2>
               <p className="text-indigo-200 mb-4 text-sm sm:text-base">{p.summary}</p>
               {p.content}
               <div className="mt-6 bg-gray-900 p-4 rounded-lg">
