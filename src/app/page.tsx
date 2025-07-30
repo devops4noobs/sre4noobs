@@ -1,7 +1,7 @@
 'use client';
 import { FaRobot, FaUserCheck, FaCogs, FaChartLine, FaRocket } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function HomePage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -17,6 +17,15 @@ export default function HomePage() {
       getStartedRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Fetch feedbacks for testimonials
+  const [feedbacks, setFeedbacks] = useState<any[]>([]);
+  useEffect(() => {
+    fetch("https://www.devops4noobs.com/feedback-handler/feedbacks")
+      .then(res => res.ok ? res.json() : [])
+      .then(data => Array.isArray(data) ? setFeedbacks(data) : [])
+      .catch(() => setFeedbacks([]));
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
@@ -156,33 +165,23 @@ export default function HomePage() {
       <section className="w-full max-w-xs sm:max-w-md md:max-w-4xl mx-auto text-center py-8 px-4 mb-6 sm:mb-12 relative overflow-hidden">
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-gray-800 p-4 rounded-xl shadow-lg text-left">
-              <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-2">
-                &quot;Devops4Noobs simplified SRE for me, landing my first job!&quot;
-              </blockquote>
-              <div className="flex items-center justify-between">
-                <span className="block text-indigo-400 font-semibold">— Raj Patel, India</span>
-                <div className="flex text-yellow-400">★★★★★</div>
+            {feedbacks.length > 0 ? feedbacks.slice(0, 3).map((fb, idx) => (
+              <div key={idx} className="bg-gray-800 p-4 rounded-xl shadow-lg text-left">
+                <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-2">
+                  {fb.message}
+                </blockquote>
+                <div className="flex items-center justify-between">
+                  <span className="block text-indigo-400 font-semibold">— {fb.name || 'Anonymous'}</span>
+                  <div className="flex text-yellow-400">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span key={i}>{i < fb.rating ? '★' : '☆'}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-xl shadow-lg text-left">
-              <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-2">
-                &quot;The immersive tools boosted my confidence in handling production incidents effectively.&quot;
-              </blockquote>
-              <div className="flex items-center justify-between">
-                <span className="block text-indigo-400 font-semibold">— Emily Johnson, USA</span>
-                <div className="flex text-yellow-400">★★★★☆</div>
-              </div>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-xl shadow-lg text-left">
-              <blockquote className="italic text-indigo-200 text-lg sm:text-xl mb-2">
-                &quot;Devops4Noobs&apos; real-world examples transformed how I approach system reliability.&quot;
-              </blockquote>
-              <div className="flex items-center justify-between">
-                <span className="block text-indigo-400 font-semibold">— Lukas Müller, Germany</span>
-                <div className="flex text-yellow-400">★★★★★</div>
-              </div>
-            </div>
+            )) : (
+              <div className="col-span-3 text-indigo-200">No feedbacks yet. Be the first to leave one!</div>
+            )}
           </div>
           <motion.a
             href="https://www.facebook.com/groups/755805476911003/?mibextid=wwXIfr"
