@@ -123,7 +123,7 @@ export default function FeedbackPage() {
           onHoverStart={() => setHoveredSection("form")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-300 mb-4 glow-text">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">
             <FaComment className="inline mr-2" /> Provide Your Feedback
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-white">
