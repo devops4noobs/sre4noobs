@@ -18,13 +18,13 @@
     }
   ],
   "routes": [
-  {
-    "pattern": "https://www.devops4noobs.com/feedback-handler/submit-feedback",
-    "zone_name": "devops4noobs.com"
-  },
-  {
-    "pattern": "https://www.devops4noobs.com/feedback-handler/feedbacks",
-    "zone_name": "devops4noobs.com"
-  }
-]
+    {
+      "pattern": "https://www.devops4noobs.com/feedback-handler/submit-feedback",
+      "zone_name": "devops4noobs.com"
+    },
+    {
+      "pattern": "https://www.devops4noobs.com/feedback-handler/feedbacks",
+      "zone_name": "devops4noobs.com"
+    }
+  ]
 }
