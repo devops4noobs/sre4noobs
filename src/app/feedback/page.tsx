@@ -9,6 +9,7 @@ interface FeedbackFormData {
   rating: number;
   name?: string;
   email?: string;
+  approved?: boolean; // Added approved field, defaults to false
 }
 
 // Next.js expects a default export of a function component, which is already present below.
@@ -25,6 +26,7 @@ export default function FeedbackPage() {
       rating: 0,
       name: '',
       email: '',
+      approved: false, // Default to false for new submissions
     },
   });
 
@@ -37,10 +39,10 @@ export default function FeedbackPage() {
       const res = await fetch("https://www.devops4noobs.com/feedback-handler/submit-feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, rating, timestamp }),
+        body: JSON.stringify({ ...data, rating, timestamp, approved: false }), // Explicitly set approved to false
       });
       if (res.ok) {
-        setSubmitStatus("Thank you for your feedback!");
+        setSubmitStatus("Thank you! Your feedback is under review and will appear after approval.");
       } else {
         setSubmitStatus("Failed to send feedback. Please try again later.");
       }
@@ -204,7 +206,7 @@ export default function FeedbackPage() {
             <button
               type="submit"
               className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-md shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 mt-6 flex items-center justify-center"
-              disabled={submitStatus === "Thank you for your feedback!"}
+              disabled={submitStatus === "Thank you! Your feedback is under review and will appear after approval."}
             >
               <FaPaperPlane className="mr-2" /> Submit Feedback
             </button>
@@ -228,7 +230,7 @@ export default function FeedbackPage() {
 
         {/* Footer Timestamp */}
         <p className="text-gray-400 text-xs mt-8 text-center">
-          Last updated: July 29, 2025, 6:56 PM EEST
+          Last updated: July 30, 2025, 4:48 PM EEST
         </p>
       </main>
     </div>

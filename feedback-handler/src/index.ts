@@ -7,9 +7,9 @@ interface FeedbackData {
   name?: string;
   email?: string;
   timestamp: string;
+  approved?: boolean;
 }
 
-// Declare the KV namespace binding
 declare global {
   const FEEDBACK_KV: KVNamespace;
 }
@@ -23,7 +23,10 @@ addEventListener('fetch', (event: FetchEvent) => {
 async function handleEvent(event: FetchEvent): Promise<Response> {
   const request = event.request;
   const url = new URL(request.url);
+<<<<<<< HEAD
   // Normalize pathname by removing the '/feedback-handler' prefix if present
+=======
+>>>>>>> df8c1f1 (add approve feedback)
   let path = url.pathname.replace(/^\/feedback-handler/, '');
 
   if (request.method === 'OPTIONS') {
@@ -33,14 +36,19 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
     });
   }
 
+<<<<<<< HEAD
   // GET /feedback-handler/feedbacks returns recent feedbacks as JSON
+=======
+  // GET /feedbacks returns only approved feedbacks as JSON
+>>>>>>> df8c1f1 (add approve feedback)
   if (request.method === 'GET' && path === '/feedbacks') {
     try {
       const list = await FEEDBACK_KV.list({ prefix: 'feedback_', limit: 20 });
       const feedbacks = await Promise.all(
         list.keys.map(async (entry) => {
           const value = await FEEDBACK_KV.get(entry.name);
-          return value ? JSON.parse(value) : null;
+          const data = value ? JSON.parse(value) : null;
+          return data && data.approved === true ? data : null; // Filter unapproved
         })
       );
       feedbacks.sort((a, b) => (b?.timestamp || '').localeCompare(a?.timestamp || ''));
@@ -60,6 +68,7 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
     }
   }
 
+<<<<<<< HEAD
   // POST /contact-handler/submit-message (new contact form route)
   if (request.method === 'POST' && url.pathname.endsWith('/contact-handler/submit-message')) {
     // Use env for secrets in module Worker, or globalThis for service Worker
@@ -67,12 +76,24 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
   }
 
   // POST /feedback-handler/submit-feedback
+=======
+  // POST /submit-feedback
+>>>>>>> df8c1f1 (add approve feedback)
   if (request.method === 'POST' && path === '/submit-feedback') {
     return await handleRequest(request);
   }
 
+<<<<<<< HEAD
   // Fallback for other routes
   return addCorsToResponse(new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
+=======
+  // New endpoint: POST /approve-feedback (admin-only)
+  if (request.method === 'POST' && path === '/approve-feedback') {
+    return await handleApproveRequest(request);
+  }
+
+  return addCorsToResponse(new Response('Not Found', { status: 404 }));
+>>>>>>> df8c1f1 (add approve feedback)
 }
 
 async function handleRequest(request: Request): Promise<Response> {
@@ -80,7 +101,6 @@ async function handleRequest(request: Request): Promise<Response> {
     const data = await request.json() as FeedbackData;
     const { message, rating, name, email, timestamp } = data;
 
-    // Validate required fields
     if (!message || typeof rating !== 'number' || !timestamp) {
       return addCorsToResponse(new Response(JSON.stringify({ error: 'Message, rating, and timestamp are required' }), {
         status: 400,
@@ -88,7 +108,6 @@ async function handleRequest(request: Request): Promise<Response> {
       }));
     }
 
-    // Generate a unique key (consider using UUID or add randomness)
     const key = `feedback_${timestamp}_${Math.random().toString(36).slice(2, 10)}`;
     const feedbackData = JSON.stringify({
       message,
@@ -96,17 +115,51 @@ async function handleRequest(request: Request): Promise<Response> {
       name: name || 'Anonymous',
       email: email || 'N/A',
       timestamp,
+      approved: false, // Default to unapproved
     });
 
-    // Store in Workers KV
     await FEEDBACK_KV.put(key, feedbackData);
 
-    return addCorsToResponse(new Response(JSON.stringify({ message: 'Feedback saved successfully' }), {
+    return addCorsToResponse(new Response(JSON.stringify({ message: 'Feedback submitted for review' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     }));
   } catch {
     return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to save feedback' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    }));
+  }
+}
+
+async function handleApproveRequest(request: Request): Promise<Response> {
+  try {
+    const { key } = await request.json() as { key: string }; // Expect the KV key from the admin
+    if (!key) {
+      return addCorsToResponse(new Response(JSON.stringify({ error: 'Key is required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      }));
+    }
+
+    const value = await FEEDBACK_KV.get(key);
+    if (!value) {
+      return addCorsToResponse(new Response(JSON.stringify({ error: 'Feedback not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      }));
+    }
+
+    const feedback = JSON.parse(value) as FeedbackData;
+    feedback.approved = true;
+    await FEEDBACK_KV.put(key, JSON.stringify(feedback));
+
+    return addCorsToResponse(new Response(JSON.stringify({ message: 'Feedback approved' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }));
+  } catch {
+    return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to approve feedback' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     }));
