@@ -23,10 +23,6 @@
     "zone_name": "devops4noobs.com"
   },
   {
-    "pattern": "www.devops4noobs.com/feedback-handler/submit-feedback",
-    "zone_name": "devops4noobs.com"
-  },
-  {
     "pattern": "www.devops4noobs.com/feedback-handler/approve-feedback",
     "zone_name": "devops4noobs.com"
   }
