@@ -23,10 +23,6 @@ addEventListener('fetch', (event: FetchEvent) => {
 async function handleEvent(event: FetchEvent): Promise<Response> {
   const request = event.request;
   const url = new URL(request.url);
-<<<<<<< HEAD
-  // Normalize pathname by removing the '/feedback-handler' prefix if present
-=======
->>>>>>> df8c1f1 (add approve feedback)
   let path = url.pathname.replace(/^\/feedback-handler/, '');
 
   if (request.method === 'OPTIONS') {
@@ -36,11 +32,7 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
     });
   }
 
-<<<<<<< HEAD
-  // GET /feedback-handler/feedbacks returns recent feedbacks as JSON
-=======
   // GET /feedbacks returns only approved feedbacks as JSON
->>>>>>> df8c1f1 (add approve feedback)
   if (request.method === 'GET' && path === '/feedbacks') {
     try {
       const list = await FEEDBACK_KV.list({ prefix: 'feedback_', limit: 20 });
@@ -60,7 +52,7 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
       );
     } catch (err) {
       return addCorsToResponse(
-        new Response(JSON.stringify({ error: 'Failed to fetch feedbacks' }), {
+        new Response(JSON.stringify({ error: 'Failed to fetch feedbacks' + (err instanceof Error ? `: ${err.message}` : '') }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
         })
@@ -68,32 +60,23 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
     }
   }
 
-<<<<<<< HEAD
-  // POST /contact-handler/submit-message (new contact form route)
-  if (request.method === 'POST' && url.pathname.endsWith('/contact-handler/submit-message')) {
-    // Use env for secrets in module Worker, or globalThis for service Worker
+  // POST /contact-handler/submit-message
+  if (request.method === 'POST' && path === '/contact-handler/submit-message') {
     return await handleContactRequest(request, globalThis);
   }
 
-  // POST /feedback-handler/submit-feedback
-=======
   // POST /submit-feedback
->>>>>>> df8c1f1 (add approve feedback)
   if (request.method === 'POST' && path === '/submit-feedback') {
     return await handleRequest(request);
   }
 
-<<<<<<< HEAD
-  // Fallback for other routes
-  return addCorsToResponse(new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
-=======
-  // New endpoint: POST /approve-feedback (admin-only)
+  // POST /approve-feedback (admin-only)
   if (request.method === 'POST' && path === '/approve-feedback') {
     return await handleApproveRequest(request);
   }
 
-  return addCorsToResponse(new Response('Not Found', { status: 404 }));
->>>>>>> df8c1f1 (add approve feedback)
+  // Fallback for other routes
+  return addCorsToResponse(new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
 }
 
 async function handleRequest(request: Request): Promise<Response> {
@@ -124,8 +107,8 @@ async function handleRequest(request: Request): Promise<Response> {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     }));
-  } catch {
-    return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to save feedback' }), {
+  } catch (err) {
+    return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to save feedback' + (err instanceof Error ? `: ${err.message}` : '') }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     }));
@@ -134,7 +117,7 @@ async function handleRequest(request: Request): Promise<Response> {
 
 async function handleApproveRequest(request: Request): Promise<Response> {
   try {
-    const { key } = await request.json() as { key: string }; // Expect the KV key from the admin
+    const { key } = await request.json() as { key: string };
     if (!key) {
       return addCorsToResponse(new Response(JSON.stringify({ error: 'Key is required' }), {
         status: 400,
@@ -158,8 +141,8 @@ async function handleApproveRequest(request: Request): Promise<Response> {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     }));
-  } catch {
-    return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to approve feedback' }), {
+  } catch (err) {
+    return addCorsToResponse(new Response(JSON.stringify({ error: 'Failed to approve feedback' + (err instanceof Error ? `: ${err.message}` : '') }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     }));
