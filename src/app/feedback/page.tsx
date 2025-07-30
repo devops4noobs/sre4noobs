@@ -109,7 +109,7 @@ export default function FeedbackPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your feedback helps us build better, more reliable systems
+            Your feedback helps us build better, more reliable systems 
           </motion.p>
         </motion.section>
 

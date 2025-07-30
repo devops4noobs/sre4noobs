@@ -1,4 +1,19 @@
-"routes": [
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "feedback-handler",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-04",
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "FEEDBACK_KV",
+      "id": "5a8456be06b94e749e0cc0c50fe8b876",
+      "preview_id": "<ID_OF_PREVIEW_KV_NAMESPACE_FOR_LOCAL_DEVELOPMENT>"
+    }
+  ],
+  "routes": [
   {
     "pattern": "www.devops4noobs.com/feedback-handler/submit-feedback",
     "zone_name": "devops4noobs.com"
@@ -8,3 +23,4 @@
     "zone_name": "devops4noobs.com"
   }
 ]
+}
