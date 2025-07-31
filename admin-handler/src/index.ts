@@ -11,12 +11,12 @@ interface FeedbackData {
   key?: string; // Added for admin response
 }
 
-declare global {
-  var FEEDBACK_KV: KVNamespace;
+interface Env {
+  FEEDBACK_KV: KVNamespace;
 }
 
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     console.log(`Request received: ${request.method} ${request.url}`);
     const url = new URL(request.url);
     let path = url.pathname.replace(/^\/admin-handler/, '');
@@ -32,12 +32,12 @@ export default {
     if (request.method === 'GET' && path === '/pending-feedback') {
       try {
         console.log('Listing pending feedbacks from KV');
-        const list = await FEEDBACK_KV.list({ prefix: 'feedback_', limit: 100 });
+        const list = await env.FEEDBACK_KV.list({ prefix: 'feedback_', limit: 100 });
         console.log(`Found ${list.keys.length} keys`);
         const feedbacks = await Promise.all(
           list.keys.map(async (entry) => {
             console.log(`Processing key: ${entry.name}`);
-            const value = await FEEDBACK_KV.get(entry.name);
+            const value = await env.FEEDBACK_KV.get(entry.name);
             const data = value ? JSON.parse(value) : null;
             return data && data.approved !== true ? { key: entry.name, ...data } : null;
           })
@@ -71,7 +71,7 @@ export default {
             headers: { 'Content-Type': 'application/json' },
           }));
         }
-        const value = await FEEDBACK_KV.get(key);
+        const value = await env.FEEDBACK_KV.get(key);
         if (!value) {
           return addCorsToResponse(new Response(JSON.stringify({ error: 'Feedback not found' }), {
             status: 404,
@@ -80,7 +80,7 @@ export default {
         }
         const feedback = JSON.parse(value) as FeedbackData;
         feedback.approved = true;
-        await FEEDBACK_KV.put(key, JSON.stringify(feedback));
+        await env.FEEDBACK_KV.put(key, JSON.stringify(feedback));
         return addCorsToResponse(new Response(JSON.stringify({ message: 'Feedback approved' }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
