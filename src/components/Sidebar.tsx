@@ -102,7 +102,6 @@ const menuItems: MenuItem[] = [
     label: 'Feedback',href: '/feedback', icon: ChatBubbleLeftRightIcon
   },
   { label: 'About/Contact', href: '/about', icon: UserCircleIcon },
-  { label: 'Admin', href: '/admin', icon: UserCircleIcon },
 ];
 
 interface SidebarProps {
