@@ -6,8 +6,8 @@ interface FeedbackItem {
   key: string;
   message: string;
   rating: number;
-  name: string;
-  email: string;
+  name?: string; // Make optional to match potential KV data
+  email?: string; // Make optional to match potential KV data
   timestamp: string;
 }
 
@@ -26,9 +26,17 @@ export default function AdminPage() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
-      const data: { error?: string; feedbacks?: FeedbackItem[] } = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to fetch pending feedbacks');
-      setPendingFeedbacks(data.feedbacks || []);
+      const data: { error?: string } | FeedbackItem[] = await res.json();
+      if (!res.ok) throw new Error(data && 'error' in data && data.error ? data.error : 'Failed to fetch pending feedbacks');
+      // Ensure data is an array and filter valid items
+      const feedbacks = Array.isArray(data) ? data.filter((item): item is FeedbackItem => 
+        item && typeof item.key === 'string' && 
+        typeof item.message === 'string' && 
+        typeof item.rating === 'number' && 
+        typeof item.timestamp === 'string'
+      ) : [];
+      console.log('Processed Feedbacks:', feedbacks); // Log processed data
+      setPendingFeedbacks(feedbacks);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
       console.error('Fetch error:', err);
@@ -71,8 +79,8 @@ export default function AdminPage() {
             >
               <p><strong>Message:</strong> {fb.message}</p>
               <p><strong>Rating:</strong> {fb.rating} ⭐</p>
-              <p><strong>Name:</strong> {fb.name}</p>
-              <p><strong>Email:</strong> {fb.email}</p>
+              <p><strong>Name:</strong> {fb.name || 'Anonymous'}</p>
+              <p><strong>Email:</strong> {fb.email || 'N/A'}</p>
               <p><strong>Timestamp:</strong> {fb.timestamp}</p>
               <button
                 onClick={() => approveFeedback(fb.key)}
