@@ -114,7 +114,7 @@ export default function ScalingSREPage() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Introduction</h2>
           <p className="text-indigo-100 text-sm sm:text-base">
-            Building and scaling an SRE team is more than hiring engineers—it's about cultivating
+            Building and scaling an SRE team is more than hiring engineers—it&apos;s about cultivating
             a culture of reliability across your organisation.  It requires thoughtful
             onboarding, long‑term planning, transparent communication and balancing the needs of
             current systems with future initiatives.  This page summarises strategies to grow
@@ -186,7 +186,7 @@ export default function ScalingSREPage() {
           <ul className="list-disc list-inside text-indigo-100 space-y-2 text-sm sm:text-base">
             <li><strong>PagerDuty Blog:</strong> read the full article on building and scaling SRE teams for more insights.</li>
             <li><strong>Google SRE Book:</strong> explore chapters on organisational structure and staffing.</li>
-            <li><strong>SRE Community:</strong> join forums and podcasts (Page it to the Limit) to hear practitioners’ stories.</li>
+            <li><strong>SRE Community:</strong> join forums and podcasts (Page it to the Limit) to hear practitioners&apos; stories.</li>
           </ul>
         </motion.div>
       </main>
