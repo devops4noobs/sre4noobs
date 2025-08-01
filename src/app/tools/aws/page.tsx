@@ -1,31 +1,10 @@
 "use client";
-
-/*
- * Redesigned AWS Observability page
- *
- * This page provides an immersive, interactive introduction to using
- * Amazon CloudWatch, Kinesis Firehose, S3 and Athena for observability.
- * It mirrors the rich animations and card‑based layout used on other
- * redesigned pages, offering a hero section, guiding principles and
- * flip cards.  Each card highlights a key aspect of the workflow,
- * such as exporting logs to S3, why Athena is powerful for log
- * analytics, and an example SQL query to spot 4xx/5xx errors.
- *
- * The content is based on public sources describing how CloudWatch
- * collects logs from AWS services and why exporting them to S3 enables
- * long‑term storage, compliance and analytics【113518676212630†L60-L87】.
- * It also summarises advantages of Amazon Athena for querying logs
- * including familiar SQL access, the ability to join and enrich data
- * and cost efficiency due to its serverless nature【2629858564949†L51-L83】.
- */
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaCloud,
   FaDatabase,
-  FaCode,
-  FaLightbulb
+  FaCode
 } from "react-icons/fa";
 
 export default function AWSObservabilityPage() {
