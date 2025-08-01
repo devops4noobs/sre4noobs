@@ -152,7 +152,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             ...(i.href && favorites.includes(i.href) ? [{ ...i, isFavorite: true }] : []),
             ...(i.subItems || []).flatMap((sub) => [
               ...(sub.href && favorites.includes(sub.href) ? [{ ...sub, isFavorite: true }] : []),
-              ...(sub.subItems || []).filter((child) => favorites.includes(child.href)).map((child) => ({ ...child, isFavorite: true })),
+              ...(sub.subItems || []).filter((child) => child.href && favorites.includes(child.href)).map((child) => ({ ...child, isFavorite: true })),
             ]),
           ])
           .filter((sub) => sub.href);
@@ -243,7 +243,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           )}
           {item.href && (
             <button
-              onClick={() => toggleFavorite(item.label, item.href)}
+              onClick={() => item.href && toggleFavorite(item.label, item.href)}
               className="ml-2 p-1 rounded hover:bg-gray-600"
               aria-label={isFavorite ? `Remove ${item.label} from favorites` : `Add ${item.label} to favorites`}
             >
