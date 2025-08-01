@@ -1,17 +1,4 @@
 "use client";
-
-/*
- * Chaos Engineering page
- *
- * This page introduces chaos engineering, a discipline that intentionally
- * injects faults into systems to test resilience.  It follows the
- * interactive design used throughout the site: a hero section,
- * guiding principles and a set of flip cards.  Content is based on
- * publicly available material that explains how chaos engineering
- * works, the steps involved in planning experiments and the types of
- * tests and benefits【781624681951284†L120-L143】【781624681951284†L149-L193】.
- */
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -184,6 +171,7 @@ export default function ChaosEngineeringPage() {
             Build resilience through controlled failure
           </motion.p>
         </motion.section>
+
 
         {/* Introduction */}
         <motion.div

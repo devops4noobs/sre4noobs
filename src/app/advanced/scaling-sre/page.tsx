@@ -1,83 +1,71 @@
 "use client";
-
-/*
- * Redesigned Kubernetes Fundamentals page.
- *
- * This page introduces the core building blocks of Kubernetes—pods, nodes,
- * deployments, services and configuration objects—within an interactive
- * layout.  Each concept is presented as a card with a brief summary on
- * the front and detailed notes on the back.  Guiding principles help
- * newcomers understand best practices for designing reliable clusters.
- */
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaCube, FaServer, FaProjectDiagram, FaNetworkWired, FaLock } from "react-icons/fa";
+import { FaUsers, FaBullseye, FaChartLine, FaHandsHelping, FaCalendarAlt } from "react-icons/fa";
 
-export default function KubernetesFundamentalsPage() {
-  const [flipped, setFlipped] = useState<number | null>(null);
-
+export default function ScalingSREPage() {
+  const [flip, setFlip] = useState<number | null>(null);
   const cardVariants = { hidden: { scale: 1, opacity: 0, y: 20 }, visible: { scale: 1, opacity: 1, y: 0 } };
   const flipVariants = { front: { rotateY: 0 }, back: { rotateY: 180 } };
 
-  const concepts = [
+  const cards = [
     {
-      icon: FaCube,
-      title: "Pods",
-      summary: "The smallest deployable units in Kubernetes.",
+      icon: FaCalendarAlt,
+      title: "Plan for Onboarding",
+      summary: "Hiring and training take time—plan for it.",
       details: (
         <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-          <li><strong>Definition:</strong> groups one or more containers sharing network and storage.</li>
-          <li><strong>Issue Impact:</strong> pod crashes disrupt services; use liveness and readiness probes.</li>
-          <li><strong>Process Improvement:</strong> leverage pod anti‑affinity to spread workloads across nodes.</li>
+          <li>New SREs may need 3–12 months to learn systems and culture.</li>
+          <li>Provide mentorship and documentation to accelerate onboarding.</li>
+          <li>Adjust project timelines to account for the learning curve.</li>
         </ul>
       ),
     },
     {
-      icon: FaServer,
-      title: "Nodes",
-      summary: "Worker machines that run your pods.",
+      icon: FaBullseye,
+      title: "Set Long‑Term Goals",
+      summary: "Look beyond immediate fires to the horizon.",
       details: (
         <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-          <li><strong>Definition:</strong> physical or virtual hosts managed by the control plane.</li>
-          <li><strong>Issue Impact:</strong> node failures take down all resident pods; plan for high availability.</li>
-          <li><strong>Process Improvement:</strong> monitor node health and enable autoscaling of node pools.</li>
+          <li>Define a vision for the SRE team 2–3 years out.</li>
+          <li>Balance building new capabilities with supporting existing systems.</li>
+          <li>Plan capacity for future workloads and organisational growth.</li>
         </ul>
       ),
     },
     {
-      icon: FaProjectDiagram,
-      title: "Deployments",
-      summary: "Declaratively manage stateless application replicas.",
+      icon: FaChartLine,
+      title: "Communicate Progress",
+      summary: "Show the team how far you’ve come.",
       details: (
         <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-          <li><strong>Definition:</strong> ensures a specified number of pod replicas are running.</li>
-          <li><strong>Issue Impact:</strong> configuration errors cause failed rollouts; prefer rolling updates.</li>
-          <li><strong>Process Improvement:</strong> use canary or blue/green strategies for zero‑downtime deploys.</li>
+          <li>Regularly remind teams of small improvements and milestones.</li>
+          <li>Use data to illustrate adoption rates and infrastructure migrations.</li>
+          <li>Celebrate wins to keep morale high during long transformations.</li>
         </ul>
       ),
     },
     {
-      icon: FaNetworkWired,
-      title: "Services",
-      summary: "Expose and load balance access to pods.",
+      icon: FaHandsHelping,
+      title: "Share Knowledge",
+      summary: "Transparency and collaboration are key.",
       details: (
         <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-          <li><strong>Definition:</strong> provides stable IPs and DNS names for pods; supports ClusterIP, NodePort and LoadBalancer types.</li>
-          <li><strong>Issue Impact:</strong> incorrect selectors or ports block traffic; validate via <code>kubectl describe service</code>.</li>
-          <li><strong>Process Improvement:</strong> use Ingress controllers for advanced routing and TLS.</li>
+          <li>Publish goals and guidelines in an internal wiki.</li>
+          <li>Partner with engineering teams to define supportable architectures.</li>
+          <li>Encourage cross‑team learning through brown‑bags and post‑mortems.</li>
         </ul>
       ),
     },
     {
-      icon: FaLock,
-      title: "ConfigMaps & Secrets",
-      summary: "Externalise configuration and sensitive data.",
+      icon: FaUsers,
+      title: "Balance Responsibilities",
+      summary: "Support current systems while building the future.",
       details: (
         <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-          <li><strong>Definition:</strong> ConfigMaps store plain‑text configuration; Secrets store credentials.</li>
-          <li><strong>Issue Impact:</strong> exposed secrets lead to security incidents; encrypt and rotate them.</li>
-          <li><strong>Process Improvement:</strong> integrate with external vaults for robust secret management.</li>
+          <li>Recognise that SRE teams must maintain existing environments while scaling.</li>
+          <li>Allocate time for both incident response and platform engineering.</li>
+          <li>Adjust priorities based on business needs and technical debt.</li>
         </ul>
       ),
     },
@@ -105,7 +93,7 @@ export default function KubernetesFundamentalsPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            Fundamental Kubernetes Concepts
+            Scaling SRE in Teams
           </motion.h1>
           <motion.p
             className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-100"
@@ -113,7 +101,7 @@ export default function KubernetesFundamentalsPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Master the core building blocks of a resilient cluster
+            Strategies to grow reliability practices across your organisation
           </motion.p>
         </motion.section>
 
@@ -126,10 +114,11 @@ export default function KubernetesFundamentalsPage() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Introduction</h2>
           <p className="text-indigo-100 text-sm sm:text-base">
-            Knowing Kubernetes primitives empowers SREs to design and troubleshoot clusters.  Each
-            component—from pods to services—plays a role in ensuring applications run reliably
-            and scale seamlessly.  This page summarises what each concept does, common failure
-            modes and how to improve them.
+            Building and scaling an SRE team is more than hiring engineers—it's about cultivating
+            a culture of reliability across your organisation.  It requires thoughtful
+            onboarding, long‑term planning, transparent communication and balancing the needs of
+            current systems with future initiatives.  This page summarises strategies to grow
+            SRE in your teams.
           </p>
         </motion.div>
 
@@ -142,45 +131,45 @@ export default function KubernetesFundamentalsPage() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Guiding Principles</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
-            <li><strong>Specify resources:</strong> define CPU and memory requests/limits for predictable scheduling.</li>
-            <li><strong>Use probes:</strong> configure readiness and liveness probes to detect unhealthy pods.</li>
-            <li><strong>Distribute workloads:</strong> apply pod anti‑affinity and topology spread constraints.</li>
-            <li><strong>Version safely:</strong> roll out changes gradually with deployments and rollout history.</li>
-            <li><strong>Secure by design:</strong> run containers as non‑root and restrict privileges via PodSecurity policies.</li>
+            <li><strong>Define mission:</strong> connect SRE work to organisational goals.</li>
+            <li><strong>Partner broadly:</strong> collaborate with engineering to design supportable architectures.</li>
+            <li><strong>Improve customer experience:</strong> focus on availability, latency and performance.</li>
+            <li><strong>Use managed solutions:</strong> favour commercially supported tools over building everything in‑house.</li>
+            <li><strong>Share knowledge:</strong> make goals and progress visible to increase transparency.</li>
           </ul>
         </motion.div>
 
-        {/* Concept Cards */}
+        {/* Strategy Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {concepts.map((concept, idx) => (
+          {cards.map((c, idx) => (
             <motion.div
-              key={concept.title}
+              key={c.title}
               className="relative cursor-pointer h-56 sm:h-60 perspective-1000"
               style={{ transformStyle: 'preserve-3d' }}
               initial="hidden"
               animate="visible"
               variants={cardVariants}
-              onClick={() => setFlipped(flipped === idx ? null : idx)}
+              onClick={() => setFlip(flip === idx ? null : idx)}
             >
               {/* Front */}
               <motion.div
                 className="absolute inset-0 bg-gray-900/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
                 variants={flipVariants}
-                animate={flipped === idx ? 'back' : 'front'}
+                animate={flip === idx ? 'back' : 'front'}
                 style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               >
-                <concept.icon className="text-3xl text-yellow-300 mb-2" />
-                <h3 className="font-semibold text-indigo-200 mb-1">{concept.title}</h3>
-                <p className="text-indigo-100 text-sm">{concept.summary}</p>
+                <c.icon className="text-3xl text-yellow-300 mb-2" />
+                <h3 className="font-semibold text-indigo-200 mb-1">{c.title}</h3>
+                <p className="text-indigo-100 text-sm">{c.summary}</p>
               </motion.div>
               {/* Back */}
               <motion.div
                 className="absolute inset-0 bg-gray-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
                 variants={flipVariants}
-                animate={flipped === idx ? 'front' : 'back'}
+                animate={flip === idx ? 'front' : 'back'}
                 style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               >
-                {concept.details}
+                {c.details}
               </motion.div>
             </motion.div>
           ))}
@@ -195,9 +184,9 @@ export default function KubernetesFundamentalsPage() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Additional Resources</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-2 text-sm sm:text-base">
-            <li><strong>Official Concepts:</strong> explore the Kubernetes docs for deep dives on all primitives.</li>
-            <li><strong>Patterns & Anti‑patterns:</strong> learn when to use Deployments vs. StatefulSets and other design choices.</li>
-            <li><strong>Hands‑on Labs:</strong> practice building clusters with Minikube, kind or managed services.</li>
+            <li><strong>PagerDuty Blog:</strong> read the full article on building and scaling SRE teams for more insights.</li>
+            <li><strong>Google SRE Book:</strong> explore chapters on organisational structure and staffing.</li>
+            <li><strong>SRE Community:</strong> join forums and podcasts (Page it to the Limit) to hear practitioners’ stories.</li>
           </ul>
         </motion.div>
       </main>
