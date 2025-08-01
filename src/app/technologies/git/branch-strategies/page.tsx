@@ -189,7 +189,7 @@ export default function BranchStrategiesPage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              Hover tip: Tailor to your team's needs for optimal flow!
+              Hover tip: Tailor to your team&apos;s needs for optimal flow!
             </motion.div>
           )}
         </motion.div>

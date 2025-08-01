@@ -96,7 +96,7 @@ export default function GitPage() {
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">What is Git?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
-            Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Created by Linus Torvalds in 2005, it's the backbone of modern software development, enabling collaboration, tracking changes, and maintaining code history.
+            Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Created by Linus Torvalds in 2005, it&apos;s the backbone of modern software development, enabling collaboration, tracking changes, and maintaining code history.
           </p>
           {hoveredSection === "intro" && (
             <motion.div
