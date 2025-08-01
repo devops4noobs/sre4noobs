@@ -1,81 +1,258 @@
+"use client"; // Required for useState and motion
+import { FaSyncAlt } from "react-icons/fa"; // Added FaSyncAlt for flip icon
+import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from "react";
+
 export default function BranchStrategiesPage() {
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [flippedCard, setFlippedCard] = useState<number | null>(null); // Tracks flipped card
+  const controls = useAnimation();
+
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { scale: 1, opacity: 0, y: 20 },
+    visible: { scale: 1, opacity: 1, y: 0 }, // Static state for non-flip cards
+  };
+
+  // Flip card variants
+  const flipVariants = {
+    front: { rotateY: 0 },
+    back: { rotateY: 180 },
+  };
+
+  // Data for flip cards (Branching Strategies)
+  const strategiesData = [
+    { name: "GitFlow", description: "A comprehensive strategy with main, develop, feature, release, and hotfix branches. Ideal for versioned releases.", pros: "Structured for multiple versions, clear workflow.", cons: "Complex, can slow down continuous deployment." },
+    { name: "GitHub Flow", description: "Simple workflow with main branch and feature branches. Pull requests for reviews before merging.", pros: "Lightweight, supports CI/CD, easy for small teams.", cons: "Less structure for large projects with multiple releases." },
+    { name: "GitLab Flow", description: "Extends GitHub Flow with environment branches (production, pre-production) for better deployment control.", pros: "Handles multiple environments, integrates well with CI/CD.", cons: "Requires more branch management." },
+    { name: "Trunk-Based Development", description: "All development in main/trunk with short-lived feature branches. Emphasizes frequent integration.", pros: "Enables fast releases, reduces merge conflicts.", cons: "Requires strong testing and feature flags." },
+    { name: "Feature Branch Workflow", description: "Create branches for each feature, merge back to main after review.", pros: "Isolates work, easy parallel development.", cons: "Can lead to long-lived branches and integration issues." },
+    { name: "Forking Workflow", description: "Fork the repository, work in fork, submit pull requests to original.", pros: "Great for open-source contributions.", cons: "More overhead for internal teams." },
+  ];
+
+  // Trigger animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const insightsSection = document.getElementById("insights");
+      if (insightsSection && window.scrollY + window.innerHeight > insightsSection.offsetTop) {
+        controls.start({ opacity: 1, y: 0 });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-indigo-400 mb-8">Branch Strategies</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-blue-900 flex flex-col items-center justify-start py-6 md:py-12 overflow-x-hidden relative">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{ top: "15%", left: "25%" }}></div>
+        <div className="absolute w-1 h-1 bg-indigo-300 rounded-full animate-pulse" style={{ top: "40%", left: "75%" }}></div>
+        <div className="absolute w-3 h-3 bg-blue-300 rounded-full animate-pulse" style={{ top: "70%", left: "35%" }}></div>
+      </div>
 
-      <section className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-6xl mx-auto">
-        <p className="mb-4">
-          Branch strategies in Git define how teams organize code changes, collaborate, and deploy to production. They minimize risks, enable efficient workflows, and support SRE goals like zero-downtime releases and quick recoveries. In production, the right strategy can reduce merge conflicts by 50% and speed up deployments.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">Core Concept: Workflow Optimization</h2>
-        <p className="mb-4">
-          These strategies use branches to isolate work, integrate changes safely, and align with production needs. They balance speed (frequent merges) with stability (protected main branches), crucial for SRE in high-stakes environments.
-        </p>
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🧠 Key Principles</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Isolation:</strong> Separate features to prevent production breaks.</li>
-          <li><strong>Integration Frequency:</strong> Merge often to catch issues early.</li>
-          <li><strong>Review Gates:</strong> Require PRs for production-quality code.</li>
-          <li><strong>Automation:</strong> CI/CD on branches for validated changes.</li>
-          <li><strong>Protection:</strong> Lock main branches in production repos.</li>
-          <li><strong>Adaptability:</strong> Evolve with team size and release cadence.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">📊 Types of Branch Strategies</h2>
-        <p className="mb-4">
-          Key strategies for production, with step-by-step commit processes:
-        </p>
-        <ul className="list-disc list-inside space-y-4 mb-4">
-          <li><strong>GitFlow:</strong> Multi-branch model for versioned releases. Steps: 1. Branch from develop (git checkout -b feature/xyz develop). 2. Commit changes (git add .; git commit -m &quot;Add xyz&quot;). 3. Push branch (git push origin feature/xyz). 4. Create PR to develop. 5. After review/merge, create release branch for QA fixes. 6. Merge release to main/develop and tag.</li>
-          <li><strong>GitHub Flow:</strong> Simple for continuous deployment. Steps: 1. Branch from main (git checkout -b feature/xyz). 2. Commit (git add .; git commit -m &quot;Implement xyz&quot;). 3. Push (git push origin feature/xyz). 4. Open PR to main with tests. 5. Merge after approval. 6. Deploy from main automatically.</li>
-          <li><strong>GitLab Flow:</strong> Environment-focused. Steps: 1. Branch from main (git checkout -b feature/xyz). 2. Commit/push changes. 3. Merge to staging branch via MR. 4. Test in staging env. 5. Merge to production branch. 6. Deploy from production branch.</li>
-          <li><strong>Trunk-Based:</strong> Main-only for fast production. Steps: 1. Commit small changes directly to main (git commit -m &quot;Add xyz with flag&quot;). 2. Use feature flags for incomplete work. 3. Push (git push origin main). 4. Run CI tests. 5. Deploy if tests pass. 6. Toggle flags in production.</li>
-          <li><strong>Feature Branch:</strong> Isolated development. Steps: 1. Branch from main (git checkout -b feature/xyz). 2. Commit changes iteratively. 3. Push branch. 4. Create PR to main. 5. Address reviews. 6. Merge and deploy from main.</li>
-          <li><strong>Release Flow:</strong> Stabilized releases. Steps: 1. Develop in develop branch. 2. Commit features (git commit -m &quot;Add xyz&quot;). 3. Create release branch from develop. 4. Fix bugs in release. 5. Merge to main/develop. 6. Tag and deploy from main.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">🎯 Real-World Production Examples</h2>
-        <div className="space-y-4 mb-6">
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">🌐</span>
-            <p>
-              Meta uses trunk-based in production for Facebook, committing to main with flags, handling billions of users via automated tests.
+      <main className="p-4 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-4xl mx-auto">
+        {/* Hero Section with Centered Multi-Line Title */}
+        <motion.section
+          className="bg-gradient-to-r from-indigo-800 to-blue-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-12 shadow-lg transform perspective-1000 hover:rotate-x-2 transition-all duration-500 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-xl">
+              Git Branching Strategies
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-indigo-100">
+              Optimizing Workflow in DevOps and SRE
             </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">📱</span>
-            <p>
-              Uber employs GitHub Flow in production, with feature branches merged after CI, supporting 1M+ daily rides with minimal downtime.
-            </p>
-          </div>
-          <div className="flex items-start">
-            <span className="text-indigo-400 mr-2">🛒</span>
-            <p>
-              Shopify uses GitLab Flow in production, with env branches for staging/prod, enabling Black Friday scales without outages.
-            </p>
-          </div>
-        </div>
+          </motion.div>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-indigo-200 mt-4 sm:mt-6"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Choose the right strategy for efficient collaboration and releases
+          </motion.p>
+        </motion.section>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">💡 Best Practices</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li>Automate PR approvals with tools like GitHub Actions for production merges.</li>
-          <li>Monitor branch metrics (e.g., age, size) to prevent production delays.</li>
-          <li>Use squash merges for clean history in production repos.</li>
-          <li>Implement branch policies to enforce SLO-related tests.</li>
-          <li>Train on strategy to align with production reliability goals.</li>
-        </ul>
+        {/* Introduction Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("intro")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Why Branching Strategies Matter</h2>
+          <p className="text-indigo-100 mb-4 text-sm sm:text-base">
+            In DevOps and SRE, a good branching strategy enables continuous integration, parallel development, and safe releases. It minimizes conflicts, ensures code quality, and supports scalable workflows for teams of any size.
+          </p>
+          {hoveredSection === "intro" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: The right strategy accelerates your DevOps pipeline!
+            </motion.div>
+          )}
+        </motion.div>
 
-        <h2 className="text-2xl font-semibold text-indigo-400 mt-6 mb-4">📐 Calculating Branch Health</h2>
-        <p className="mb-4 italic">
-          <strong>Health Score = (Commits Per Day × Merge Success Rate) / Open Branches</strong><br />
-          Example: 50 commits/day, 95% success, 10 open branches = (50 × 0.95) / 10 = 4.75 – aim for `{'>'}`5 in production.
+        {/* Common Branching Strategies - Flip Cards */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          whileHover="hover"
+          onHoverStart={() => setHoveredSection("strategies")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Common Branching Strategies</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {strategiesData.map((data, index) => (
+              <motion.div
+                key={index}
+                className="relative w-full h-48 cursor-pointer perspective-1000"
+                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                whileHover={{ scale: 1.02 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-indigo-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "back" : "front"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.name}: Description</h3>
+                  <p className="text-center">{data.description}</p>
+                </motion.div>
+                <motion.div
+                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-blue-800/80 flex flex-col items-center justify-center p-4 text-white text-sm sm:text-base"
+                  animate={flippedCard === index ? "front" : "back"}
+                  variants={flipVariants}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="font-bold mb-2">{data.name}: Pros & Cons</h3>
+                  <p className="text-center">Pros: {data.pros}<br />Cons: {data.cons}</p>
+                </motion.div>
+                <motion.button
+                  className="absolute bottom-2 left-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                >
+                  <FaSyncAlt className="text-lg" />
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+          {hoveredSection === "strategies" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Flip to see pros and cons of each strategy!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Choosing a Strategy Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("choosing")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Choosing the Right Strategy</h2>
+          <p className="text-indigo-100 mb-4 text-sm sm:text-base">
+            Select based on team size, project complexity, and release frequency. For small teams and frequent releases, GitHub Flow or Trunk-Based works well. For larger projects with multiple versions, GitFlow provides structure. Always combine with CI/CD and feature flags for best results.
+          </p>
+          {hoveredSection === "choosing" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Tailor to your team's needs for optimal flow!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Best Practices Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("practices")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Best Practices for Branching in SRE</h2>
+          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
+            <li>Use descriptive branch names (e.g., feature/user-auth).</li>
+            <li>Keep branches short-lived to minimize merge conflicts.</li>
+            <li>Require pull requests with code reviews.</li>
+            <li>Integrate automated testing and CI/CD.</li>
+            <li>Regularly rebase or merge from main to stay up-to-date.</li>
+            <li>Delete merged branches to keep the repository clean.</li>
+          </ul>
+          {hoveredSection === "practices" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Implement these for smooth collaboration!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Closing Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("closing")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <p className="text-indigo-100 text-sm sm:text-base">
+            Effective branching strategies are essential for SRE success, enabling rapid, reliable releases while maintaining code quality in distributed teams.
+          </p>
+          {hoveredSection === "closing" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Choose and adapt a strategy that fits your team!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Footer Timestamp */}
+        <p className="text-gray-400 text-xs mt-4 text-center">
+          Last updated: July 30, 2025
         </p>
-
-        <p className="text-gray-400 mt-6">
-          Optimized branch strategies drive SRE success in production by enabling resilient, scalable systems.
-        </p>
-      </section>
+      </main>
     </div>
   );
 }
