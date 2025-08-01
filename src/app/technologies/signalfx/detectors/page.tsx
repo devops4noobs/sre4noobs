@@ -23,30 +23,30 @@ export default function DetectorsPage() {
     back: { rotateY: 180 },
   };
 
-const detectorsData = [
+  const detectorsData = [
     {
       name: "HTTP Error Rate",
       description:
         "Monitors client and server error rates for API services and triggers when the error percentage exceeds 5% over a five‑minute window. This helps catch spikes in 4xx/5xx responses before users notice widespread failures.",
-      code: `E = data(&apos;http_status.count&apos;, filter=filter(&apos;Status&apos;, &apos;4*&apos;)).sum().publish(label=&apos;4xx&apos;)\nG = data(&apos;http_status.count&apos;, filter=filter(&apos;Status&apos;, &apos;5*&apos;)).sum().publish(label=&apos;5xx&apos;)\nT = data(&apos;http_status.count&apos;).sum().publish(label=&apos;Total&apos;)\nerror_rate = ((E + G) / T * 100).publish(label=&apos;ErrorRate&apos;)\ndetect(when(error_rate > 5, &apos;5m&apos;)).publish(&apos;HighErrorRate&apos;)\n# Routes alert to PagerDuty for escalation`,
+      code: `E = data('http_status.count', filter=filter('Status', '4*')).sum().publish(label='4xx')\nG = data('http_status.count', filter=filter('Status', '5*')).sum().publish(label='5xx')\nT = data('http_status.count').sum().publish(label='Total')\nerror_rate = ((E + G) / T * 100).publish(label='ErrorRate')\ndetect(when(error_rate > 5, '5m')).publish('HighErrorRate')\n# Routes alert to PagerDuty for escalation`,
     },
     {
       name: "CPU Sudden Spike",
       description:
-        "Compares current CPU utilisation against the recent baseline using mean plus standard deviation. It fires when the last few minutes of data are several standard deviations above the last hour’s average【935637609780834†L38-L50】.",
-      code: `from signalfx.detectors.against_recent import against_recent\nservice_cpu = data(&apos;cpu.utilization&apos;).mean(by=[&apos;aws_tag_service&apos;])\n# Trigger when the last 5 minutes are ≥3 standard deviations above the previous hour\nagainst_recent.detector_mean_std(service_cpu).publish(&apos;cpu_detector&apos;)`,
+        "Compares current CPU utilisation against the recent baseline using mean plus standard deviation. It fires when the last few minutes of data are several standard deviations above the last hour’s average.",
+      code: `from signalfx.detectors.against_recent import against_recent\nservice_cpu = data('cpu.utilization').mean(by=['aws_tag_service'])\n# Trigger when the last 5 minutes are ≥3 standard deviations above the previous hour\nagainst_recent.detector_mean_std(service_cpu).publish('cpu_detector')`,
     },
     {
       name: "CPU Percentile Anomaly",
       description:
-        "Detects when the current CPU load exceeds a high percentile of the historical distribution. This identifies outliers without requiring fixed thresholds by comparing recent data to the top 1% of the last hour【935637609780834†L72-L125】.",
-      code: `from signalfx.detectors.against_recent import against_recent\nservice_cpu = data(&apos;cpu.utilization&apos;).mean(by=[&apos;aws_tag_service&apos;])\n# Fires if the last 5 minutes exceed the 99th percentile of the previous hour\nagainst_recent.detector_percentile(service_cpu).publish(&apos;cpu_detector&apos;)`,
+        "Detects when the current CPU load exceeds a high percentile of the historical distribution. This identifies outliers without requiring fixed thresholds by comparing recent data to the top 1% of the last hour.",
+      code: `from signalfx.detectors.against_recent import against_recent\nservice_cpu = data('cpu.utilization').mean(by=['aws_tag_service'])\n# Fires if the last 5 minutes exceed the 99th percentile of the previous hour\nagainst_recent.detector_percentile(service_cpu).publish('cpu_detector')`,
     },
     {
       name: "Historical Growth Rate",
       description:
-        "Compares the current window to equivalent windows in previous periods to detect unusual growth. Useful for weekly patterns, it fires when the current period’s mean is more than 20% above the median of past weeks【719436511160230†L43-L56】.",
-      code: `from signalfx.detectors.against_periods import against_periods\nservice_cpu = data(&apos;cpu.utilization&apos;).mean(by=[&apos;aws_tag_service&apos;])\n# Detect 20 % growth compared with the same window in prior weeks\nagainst_periods.detector_growth_rate(service_cpu).publish(&apos;cpu_detector&apos;)`,
+        "Compares the current window to equivalent windows in previous periods to detect unusual growth. Useful for weekly patterns, it fires when the current period’s mean is more than 20% above the median of past weeks.",
+      code: `from signalfx.detectors.against_periods import against_periods\nservice_cpu = data('cpu.utilization').mean(by=['aws_tag_service'])\n# Detect 20 % growth compared with the same window in prior weeks\nagainst_periods.detector_growth_rate(service_cpu).publish('cpu_detector')`,
     },
   ];
 
@@ -299,7 +299,7 @@ const detectorsData = [
             monitor different facets of your system—latency, errors, utilisation
             and growth—and connect them to PagerDuty or Slack for seamless
             incident response. For more inspiration, explore the SignalFlow
-            library and tailor these patterns to your own environment【826788790116899†L0-L19】.
+            library and tailor these patterns to your own environment.
           </p>
           {hoveredSection === "conclusion" && (
             <motion.div
