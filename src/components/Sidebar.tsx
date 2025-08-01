@@ -66,6 +66,7 @@ const menuItems: MenuItem[] = [
         label: 'SignalFX',
         children: [
           { label: 'About', href: '/technologies/signalfx', icon: BellIcon },
+          { label: 'Metrics', href: '/technologies/signalfx/metrics', icon: BellIcon },
           { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
           { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
         ],

@@ -1,7 +1,27 @@
 "use client";
+
+/*
+ * Redesigned SignalFx (Splunk Observability Cloud) overview
+ *
+ * This page provides a high‑level introduction to the capabilities of
+ * Splunk Observability Cloud (formerly SignalFx).  It follows the
+ * interactive pattern used throughout the site: a hero section,
+ * guiding principles and a set of flip cards that summarise key
+ * features.  The content draws on public Splunk resources describing
+ * how Observability Cloud correlates logs, metrics and traces to
+ * accelerate troubleshooting and how it supports OpenTelemetry
+ * instrumentation【727614261722715†L769-L785】.
+ */
+
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaChartLine, FaLink, FaSatelliteDish } from "react-icons/fa";
+import {
+  FaChartLine,
+  FaLink,
+  FaCloud,
+  FaFileAlt,
+  FaStream
+} from "react-icons/fa";
 
 export default function SignalFxOverviewPage() {
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
@@ -15,26 +35,20 @@ export default function SignalFxOverviewPage() {
     back: { rotateY: 180 },
   };
 
+  // Feature cards summarising key capabilities.  The back of each card
+  // lists just a few bullet points rather than long paragraphs to keep
+  // scrolling to a minimum.
   const cards = [
     {
       icon: FaChartLine,
       title: "Real‑Time Metrics",
       summary: "Stream and visualise high‑frequency metrics at scale.",
       details: (
-        <>
-          <p className="mb-2 text-sm sm:text-base">
-            Splunk Observability Cloud ingests and stores metrics with second‑level
-            granularity. This enables real‑time dashboards and detectors that
-            capture spikes in latency, error rates and resource utilisation. It
-            integrates golden‑signal monitoring to keep SREs aware of latency,
-            traffic, errors and saturation.
-          </p>
-          <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-            <li>High‑frequency streaming metrics for CPU, memory, custom KPIs.</li>
-            <li>Dashboards update in real time for rapid triage.</li>
-            <li>Supports complex calculations through SignalFlow detectors.</li>
-          </ul>
-        </>
+        <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
+          <li>Second‑level granularity for CPU, memory and custom KPIs.</li>
+          <li>Dashboards update live for rapid triage.</li>
+          <li>Compute complex calculations via SignalFlow detectors.</li>
+        </ul>
       ),
     },
     {
@@ -42,41 +56,85 @@ export default function SignalFxOverviewPage() {
       title: "Logs & Traces Correlation",
       summary: "Automatically correlate logs with metrics and traces.",
       details: (
-        <>
-          <p className="mb-2 text-sm sm:text-base">
-            Observability Cloud accelerates troubleshooting by previewing metrics
-            and traces alongside your log data in Splunk search.It
-            automatically correlates and analyses logs at petabyte scale
-            alongside real‑time metrics and traces to identify root causes
-            faster.
-          </p>
-          <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-            <li>See logs in context when exploring a metric or trace.</li>
-            <li>Jump directly from an alert to related logs for faster RCA.</li>
-            <li>Analyse petabyte‑scale log data without compromising speed.</li>
-          </ul>
-        </>
+        <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
+          <li>Preview logs alongside metrics and traces for context.</li>
+          <li>Jump straight from an alert to related logs or spans.</li>
+          <li>Correlate and analyse petabyte‑scale data at speed.</li>
+        </ul>
       ),
     },
     {
-      icon: FaSatelliteDish,
-      title: "OpenTelemetry Integration",
-      summary: "Collect telemetry data in any format without vendor lock‑in.",
+      icon: FaCloud,
+      title: "AWS CloudWatch Integration",
+      summary: "Ingest metrics and logs from AWS services via CloudWatch.",
       details: (
-        <>
-          <p className="mb-2 text-sm sm:text-base">
-            Splunk Observability Cloud supports OpenTelemetry, enabling you to
-            collect, access and analyse unstructured data from any source.
-            This flexibility avoids vendor lock‑in and makes it easy to instrument
-            services across heterogeneous environments.
-          </p>
-          <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
-            <li>Use open standards to send metrics, logs and traces.</li>
-            <li>Integrate with third‑party storage or analytics platforms.</li>
-            <li>Scale collection pipelines as your system grows.</li>
-          </ul>
-        </>
+        <ul className="list-disc list-inside text-sm sm:text-base space-y-1">
+          <li>Enable CloudWatch to capture logs and metrics from EC2, Lambda, API Gateway and more.</li>
+          <li>Use Metric Streams to deliver real‑time metrics to Splunk without polling.</li>
+          <li>Send log data via Kinesis Data Firehose for reliable batching and delivery to Splunk.</li>
+        </ul>
       ),
+    },
+  ];
+
+  // Describe the three pillars of observability.  Each entry contains a title,
+  // a brief description broken into bullet points and an icon.  Presenting
+  // these concepts separately makes it easier for newcomers to digest the
+  // difference between metrics, logs and traces without scrolling through
+  // paragraphs.
+  const concepts = [
+    {
+      icon: FaChartLine,
+      title: "Metrics",
+      description: [
+        "Numerical measurements like CPU, memory and latency.",
+        "Collected at regular intervals to show trends over time.",
+        "Used to detect spikes, drops and saturation." 
+      ],
+    },
+    {
+      icon: FaFileAlt,
+      title: "Logs",
+      description: [
+        "Structured or unstructured messages emitted by services.",
+        "Provide context for errors, warnings and informational events.",
+        "Useful for root cause analysis and auditing." 
+      ],
+    },
+    {
+      icon: FaStream,
+      title: "Traces",
+      description: [
+        "Distributed spans that follow a request through your system.",
+        "Show call relationships and latency at each hop.",
+        "Allow you to pinpoint where time is spent." 
+      ],
+    },
+  ];
+
+
+  // A simple step‑by‑step overview to help newcomers understand how to adopt
+  // Observability Cloud.  Each step includes a short description.
+  const overviewSteps = [
+    {
+      title: "Collect",
+      description:
+        "Enable Amazon CloudWatch metrics, logs and traces across your AWS services.",
+    },
+    {
+      title: "Stream",
+      description:
+        "Use Metric Streams and Kinesis Firehose to send high‑frequency telemetry to Observability Cloud.",
+    },
+    {
+      title: "Visualise",
+      description:
+        "Build dashboards and detectors that highlight anomalies in real‑time.",
+    },
+    {
+      title: "Iterate",
+      description:
+        "Continuously refine metrics, dashboards and alert rules based on incident reviews.",
     },
   ];
 
@@ -156,10 +214,115 @@ export default function SignalFxOverviewPage() {
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Stream everything:</strong> capture metrics, logs and traces from all services.</li>
             <li><strong>Correlate data:</strong> link metrics with traces and logs for rapid root cause analysis.</li>
-            <li><strong>Use open standards:</strong> instrument via OpenTelemetry to avoid vendor lock‑in.</li>
+            <li><strong>Leverage AWS integrations:</strong> ingest metrics and logs via CloudWatch and Metric Streams.</li>
             <li><strong>Automate alerting:</strong> build detectors and dashboards to surface issues early.</li>
             <li><strong>Continuously refine:</strong> iterate on SLOs, error budgets and dashboard design as your system evolves.</li>
           </ul>
+        </motion.div>
+
+        {/* Key Concepts */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
+            Key Concepts
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {concepts.map((concept, idx) => (
+              <div
+                key={idx}
+                className="bg-indigo-800/80 rounded-lg p-4 text-center shadow-md hover:shadow-lg transition duration-300"
+              >
+                <concept.icon className="text-3xl text-yellow-300 mb-2" />
+                <h3 className="font-semibold text-yellow-200 mb-2">
+                  {concept.title}
+                </h3>
+                <ul className="list-disc list-inside text-indigo-100 text-sm sm:text-base space-y-1">
+                  {concept.description.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Getting Started / Overview Steps */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
+            Getting Started
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {overviewSteps.map((step, idx) => (
+              <div
+                key={idx}
+                className="bg-indigo-800/80 rounded-lg p-4 flex flex-col items-center text-center shadow-md hover:shadow-lg transition duration-300"
+              >
+                <h3 className="font-semibold text-yellow-200 mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-indigo-100 text-sm">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Ingest Data from AWS */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
+            Ingest Data from AWS
+          </h2>
+          <p className="text-indigo-100 mb-2 text-sm sm:text-base">
+            Splunk Observability Cloud integrates natively with Amazon CloudWatch to
+            pull metrics, logs and traces from your AWS environment.  A common
+            pattern is to stream CloudWatch Logs to Splunk via Amazon Kinesis
+            Data Firehose, which batches, compresses and reliably delivers
+            your log data.
+          </p>
+          <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base mb-3">
+            <li>
+              <strong>Enable CloudWatch:</strong> create log groups for your
+              applications and ensure all AWS services (EC2, Lambda, API
+              Gateway) send logs and metrics to CloudWatch.
+            </li>
+            <li>
+              <strong>Create a Firehose stream:</strong> in the AWS console, set
+              up an Amazon Kinesis Data Firehose delivery stream sourcing from
+              your CloudWatch Logs group.  Choose Splunk as the destination
+              and provide your HEC endpoint and token.
+            </li>
+            <li>
+              <strong>Configure metric streams:</strong> under CloudWatch
+              Metrics → Streams, create a Metric Stream and select Splunk
+              Observability as the partner destination.  Metric streams
+              deliver near‑real‑time metrics without polling.
+            </li>
+            <li>
+              <strong>Verify ingestion:</strong> once configured, logs and
+              metrics will appear in Splunk Observability Cloud where you can
+              build detectors and dashboards.
+            </li>
+          </ul>
+          <p className="text-xs sm:text-sm text-gray-400">
+            Kinesis Firehose simplifies log delivery and handles aggregation,
+            compression and secure transport automatically, eliminating the
+            need to build custom pipelines.
+          </p>
         </motion.div>
 
         {/* Cards grid */}
@@ -168,6 +331,7 @@ export default function SignalFxOverviewPage() {
             <motion.div
               key={card.title}
               className="relative cursor-pointer h-60 sm:h-64 perspective-1000"
+              style={{ transformStyle: "preserve-3d" }}
               initial="hidden"
               animate="visible"
               variants={cardVariants}
@@ -175,13 +339,13 @@ export default function SignalFxOverviewPage() {
                 setFlippedCard(flippedCard === index ? null : index)
               }
             >
-              {/* Front */}
-              <motion.div
-                className="absolute inset-0 bg-gray-900/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
-                variants={flipVariants}
-                animate={flippedCard === index ? "back" : "front"}
-                style={{ transformStyle: "preserve-3d" }}
-              >
+                {/* Front */}
+                <motion.div
+                  className="absolute inset-0 bg-gray-900/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
+                  variants={flipVariants}
+                  animate={flippedCard === index ? "back" : "front"}
+                  style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                >
                 <card.icon className="text-3xl text-yellow-300 mb-2" />
                 <h3 className="font-semibold text-indigo-200 mb-1">
                   {card.title}
@@ -190,18 +354,41 @@ export default function SignalFxOverviewPage() {
                   {card.summary}
                 </p>
               </motion.div>
-              {/* Back */}
-              <motion.div
-                className="absolute inset-0 bg-gray-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
-                variants={flipVariants}
-                animate={flippedCard === index ? "front" : "back"}
-                style={{ transformStyle: "preserve-3d", rotateY: "180deg" }}
-              >
-                {card.details}
-              </motion.div>
+                {/* Back */}
+                <motion.div
+                  className="absolute inset-0 bg-gray-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
+                  variants={flipVariants}
+                  animate={flippedCard === index ? "front" : "back"}
+                  style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                >
+                  {card.details}
+                </motion.div>
             </motion.div>
           ))}
         </div>
+
+        {/* Additional Resources */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mt-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
+            Additional Resources
+          </h2>
+          <ul className="list-disc list-inside text-indigo-100 space-y-2 text-sm sm:text-base">
+            <li>
+              <strong>Splunk Observability Cloud Docs:</strong> explore official guides on streaming, dashboards and alerting.
+            </li>
+            <li>
+              <strong>AWS CloudWatch Documentation:</strong> discover how to collect logs, metrics and traces from AWS services.
+            </li>
+            <li>
+              <strong>SignalFlow Library:</strong> browse reusable detector patterns and sample code.
+            </li>
+          </ul>
+        </motion.div>
       </main>
     </div>
   );

@@ -1,4 +1,20 @@
 "use client";
+
+/*
+ * This page redesigns the SignalFx detectors section of the site to mirror
+ * the rich, interactive feel of the SRE vs. DevOps comparison page.  It
+ * removes any image dependencies (previously there was a static dashboard
+ * illustration) and instead focuses on real‑world detector examples drawn
+ * from Splunk Observability Cloud's SignalFlow library and documentation.
+ * Each example is presented as an interactive card: the front of the card
+ * summarises what the detector does and why it matters; clicking the card
+ * flips it over to reveal the underlying SignalFlow program.  These
+ * programs are based on production patterns such as HTTP error rate
+ * monitoring, sudden CPU spikes, percentile‑based anomalies and
+ * historical growth rate detection.  Inline citations in the accompanying
+ * markdown file reference the sources for these patterns【826788790116899†L0-L19】【935637609780834†L38-L50】.
+ */
+
 import { FaSyncAlt } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -23,6 +39,10 @@ export default function DetectorsPage() {
     back: { rotateY: 180 },
   };
 
+  // A collection of real‑world detector examples.  Each object contains
+  // a descriptive title, a summary of what it detects, and the
+  // corresponding SignalFlow program.  These examples are taken from
+  // official documentation and open source libraries【935637609780834†L38-L50】【719436511160230†L45-L56】.
   const detectorsData = [
     {
       name: "HTTP Error Rate",
@@ -215,6 +235,7 @@ export default function DetectorsPage() {
               <motion.div
                 key={index}
                 className="relative w-full h-60 sm:h-64 md:h-72 cursor-pointer perspective-1000"
+                style={{ transformStyle: "preserve-3d" }}
                 onClick={() =>
                   setFlippedCard(flippedCard === index ? null : index)
                 }
@@ -225,10 +246,11 @@ export default function DetectorsPage() {
               >
                 {/* Front side: description */}
                 <motion.div
-                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-indigo-800/80 flex flex-col items-start justify-between p-4 text-white"
+                  className="absolute w-full h-full rounded-lg shadow-lg bg-indigo-800/80 flex flex-col items-start justify-between p-4 text-white"
                   animate={flippedCard === index ? "back" : "front"}
                   variants={flipVariants}
                   transition={{ duration: 0.6 }}
+                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
                 >
                   <div>
                     <h3 className="font-bold mb-2 text-lg">{det.name}</h3>
@@ -242,10 +264,11 @@ export default function DetectorsPage() {
                 </motion.div>
                 {/* Back side: code snippet */}
                 <motion.div
-                  className="absolute w-full h-full rounded-lg shadow-lg backface-hidden bg-blue-800/80 flex flex-col items-start justify-start p-4 overflow-auto text-white"
+                  className="absolute w-full h-full rounded-lg shadow-lg bg-blue-800/80 flex flex-col items-start justify-start p-4 overflow-auto text-white"
                   animate={flippedCard === index ? "front" : "back"}
                   variants={flipVariants}
                   transition={{ duration: 0.6 }}
+                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
                 >
                   <h3 className="font-bold mb-2 text-lg">{det.name} Code</h3>
                   <pre className="bg-gray-900/70 p-2 rounded-md w-full text-xs sm:text-sm overflow-auto">
