@@ -26,12 +26,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [isLoading] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
-  const { recentPages, addToRecentlyVisited, clearRecentlyVisited } = useRecentlyVisited();
-  const { searchHistory, addToSearchHistory, clearSearchHistory, getSearchSuggestions } = useSearchHistory();
+  const { recentPages, addToRecentlyVisited } = useRecentlyVisited();
+  const { addToSearchHistory, getSearchSuggestions } = useSearchHistory();
   const filteredItems = useMenuFilter(menuItems, searchQuery, favorites, recentPages);
 
   // Auto-expand sections with search results
