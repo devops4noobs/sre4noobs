@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { FaRedoAlt } from 'react-icons/fa';
 
 interface FlipCardProps {
@@ -9,8 +9,8 @@ interface FlipCardProps {
   className?: string;
   frontContent: React.ReactNode;
   backContent: React.ReactNode;
-  cardVariants?: any;
-  flipVariants?: any;
+  cardVariants?: Variants;
+  flipVariants?: Variants;
 }
 
 export const FlipCard: React.FC<FlipCardProps> = ({

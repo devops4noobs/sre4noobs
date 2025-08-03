@@ -1,5 +1,10 @@
 import { useMemo } from 'react';
 import { MenuItem } from '../data/menuItems';
+import { ClockIcon } from '@heroicons/react/24/outline';
+
+interface MenuItemWithScore extends MenuItem {
+  searchScore?: number;
+}
 
 export const useMenuFilter = (
   menuItems: MenuItem[], 
@@ -59,7 +64,7 @@ export const useMenuFilter = (
         });
     };
 
-    const filterBySearch = (items: MenuItem[]): MenuItem[] => {
+    const filterBySearch = (items: MenuItem[]): MenuItemWithScore[] => {
       if (!searchQuery) return items;
 
       const matchesQuery = (text: string) => 
@@ -92,15 +97,15 @@ export const useMenuFilter = (
               ...item,
               subItems: filteredSubItems,
               searchScore: itemScore,
-            };
+            } as MenuItemWithScore;
           }
 
           return null;
         })
-        .filter((item): item is MenuItem => item !== null)
+        .filter((item): item is MenuItemWithScore => item !== null)
         .sort((a, b) => {
-          const scoreA = (a as any).searchScore || 0;
-          const scoreB = (b as any).searchScore || 0;
+          const scoreA = a.searchScore || 0;
+          const scoreB = b.searchScore || 0;
           return scoreB - scoreA;
         });
     };
@@ -122,10 +127,7 @@ export const useMenuFilter = (
       const recentSection: MenuItem = {
         label: 'Recently Visited',
         subItems: recentItems,
-        icon: (() => {
-          const { ClockIcon } = require('@heroicons/react/24/outline');
-          return ClockIcon;
-        })(),
+        icon: ClockIcon,
       };
       
       // Insert after Favorites

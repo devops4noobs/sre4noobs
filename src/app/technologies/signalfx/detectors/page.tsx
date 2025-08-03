@@ -15,7 +15,7 @@
  * markdown file reference the sources for these patterns【826788790116899†L0-L19】【935637609780834†L38-L50】.
  */
 
-import { FaRedoAlt, FaSyncAlt } from "react-icons/fa";
+import { FaRedoAlt } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 

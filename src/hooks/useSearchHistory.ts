@@ -4,7 +4,7 @@ const MAX_SEARCH_HISTORY = 10;
 
 export const useSearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [setRecentSearches] = useState<string[]>([]);
 
   // Load search history from localStorage
   useEffect(() => {

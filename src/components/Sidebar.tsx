@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { 
   ChevronDownIcon, LockClosedIcon, XMarkIcon, StarIcon, MagnifyingGlassIcon,
-  ClockIcon, TrashIcon, Cog6ToothIcon, ChevronUpIcon
+  ClockIcon, Cog6ToothIcon, ChevronUpIcon
 } from '@heroicons/react/24/outline';
 import { menuItems, MenuItem } from '../data/menuItems';
 import { useFavorites } from '../hooks/useFavorites';
@@ -26,7 +26,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   
@@ -332,7 +332,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <li className="text-center py-8 text-gray-400">
                   <div className="flex flex-col items-center animate-fadeIn">
                     <MagnifyingGlassIcon className="w-12 h-12 mb-2 text-gray-500" />
-                    <p>No results found for "{searchQuery}"</p>
+                    <p>No results found for &quot;{searchQuery}&quot;</p>
                     <button
                       onClick={() => setSearchQuery('')}
                       className="mt-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
