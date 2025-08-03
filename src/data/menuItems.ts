@@ -1,9 +1,9 @@
 import { 
-  ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, 
+HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, 
   ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, 
   PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, 
   UserCircleIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, 
-  BellIcon, LockClosedIcon, XMarkIcon, StarIcon, MagnifyingGlassIcon, 
+  BellIcon, StarIcon, 
   BuildingLibraryIcon, WrenchScrewdriverIcon, CpuChipIcon, LightBulbIcon, 
   ClipboardDocumentCheckIcon 
 } from '@heroicons/react/24/outline';
