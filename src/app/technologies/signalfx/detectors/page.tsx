@@ -15,7 +15,7 @@
  * markdown file reference the sources for these patterns【826788790116899†L0-L19】【935637609780834†L38-L50】.
  */
 
-import { FaSyncAlt } from "react-icons/fa";
+import { FaRedoAlt, FaSyncAlt } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -216,91 +216,73 @@ export default function DetectorsPage() {
           )}
         </motion.div>
 
-        {/* Real‑world detector cards */}
+        {/* Real‑world detector cards - Redesigned */}
         <motion.div
           id="detector-insights"
           className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
           initial="hidden"
           animate={controls}
           variants={cardVariants}
-          whileHover="hover"
-          onHoverStart={() => setHoveredSection("detectors")}
-          onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">
-            Real‑World Examples
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            {detectorsData.map((det, index) => (
-              <motion.div
-                key={index}
-                className="relative w-full h-60 sm:h-64 md:h-72 cursor-pointer perspective-1000"
-                style={{ transformStyle: "preserve-3d" }}
-                onClick={() =>
-                  setFlippedCard(flippedCard === index ? null : index)
-                }
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {/* Front side: description */}
-                <motion.div
-                  className="absolute w-full h-full rounded-lg shadow-lg bg-indigo-800/80 flex flex-col items-start justify-between p-4 text-white"
-                  animate={flippedCard === index ? "back" : "front"}
-                  variants={flipVariants}
-                  transition={{ duration: 0.6 }}
-                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
-                >
-                  <div>
-                    <h3 className="font-bold mb-2 text-lg">{det.name}</h3>
-                    <p className="text-sm sm:text-base text-indigo-100">
-                      {det.description}
-                    </p>
-                  </div>
-                  <p className="text-xs text-indigo-200 mt-2">
-                    Click to view the SignalFlow program
-                  </p>
-                </motion.div>
-                {/* Back side: code snippet */}
-                <motion.div
-                  className="absolute w-full h-full rounded-lg shadow-lg bg-blue-800/80 flex flex-col items-start justify-start p-4 overflow-auto text-white"
-                  animate={flippedCard === index ? "front" : "back"}
-                  variants={flipVariants}
-                  transition={{ duration: 0.6 }}
-                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
-                >
-                  <h3 className="font-bold mb-2 text-lg">{det.name} Code</h3>
-                  <pre className="bg-gray-900/70 p-2 rounded-md w-full text-xs sm:text-sm overflow-auto">
-                    <code>{det.code}</code>
-                  </pre>
-                </motion.div>
-                {/* Flip button */}
-                <motion.button
-                  className="absolute bottom-2 left-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setFlippedCard(flippedCard === index ? null : index);
-                  }}
-                >
-                  <FaSyncAlt className="text-lg" />
-                </motion.button>
-              </motion.div>
-            ))}
-          </div>
-          {hoveredSection === "detectors" && (
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
+          Real‑World Examples
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+          {detectorsData.map((card, index) => (
             <motion.div
-              className="bg-yellow-900/50 rounded p-2 mt-4 text-white text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+              key={index}
+              className="relative cursor-pointer h-60 sm:h-64 md:h-72 perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              onClick={() => setFlippedCard(flippedCard === index ? null : index)}
             >
-              Hover tip: Click a card to flip between description and code.
-            </motion.div>
-          )}
+        {/* Front */}
+        <motion.div
+          className="absolute inset-0 bg-indigo-800/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-start justify-center"
+          animate={flippedCard === index ? 'back' : 'front'}
+          variants={flipVariants}
+          style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+        >
+          <div className="absolute top-2 right-2">
+            <FaRedoAlt className="text-yellow-300/70 text-sm animate-pulse" />
+          </div>
+          <h3 className="text-lg font-semibold text-yellow-200 mb-1">{card.name}</h3>
+          <p className="text-sm text-indigo-100 mb-2">{card.description}</p>
+          <p className="text-xs text-yellow-300/70 mt-auto">Click to flip</p>
         </motion.div>
+
+        {/* Back */}
+        <motion.div
+          className="absolute inset-0 bg-blue-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
+          animate={flippedCard === index ? 'front' : 'back'}
+          variants={flipVariants}
+          style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+        >
+          <div className="absolute top-2 right-2">
+            <FaRedoAlt className="text-yellow-300/70 text-sm animate-pulse" />
+          </div>
+          <h3 className="text-sm font-semibold text-yellow-200 mb-2">{card.name} Code</h3>
+          <pre className="bg-gray-900/80 p-2 rounded text-xs text-indigo-100 whitespace-pre-wrap break-words overflow-auto">
+            <code>{card.code}</code>
+          </pre>
+          <p className="text-xs text-yellow-300/70 text-center mt-2">Click to flip back</p>
+        </motion.div>
+      </motion.div>
+    ))}
+  </div>
+
+  <motion.div
+    className="text-center mt-4 text-sm text-gray-400"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+  >
+    💡 Click the cards to flip and see SignalFlow examples.
+  </motion.div>
+</motion.div>
+
 
         {/* Conclusion card */}
         <motion.div

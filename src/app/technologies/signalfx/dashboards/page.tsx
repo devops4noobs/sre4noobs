@@ -20,7 +20,8 @@ import {
   FaChartLine,
   FaListUl,
   FaTachometerAlt,
-  FaTable
+  FaTable,
+  FaRedoAlt
 } from "react-icons/fa";
 
 export default function DashboardsRedesignedPage() {
@@ -292,7 +293,7 @@ export default function DashboardsRedesignedPage() {
             visualise slow requests:
           </p>
           <pre className="bg-gray-900/90 rounded-md p-3 text-xs sm:text-sm overflow-x-auto text-indigo-100">
-{sampleQuery}
+        {sampleQuery}
           </pre>
         </motion.div>
 
@@ -317,13 +318,16 @@ export default function DashboardsRedesignedPage() {
                 animate={flippedCard === index ? "back" : "front"}
                 style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
               >
-                <card.icon className="text-3xl text-yellow-300 mb-2" />
+                <div className="absolute top-2 right-2">
+                    <FaRedoAlt className="text-yellow-300/70 text-sm animate-pulse" />
+                </div>
                 <h3 className="font-semibold text-indigo-200 mb-1">
                   {card.title}
                 </h3>
                 <p className="text-indigo-100 text-sm">
                   {card.summary}
                 </p>
+                <p className="text-xs text-yellow-300/70 mt-auto">Click to flip</p>
               </motion.div>
               {/* Back */}
               <motion.div
@@ -332,11 +336,23 @@ export default function DashboardsRedesignedPage() {
                 animate={flippedCard === index ? "front" : "back"}
                 style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
               >
+              <div className="absolute top-2 right-2">
+               <FaRedoAlt className="text-yellow-300/70 text-sm animate-pulse" />
+              </div>
                 {card.details}
+                <p className="text-xs text-yellow-300/70 text-center mt-2">Click to flip back</p>
               </motion.div>
             </motion.div>
           ))}
         </div>
+        <motion.div
+    className="text-center mt-4 text-sm text-gray-400"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+  >
+    💡 Click the cards to flip and see Dashboards examples.
+  </motion.div>
 
         {/* Additional Resources */}
         <motion.div

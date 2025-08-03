@@ -21,7 +21,8 @@ import {
   FaCube,
   FaProjectDiagram,
   FaNetworkWired,
-  FaLock
+  FaLock,
+  FaRedoAlt
 } from "react-icons/fa";
 
 export default function KubernetesPage() {
@@ -221,9 +222,22 @@ export default function KubernetesPage() {
               >
                 {card.details}
               </motion.div>
+              {/* Flip indicator */}
+              <div className="absolute top-2 right-2">
+                <FaRedoAlt className="text-yellow-300/60 text-sm animate-pulse" />
+              </div>
             </motion.div>
           ))}
         </div>
+        
+        <motion.div
+          className="text-center mt-4 text-sm text-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          💡 Click the cards to flip and see Kubernetes concepts
+        </motion.div>
 
         {/* Workload Primitives */}
         <motion.div

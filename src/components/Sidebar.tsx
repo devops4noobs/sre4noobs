@@ -1,113 +1,20 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronDownIcon, HomeIcon, QuestionMarkCircleIcon, ScaleIcon, KeyIcon, ShieldCheckIcon, ChartBarIcon, TrashIcon, EyeIcon, CogIcon, RocketLaunchIcon, PuzzlePieceIcon, BookOpenIcon, BeakerIcon, UsersIcon, ChatBubbleLeftRightIcon, UserCircleIcon, ChartPieIcon, AcademicCapIcon, DocumentTextIcon, ServerIcon, BellIcon, LockClosedIcon, XMarkIcon, StarIcon, MagnifyingGlassIcon, BuildingLibraryIcon, WrenchScrewdriverIcon, CpuChipIcon, LightBulbIcon, ClipboardDocumentCheckIcon } from '@heroicons/react/24/outline';
-
-// MenuItem interface
-interface MenuItem {
-  label: string;
-  href?: string;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
-  isPremium?: boolean;
-  subItems?: MenuItem[];
-}
-
-const menuItems: MenuItem[] = [
-  { label: 'Favorites', subItems: [], icon: StarIcon },
-  { label: 'Home', href: '/', icon: HomeIcon },
-  {
-    label: 'SRE Fundamentals',
-    icon: AcademicCapIcon,
-    subItems: [
-      { label: 'What is SRE?', href: '/fundamentals/what-is-sre', icon: QuestionMarkCircleIcon },
-      { label: 'SRE vs. DevOps', href: '/fundamentals/sre-vs-devops', icon: ScaleIcon },
-      { label: 'Observability vs. Monitoring', href: '/fundamentals/observability-vs-monitoring', icon: EyeIcon },
-      { label: 'Key Principles', href: '/fundamentals/principles', icon: KeyIcon },
-      { label: 'Interview Questions', href: '/fundamentals/interviewfundamentals', icon: KeyIcon },
-    ],
-  },
-  {
-    label: 'SRE Pillars',
-    icon: BuildingLibraryIcon,
-    subItems: [
-      { label: 'Embracing Risk', href: '/pillars/embracing-risk', icon: ShieldCheckIcon },
-      { label: 'SLOs', href: '/pillars/slo', icon: ChartBarIcon },
-      { label: 'Eliminating Toil', href: '/pillars/toil', icon: TrashIcon },
-      { label: 'Monitoring', href: '/pillars/monitoring', icon: EyeIcon },
-      { label: 'Automation', href: '/pillars/automation', icon: CogIcon },
-      { label: 'Release Engineering', href: '/pillars/release-engineering', icon: RocketLaunchIcon },
-      { label: 'Simplicity', href: '/pillars/simplicity', icon: PuzzlePieceIcon },
-    ],
-  },
-  {
-    label: 'Tools',
-    icon: WrenchScrewdriverIcon,
-    subItems: [
-      { label: 'Blameless Postmortems', href: '/tools/postmortem', icon: BookOpenIcon },
-      { label: 'RCA', href: '/tools/rca', icon: BookOpenIcon },
-      { label: 'SLO Calculator', href: '/tools/slo-calculator', icon: ChartBarIcon },
-      { label: 'Error Budget Tracker', href: '/tools/error-budget', icon: ShieldCheckIcon },
-      { label: 'Incident Simulator', href: '/tools/incident-simulator', icon: BeakerIcon },
-      { label: 'Non-critical Incident', href: '/tools/non-critical', icon: BeakerIcon },
-      { label: 'PagerDuty', href: '/tools/pagerduty', icon: BellIcon },
-      { label: 'AWS', href: '/tools/aws', icon: ServerIcon },
-    ],
-  },
-  {
-    label: 'Technologies',
-    icon: CpuChipIcon,
-    subItems: [
-      {
-        label: 'Kubernetes',
-        subItems: [
-          { label: 'About K8S', href: '/technologies/kubernetes', icon: ChartPieIcon },
-          { label: 'Fundamentals', href: '/technologies/kubernetes/fundamentals', icon: AcademicCapIcon },
-          { label: 'Cheatsheets', href: '/technologies/kubernetes/cheatsheets', icon: DocumentTextIcon },
-          { label: 'CKA Mocks', href: '/technologies/kubernetes/ckamocks', icon: ServerIcon, isPremium: true },
-        ],
-      },
-      {
-        label: 'SignalFX',
-        subItems: [
-          { label: 'About', href: '/technologies/signalfx', icon: BellIcon },
-          { label: 'Metrics', href: '/technologies/signalfx/metrics', icon: BellIcon },
-          { label: 'Detectors', href: '/technologies/signalfx/detectors', icon: BellIcon },
-          { label: 'Dashboards', href: '/technologies/signalfx/dashboards', icon: ChartBarIcon },
-        ],
-      },
-      {
-        label: 'GIT',
-        subItems: [
-          { label: 'About GIT', href: '/technologies/git', icon: AcademicCapIcon },
-          { label: 'Cheatsheets', href: '/technologies/git/cheatsheets', icon: DocumentTextIcon },
-          { label: 'Branch Strategies', href: '/technologies/git/branch-strategies', icon: DocumentTextIcon },
-          { label: 'Best Practices', href: '/technologies/git/best-practices', icon: ServerIcon, isPremium: true },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Advanced Topics',
-    icon: LightBulbIcon,
-    subItems: [
-      { label: 'Case Studies', href: '/advanced/case-studies', icon: BookOpenIcon },
-      { label: 'Chaos Engineering', href: '/advanced/chaos-engineering', icon: BeakerIcon },
-      { label: 'Scaling SRE', href: '/advanced/scaling-sre', icon: UsersIcon },
-    ],
-  },
-  {
-    label: 'Assessments',
-    icon: ClipboardDocumentCheckIcon,
-    subItems: [
-      { label: 'Quizzes', href: '/assessments/quizzes', icon: QuestionMarkCircleIcon },
-      { label: 'Hands-On Labs', href: '/assessments/labs', icon: BeakerIcon },
-      { label: 'Certification Path', href: '/assessments/certification', icon: ShieldCheckIcon },
-    ],
-  },
-  { label: 'Feedback', href: '/feedback', icon: ChatBubbleLeftRightIcon },
-  { label: 'About', href: '/about', icon: UserCircleIcon },
-];
+import { 
+  ChevronDownIcon, LockClosedIcon, XMarkIcon, StarIcon, MagnifyingGlassIcon,
+  ClockIcon, TrashIcon, Cog6ToothIcon, ChevronUpIcon
+} from '@heroicons/react/24/outline';
+import { menuItems, MenuItem } from '../data/menuItems';
+import { useFavorites } from '../hooks/useFavorites';
+import { useMenuFilter } from '../hooks/useMenuFilter';
+import { useSearchHistory } from '../hooks/useSearchHistory';
+import { useRecentlyVisited } from '../hooks/useRecentlyVisited';
+import { SearchHighlighter } from './SearchHighlighter';
+import { LoadingState } from './LoadingState';
+import { Breadcrumbs } from './Breadcrumbs';
+import { ThemeSelector } from './ThemeSelector';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -117,142 +24,173 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  
+  const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { recentPages, addToRecentlyVisited, clearRecentlyVisited } = useRecentlyVisited();
+  const { searchHistory, addToSearchHistory, clearSearchHistory, getSearchSuggestions } = useSearchHistory();
+  const filteredItems = useMenuFilter(menuItems, searchQuery, favorites, recentPages);
 
-  // Load favorites from localStorage
+  // Auto-expand sections with search results
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites');
-    if (storedFavorites) setFavorites(JSON.parse(storedFavorites));
-  }, []);
+    if (searchQuery && filteredItems.length > 0) {
+      const sectionsToExpand: string[] = [];
+      filteredItems.forEach(item => {
+        if (item.subItems && item.subItems.length > 0) {
+          sectionsToExpand.push(item.label);
+        }
+      });
+      setExpandedSections(prev => [...new Set([...prev, ...sectionsToExpand])]);
+    }
+  }, [searchQuery, filteredItems]);
 
-  // Save favorites to localStorage
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  const toggleSection = (label: string) => {
+  const toggleSection = useCallback((label: string) => {
     setExpandedSections((prev) =>
       prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
     );
-  };
+  }, []);
 
-  const toggleFavorite = (label: string, href: string) => {
-    setFavorites((prev) =>
-      prev.includes(href) ? prev.filter((f) => f !== href) : [...prev, href]
-    );
-  };
+  const handleToggleFavorite = useCallback((label: string, href: string) => {
+    toggleFavorite(href);
+  }, [toggleFavorite]);
 
-  // Simplified filter logic
-  const filteredItems = menuItems
-    .map((item) => {
-      if (item.label === 'Favorites') {
-        const favoriteItems = menuItems
-          .flatMap((i) => [
-            ...(i.href && favorites.includes(i.href) ? [{ ...i, isFavorite: true }] : []),
-            ...(i.subItems || []).flatMap((sub) => [
-              ...(sub.href && favorites.includes(sub.href) ? [{ ...sub, isFavorite: true }] : []),
-              ...(sub.subItems || []).filter((child) => child.href && favorites.includes(child.href)).map((child) => ({ ...child, isFavorite: true })),
-            ]),
-          ])
-          .filter((sub) => sub.href);
-        return { ...item, subItems: favoriteItems };
-      }
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+    if (query.trim().length >= 2) {
+      addToSearchHistory(query);
+    }
+  }, [addToSearchHistory]);
 
-      if (!searchQuery) return { ...item, subItems: item.subItems || [] };
+  const handleLinkClick = useCallback((item: MenuItem) => {
+    if (item.href) {
+      addToRecentlyVisited({
+        href: item.href,
+        label: item.label,
+        icon: item.icon,
+      });
+    }
+    if (!item.isPremium) {
+      onClose();
+    }
+  }, [addToRecentlyVisited, onClose]);
 
-      const matchesQuery = (label: string) => label.toLowerCase().includes(searchQuery.toLowerCase());
-      return {
-        ...item,
-        subItems: (item.subItems || []).filter(
-          (sub) =>
-            matchesQuery(sub.label) ||
-            (sub.href && matchesQuery(sub.href)) ||
-            (sub.subItems || []).some((child) => matchesQuery(child.label) || (child.href && matchesQuery(child.href)))
-        ),
-      };
-    })
-    .filter((item) => {
-      if (!searchQuery) return true;
-      const matchesQuery = (label: string) => label.toLowerCase().includes(searchQuery.toLowerCase());
-      return (
-        item.label === 'Favorites' ||
-        matchesQuery(item.label) ||
-        (item.href && matchesQuery(item.href)) ||
-        (item.subItems && item.subItems.length > 0)
-      );
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setSearchQuery('');
+      setShowSearchSuggestions(false);
+    } else if (e.key === 'Enter' && searchQuery.trim()) {
+      addToSearchHistory(searchQuery);
+      setShowSearchSuggestions(false);
+    }
+  }, [searchQuery, addToSearchHistory]);
+
+  const getBreadcrumbs = useCallback(() => {
+    const pathSegments = pathname.split('/').filter(Boolean);
+    const breadcrumbs: Array<{ label: string; href?: string; icon?: React.FC<React.SVGProps<SVGSVGElement>> }> = [];
+    
+    let currentPath = '';
+    pathSegments.forEach((segment, index) => {
+      currentPath += `/${segment}`;
+      const label = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+      breadcrumbs.push({
+        label,
+        href: index < pathSegments.length - 1 ? currentPath : undefined,
+      });
     });
+    
+    return breadcrumbs;
+  }, [pathname]);
 
-  // Debug: Log filtered items
-  console.log('Filtered Items:', filteredItems);
+  const suggestions = getSearchSuggestions(searchQuery);
 
   const renderMenuItem = (item: MenuItem, depth: number = 0): React.ReactNode => {
     const Icon = item.icon || null;
     const isActive = pathname === item.href;
     const hasChildren = item.subItems && item.subItems.length > 0;
     const isExpanded = expandedSections.includes(item.label);
-    const isFavorite = item.href ? favorites.includes(item.href) : false;
-
-    // Debug: Log item being rendered
-    console.log(`Rendering Item: ${item.label}, Depth: ${depth}, HasChildren: ${hasChildren}`);
+    const isItemFavorite = item.href ? isFavorite(item.href) : false;
 
     return (
-      <li key={item.label} className={`relative ${depth > 0 ? 'ml-4' : ''}`}>
+      <li key={`${item.label}-${depth}`} className={`relative ${depth > 0 ? 'ml-4' : ''}`}>
         <div className="flex items-center justify-between group">
           {item.href ? (
             <Link
               href={item.href}
-              className={`flex items-center w-full p-2 rounded-md transition-colors ${
-                isActive ? 'bg-purple-500 text-white' : 'hover:bg-gray-700 text-gray-200'
+              className={`flex items-center w-full p-2 rounded-md transition-all duration-200 ${
+                isActive 
+                  ? 'bg-purple-500 text-white shadow-lg transform scale-105' 
+                  : 'hover:bg-gray-700 text-gray-200 hover:transform hover:scale-102'
               }`}
-              onClick={() => !item.isPremium && onClose()}
+              onClick={() => handleLinkClick(item)}
               aria-current={isActive ? 'page' : undefined}
             >
               {Icon && (
                 <Icon
-                  className={`w-${depth === 0 ? 5 : 4} h-${depth === 0 ? 5 : 4} mr-2 ${
+                  className={`w-${depth === 0 ? 5 : 4} h-${depth === 0 ? 5 : 4} mr-2 transition-colors ${
                     isActive ? 'text-white' : depth === 0 ? 'text-purple-400' : 'text-gray-400'
                   }`}
                 />
               )}
-              <span className={depth > 0 ? 'text-sm' : ''}>{item.label}</span>
+              <SearchHighlighter
+                text={item.label}
+                searchQuery={searchQuery}
+                className={`${depth > 0 ? 'text-sm' : ''} flex-1 text-left`}
+                highlightClassName="bg-yellow-300 text-gray-900 px-1 rounded"
+              />
               {item.isPremium && <LockClosedIcon className="w-4 h-4 ml-2 text-yellow-400" />}
             </Link>
           ) : (
             <button
               onClick={() => toggleSection(item.label)}
-              className="flex items-center w-full p-2 rounded-md hover:bg-gray-700 text-gray-200 transition-colors"
+              className="flex items-center w-full p-2 rounded-md hover:bg-gray-700 text-gray-200 transition-all duration-200 hover:transform hover:scale-102"
               aria-expanded={isExpanded}
               aria-controls={`submenu-${item.label.replace(/\s+/g, '-')}`}
             >
               {Icon && (
                 <Icon
-                  className={`w-5 h-5 mr-2 ${isActive ? 'text-white' : 'text-purple-400'}`}
+                  className={`w-5 h-5 mr-2 transition-colors ${isActive ? 'text-white' : 'text-purple-400'}`}
                 />
               )}
-              <span className={depth > 0 ? 'text-sm' : ''}>{item.label}</span>
+              <SearchHighlighter
+                text={item.label}
+                searchQuery={searchQuery}
+                className={`${depth > 0 ? 'text-sm' : ''} flex-1 text-left`}
+                highlightClassName="bg-yellow-300 text-gray-900 px-1 rounded"
+              />
             </button>
           )}
           {hasChildren && (
             <ChevronDownIcon
               onClick={() => toggleSection(item.label)}
-              className={`w-4 h-4 text-gray-400 transition-transform cursor-pointer ${
+              className={`w-4 h-4 text-gray-400 transition-all duration-200 cursor-pointer hover:text-purple-400 ${
                 isExpanded ? 'rotate-180' : ''
               }`}
             />
           )}
           {item.href && (
             <button
-              onClick={() => item.href && toggleFavorite(item.label, item.href)}
-              className="ml-2 p-1 rounded hover:bg-gray-600"
-              aria-label={isFavorite ? `Remove ${item.label} from favorites` : `Add ${item.label} to favorites`}
+              onClick={() => item.href && handleToggleFavorite(item.label, item.href)}
+              className="ml-2 p-1 rounded hover:bg-gray-600 transition-all duration-200 hover:scale-110"
+              aria-label={isItemFavorite ? `Remove ${item.label} from favorites` : `Add ${item.label} to favorites`}
             >
-              <StarIcon className={`w-4 h-4 ${isFavorite ? 'text-yellow-400' : 'text-gray-400'}`} />
+              <StarIcon className={`w-4 h-4 transition-all duration-200 ${
+                isItemFavorite ? 'text-yellow-400 fill-current' : 'text-gray-400 hover:text-yellow-400'
+              }`} />
             </button>
           )}
         </div>
         {isExpanded && hasChildren && (
-          <ul id={`submenu-${item.label.replace(/\s+/g, '-')}`} className="space-y-1 mt-1">
+          <ul 
+            id={`submenu-${item.label.replace(/\s+/g, '-')}`} 
+            className="space-y-1 mt-1 animate-fadeIn"
+            style={{
+              animation: 'slideDown 0.2s ease-out'
+            }}
+          >
             {item.subItems!.map((subItem) => renderMenuItem(subItem, depth + 1))}
           </ul>
         )}
@@ -262,33 +200,191 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   return (
     <aside
-      className={`bg-gray-800 text-white border-r border-gray-700 fixed top-0 bottom-0 z-30 shadow-lg transform transition-all duration-300 w-64 ${
+      className={`bg-gray-800 text-white border-r border-gray-700 fixed top-0 bottom-0 z-30 shadow-lg transform transition-all duration-300 w-64 flex flex-col ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } md:translate-x-0`}
     >
-      <div className="flex items-center justify-between p-4">
+      {/* Header */}
+      <div className="flex items-center justify-between p-4 border-b border-gray-700 flex-shrink-0">
         <h2 className="text-lg font-semibold">SRE Dashboard</h2>
-        <button onClick={onClose} className="md:hidden" aria-label="Close Sidebar">
-          <XMarkIcon className="w-6 h-6 text-white" />
-        </button>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="p-1 rounded hover:bg-gray-700 transition-colors"
+            aria-label="Settings"
+          >
+            <Cog6ToothIcon className="w-5 h-5 text-gray-400" />
+          </button>
+          <button onClick={onClose} className="md:hidden" aria-label="Close Sidebar">
+            <XMarkIcon className="w-6 h-6 text-white" />
+          </button>
+        </div>
       </div>
-      <div className="px-4 mb-4">
+
+      {/* Settings Panel */}
+      {showSettings && (
+        <div className="p-4 bg-gray-750 border-b border-gray-600 flex-shrink-0">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-medium text-gray-300">Settings</h3>
+            <button
+              onClick={() => setShowSettings(false)}
+              className="text-gray-400 hover:text-white"
+            >
+              <ChevronUpIcon className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="space-y-3">
+            <ThemeSelector />
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-300">Clear Recent</span>
+              <button
+                onClick={clearRecentlyVisited}
+                className="px-3 py-1 text-xs bg-gray-600 hover:bg-gray-500 rounded transition-colors"
+                disabled={recentPages.length === 0}
+              >
+                Clear
+              </button>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-300">Clear History</span>
+              <button
+                onClick={clearSearchHistory}
+                className="px-3 py-1 text-xs bg-gray-600 hover:bg-gray-500 rounded transition-colors"
+                disabled={searchHistory.length === 0}
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Breadcrumbs */}
+      {pathname !== '/' && (
+        <div className="px-4 py-2 border-b border-gray-700 flex-shrink-0">
+          <Breadcrumbs items={getBreadcrumbs()} />
+        </div>
+      )}
+
+      {/* Search */}
+      <div className="px-4 py-3 border-b border-gray-700 flex-shrink-0">
         <div className="relative">
           <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
+            ref={searchInputRef}
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search menu..."
-            className="w-full pl-10 pr-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            onChange={(e) => handleSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setShowSearchSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSearchSuggestions(false), 200)}
+            placeholder="Search menu... (Press Esc to clear)"
+            className="w-full pl-10 pr-10 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+            autoComplete="off"
           />
+          {searchQuery && (
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setShowSearchSuggestions(false);
+              }}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+              aria-label="Clear search"
+            >
+              <XMarkIcon className="w-4 h-4" />
+            </button>
+          )}
+
+          {/* Search Suggestions */}
+          {showSearchSuggestions && suggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-50 max-h-48 overflow-y-auto">
+              <div className="px-3 py-2 text-xs text-gray-400 border-b border-gray-600">
+                Recent searches
+              </div>
+              {suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    handleSearch(suggestion);
+                    setShowSearchSuggestions(false);
+                  }}
+                  className="w-full px-3 py-2 text-left text-sm text-gray-200 hover:bg-gray-700 transition-colors flex items-center"
+                >
+                  <ClockIcon className="w-4 h-4 mr-2 text-gray-400" />
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-      <nav className="px-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
-        <ul className="space-y-2">
-          {filteredItems.map((item) => renderMenuItem(item))}
-        </ul>
-      </nav>
+
+      {/* Navigation - This is the scrollable area */}
+      <div className="flex-1 overflow-y-auto">
+        <nav className="px-4 py-2">
+          {isLoading ? (
+            <LoadingState message="Loading menu..." />
+          ) : (
+            <ul className="space-y-1">
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item) => renderMenuItem(item))
+              ) : searchQuery ? (
+                <li className="text-center py-8 text-gray-400">
+                  <div className="flex flex-col items-center animate-fadeIn">
+                    <MagnifyingGlassIcon className="w-12 h-12 mb-2 text-gray-500" />
+                    <p>No results found for "{searchQuery}"</p>
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="mt-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
+                    >
+                      Clear search
+                    </button>
+                  </div>
+                </li>
+              ) : null}
+            </ul>
+          )}
+        </nav>
+      </div>
+
+      {/* Footer Stats */}
+      <div className="px-4 py-2 border-t border-gray-700 text-xs text-gray-400 flex-shrink-0">
+        <div className="flex justify-between items-center">
+          <span>{favorites.length} favorites</span>
+          <span>{recentPages.length} recent</span>
+        </div>
+      </div>
+
+      {/* Custom Styles */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+          from { 
+            opacity: 0; 
+            transform: translateY(-10px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+        
+        .hover\\:scale-102:hover {
+          transform: scale(1.02);
+        }
+        
+        .hover\\:scale-110:hover {
+          transform: scale(1.1);
+        }
+      `}</style>
     </aside>
   );
 }

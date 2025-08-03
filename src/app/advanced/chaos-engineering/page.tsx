@@ -8,7 +8,8 @@ import {
   FaShieldAlt,
   FaFlask,
   FaRobot,
-  FaToolbox
+  FaToolbox,
+  FaRedoAlt
 } from "react-icons/fa";
 
 export default function ChaosEngineeringPage() {

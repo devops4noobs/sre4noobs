@@ -193,6 +193,14 @@ export default function NonCriticalIssueTrackingProcess() {
                   </motion.div>
                 ))}
               </div>
+              <motion.div
+                className="text-center mt-4 text-sm text-gray-400"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                💡 Click the cards to flip and see detailed steps
+              </motion.div>
               {hoveredSection === "workflow" && (
                 <motion.div
                   className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"

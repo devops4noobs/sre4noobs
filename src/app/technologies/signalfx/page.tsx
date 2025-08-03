@@ -20,7 +20,8 @@ import {
   FaLink,
   FaCloud,
   FaFileAlt,
-  FaStream
+  FaStream,
+  FaRedoAlt
 } from "react-icons/fa";
 
 export default function SignalFxOverviewPage() {
@@ -330,42 +331,54 @@ export default function SignalFxOverviewPage() {
           {cards.map((card, index) => (
             <motion.div
               key={card.title}
-              className="relative cursor-pointer h-60 sm:h-64 perspective-1000"
-              style={{ transformStyle: "preserve-3d" }}
+              className="relative cursor-pointer h-56 sm:h-60 perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
               initial="hidden"
               animate="visible"
               variants={cardVariants}
-              onClick={() =>
-                setFlippedCard(flippedCard === index ? null : index)
-              }
+              onClick={() => setFlippedCard(flippedCard === index ? null : index)}
             >
-                {/* Front */}
-                <motion.div
-                  className="absolute inset-0 bg-gray-900/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
-                  variants={flipVariants}
-                  animate={flippedCard === index ? "back" : "front"}
-                  style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
-                >
+              {/* Front */}
+              <motion.div
+                className="absolute inset-0 bg-gray-900/80 backdrop-blur-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
+                variants={flipVariants}
+                animate={flippedCard === index ? 'back' : 'front'}
+                style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+              >
+                {/* Flip indicator */}
+                <div className="absolute top-2 right-2">
+                  <FaRedoAlt className="text-yellow-300/60 text-sm animate-pulse" />
+                </div>
                 <card.icon className="text-3xl text-yellow-300 mb-2" />
-                <h3 className="font-semibold text-indigo-200 mb-1">
-                  {card.title}
-                </h3>
-                <p className="text-indigo-100 text-sm">
-                  {card.summary}
-                </p>
+                <h3 className="font-semibold text-indigo-200 mb-1">{card.title}</h3>
+                <p className="text-indigo-100 text-sm">{card.summary}</p>
+                <p className="text-yellow-300/80 text-xs mt-2">Click to flip</p>
               </motion.div>
-                {/* Back */}
-                <motion.div
-                  className="absolute inset-0 bg-gray-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
-                  variants={flipVariants}
-                  animate={flippedCard === index ? "front" : "back"}
-                  style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
-                >
-                  {card.details}
-                </motion.div>
+              {/* Back */}
+              <motion.div
+                className="absolute inset-0 bg-gray-800/90 backdrop-blur-md rounded-lg p-4 overflow-y-auto text-left"
+                variants={flipVariants}
+                animate={flippedCard === index ? 'front' : 'back'}
+                style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+              >
+                {/* Flip back indicator */}
+                <div className="absolute top-2 right-2">
+                  <FaRedoAlt className="text-yellow-300/60 text-sm animate-pulse" />
+                </div>
+                {card.details}
+                <p className="text-yellow-300/80 text-xs mt-2 text-center">Click to flip back</p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
+        <motion.div
+          className="text-center mt-4 text-sm text-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          💡 Click the cards to flip and see detailed features
+        </motion.div>
 
         {/* Additional Resources */}
         <motion.div

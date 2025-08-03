@@ -20,6 +20,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { FaRedoAlt } from "react-icons/fa";
 import {
   FaBell,
   FaUsers,
@@ -357,9 +358,26 @@ export default function PagerDutyIntegrationPage() {
               >
                 {card.details}
               </motion.div>
+              {/* Flip Icon */}
+              <motion.button
+                className="absolute top-2 right-2 w-6 h-6 bg-yellow-400 hover:bg-yellow-500 text-indigo-900 rounded-full flex items-center justify-center shadow-md transition duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+              >
+                <FaRedoAlt className="text-sm" />
+              </motion.button>
             </motion.div>
           ))}
         </div>
+        <motion.div
+          className="text-center mt-4 text-sm text-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          💡 Click the cards to flip and see detailed information
+        </motion.div>
 
         {/* Additional Resources */}
         <motion.div

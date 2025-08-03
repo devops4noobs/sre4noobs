@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+/* Existing styles */
 .neon-text {
   text-shadow: 0 0 10px #facc15, 0 0 20px #facc15, 0 0 30px #facc15;
 }
@@ -19,6 +21,98 @@
 @keyframes pulse {
   0%, 100% { text-shadow: 0 0 5px #facc15; }
   50% { text-shadow: 0 0 15px #facc15, 0 0 25px #facc15; }
+}
+
+/* Enhanced Sidebar Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+    max-height: 0;
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+    max-height: 1000px;
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+/* Sidebar Animation Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.15s ease-out;
+}
+
+/* Smooth Transitions */
+.sidebar-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-hover:hover {
+  transform: translateX(2px);
+}
+
+/* Search Highlight Styles */
+.search-highlight {
+  background: linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1f2937;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* Theme Variables */
+:root {
+  --sidebar-bg: #1f2937;
+  --sidebar-surface: #374151;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-accent: #fbbf24;
+}
+
+[data-sidebar-theme="blue"] {
+  --sidebar-primary: #3b82f6;
+  --sidebar-accent: #f59e0b;
+}
+
+[data-sidebar-theme="green"] {
+  --sidebar-primary: #10b981;
+  --sidebar-accent: #f97316;
+}
+
+[data-sidebar-theme="dark"] {
+  --sidebar-bg: #000000;
+  --sidebar-surface: #111827;
+  --sidebar-primary: #ffffff;
+  --sidebar-accent: #3b82f6;
 }
 
 /* Responsive helpers for custom text effects */

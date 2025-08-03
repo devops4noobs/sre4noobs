@@ -26,6 +26,7 @@ import {
   FaMemory,
   FaChartLine,
   FaNetworkWired,
+  FaRedoAlt,
 } from "react-icons/fa";
 
 export default function SignalFxMetricsPage() {
@@ -256,9 +257,14 @@ export default function SignalFxMetricsPage() {
                 animate={flippedCard === index ? 'back' : 'front'}
                 style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               >
+                {/* Flip indicator */}
+                <div className="absolute top-2 right-2">
+                  <FaRedoAlt className="text-yellow-300/60 text-sm animate-pulse" />
+                </div>
                 <card.icon className="text-3xl text-yellow-300 mb-2" />
                 <h3 className="font-semibold text-indigo-200 mb-1">{card.title}</h3>
                 <p className="text-indigo-100 text-sm">{card.summary}</p>
+                <p className="text-yellow-300/80 text-xs mt-2">Click to flip</p>
               </motion.div>
               {/* Back */}
               <motion.div
@@ -267,11 +273,25 @@ export default function SignalFxMetricsPage() {
                 animate={flippedCard === index ? 'front' : 'back'}
                 style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               >
+                {/* Flip back indicator */}
+                <div className="absolute top-2 right-2">
+                  <FaRedoAlt className="text-yellow-300/60 text-sm animate-pulse" />
+                </div>
                 {card.details}
+                <p className="text-yellow-300/80 text-xs mt-2 text-center">Click to flip back</p>
               </motion.div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+                  className="text-center mt-4 text-sm text-gray-400"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+        >
+                  💡 Click the cards to flip and see detailed features
+        </motion.div>
 
         {/* SignalFlow Examples */}
         <motion.div
