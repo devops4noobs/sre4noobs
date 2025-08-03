@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { 
   ChevronDownIcon, LockClosedIcon, XMarkIcon, StarIcon, MagnifyingGlassIcon,
-  ClockIcon, Cog6ToothIcon, ChevronUpIcon
+  ClockIcon
 } from '@heroicons/react/24/outline';
 import { menuItems, MenuItem } from '../data/menuItems';
 import { useFavorites } from '../hooks/useFavorites';
@@ -14,7 +14,6 @@ import { useRecentlyVisited } from '../hooks/useRecentlyVisited';
 import { SearchHighlighter } from './SearchHighlighter';
 import { LoadingState } from './LoadingState';
 import { Breadcrumbs } from './Breadcrumbs';
-import { ThemeSelector } from './ThemeSelector';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -204,61 +203,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } md:translate-x-0`}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-700 flex-shrink-0">
-        <h2 className="text-lg font-semibold">SRE Dashboard</h2>
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="p-1 rounded hover:bg-gray-700 transition-colors"
-            aria-label="Settings"
-          >
-            <Cog6ToothIcon className="w-5 h-5 text-gray-400" />
-          </button>
-          <button onClick={onClose} className="md:hidden" aria-label="Close Sidebar">
-            <XMarkIcon className="w-6 h-6 text-white" />
-          </button>
-        </div>
-      </div>
-
-      {/* Settings Panel */}
-      {showSettings && (
-        <div className="p-4 bg-gray-750 border-b border-gray-600 flex-shrink-0">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-medium text-gray-300">Settings</h3>
-            <button
-              onClick={() => setShowSettings(false)}
-              className="text-gray-400 hover:text-white"
-            >
-              <ChevronUpIcon className="w-4 h-4" />
-            </button>
-          </div>
-          <div className="space-y-3">
-            <ThemeSelector />
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Clear Recent</span>
-              <button
-                onClick={clearRecentlyVisited}
-                className="px-3 py-1 text-xs bg-gray-600 hover:bg-gray-500 rounded transition-colors"
-                disabled={recentPages.length === 0}
-              >
-                Clear
-              </button>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Clear History</span>
-              <button
-                onClick={clearSearchHistory}
-                className="px-3 py-1 text-xs bg-gray-600 hover:bg-gray-500 rounded transition-colors"
-                disabled={searchHistory.length === 0}
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
+ 
       {/* Breadcrumbs */}
       {pathname !== '/' && (
         <div className="px-4 py-2 border-b border-gray-700 flex-shrink-0">

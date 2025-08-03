@@ -61,8 +61,6 @@ export const menuItems: MenuItem[] = [
       { label: 'Error Budget Tracker', href: '/tools/error-budget', icon: ShieldCheckIcon },
       { label: 'Incident Simulator', href: '/tools/incident-simulator', icon: BeakerIcon },
       { label: 'Non-critical Incident', href: '/tools/non-critical', icon: BeakerIcon },
-      { label: 'PagerDuty', href: '/tools/pagerduty', icon: BellIcon },
-      { label: 'AWS', href: '/tools/aws', icon: ServerIcon },
     ],
   },
   {
@@ -96,6 +94,8 @@ export const menuItems: MenuItem[] = [
           { label: 'Best Practices', href: '/technologies/git/best-practices', icon: ServerIcon, isPremium: true },
         ],
       },
+      { label: 'PagerDuty', href: '/tools/pagerduty'},
+      { label: 'AWS', href: '/tools/aws'},
     ],
   },
   {
