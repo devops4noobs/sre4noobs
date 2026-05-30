@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "deploy:admin": "cd admin-handler && npx wrangler deploy",
+    "dev:admin": "cd admin-handler && npx wrangler dev"
   },
   "dependencies": {
     "react": "^19.0.0",
