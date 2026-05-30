@@ -1,0 +1,107 @@
+Senior SRE Review
+
+Current strengths
+- Good topical coverage: fundamentals, principles, technologies, tools, advanced topics.
+- Clean site navigation and a strong learning structure.
+- Interactive components already exist (PostmortemForm, SLO calculator, incident simulator, etc.).
+- The homepage is engaging and junior-friendly.
+
+Key gaps I found
+- README.md is still the default Next.js scaffold and does not describe the SRE learning mission, contribution workflow, or content roadmap.
+- The menu includes Assessments pages (/assessments/quizzes, /assessments/labs, /assessments/certification) but those routes are not present in the filesystem.
+- The site is visually polished, but the current content appears more high-level than hands-on.
+- There is no explicit learning path, glossary, or checklist for juniors to follow.
+- No clear “practice lab” or “real incident scenario” curriculum in the repository.
+
+What I would add
+1. Add a clear junior SRE learning path
+- Create a dedicated “Learning Path” or “Start Here” section:
+  - Beginner module: SRE basics, culture, monitoring, incident response.
+  - Intermediate module: SLO design, observability, automation, release engineering.
+  - Advanced module: chaos engineering, scaling SRE, postmortem maturity.
+
+2. Build practical, interactive labs
+- Add real exercises and templates:
+  - src/app/assessments/labs/page.tsx
+    - “Design an SLO for a web service”
+    - “Build an incident response checklist”
+    - “Write a blameless postmortem”
+  - src/app/tools/incident-simulator/page.tsx
+    - Simulated outage scenarios with branching decisions
+  - src/app/tools/slo-calculator/page.tsx
+    - More guided example exercises, not just a calculator
+
+3. Add assessments and self-check quizzes
+- Implement the missing routes and content:
+  - src/app/assessments/quizzes/page.tsx
+    - Multiple-choice and scenario-based questions
+  - src/app/assessments/certification/page.tsx
+    - Recommended learning outcomes
+    - Suggested badge or path for juniors
+
+4. Add templates and cheat sheets
+- Add reusable resources:
+  - Incident response runbook template
+  - Postmortem template / RCA worksheet
+  - SLO/SLA drafting guide
+  - Monitoring checklist
+  - On-call runbook checklist
+
+5. Add a glossary and FAQ
+- Create a quick reference:
+  - SLO, SLA, SLI, error budget, toil, observability, MTTR, MTBF
+  - Common SRE terms and senior guidance
+
+6. Add case-study guided learning
+- Expand src/app/advanced/case-studies/page.tsx with:
+  - “Netflix chaos experiments”
+  - “Google SRE error budget story”
+  - “Kubernetes incident postmortem”
+  - Practical lessons and “what would you do next?”
+
+7. Improve project documentation
+- Replace generic README.md with:
+  - project mission
+  - how to use the learning site
+  - how juniors can contribute content
+  - how to add new labs / pages
+  - folder structure explanation
+
+8. Align menu with actual content
+- Ensure src/data/menuItems.ts only references existing pages or add the missing routes:
+  - Fix or remove orphan menu entries for unimplemented assessment pages.
+  - Add “Glossary”, “Learning Path”, and “Runbooks” if added.
+
+Practical additions for juniors
+- Learning Path page
+- Assessments route with quizzes and labs
+- Glossary
+- Incident Response mini-course
+- Postmortem + RCA workflow guide
+- SLO design workshop
+- Monitoring and alerting checklist
+
+UX / delivery improvements
+- Add “progress steps” or “module completion” markers.
+- Add “next recommended page” suggestions on each article.
+- Use templates and examples, not only definitions.
+- Keep content short, practical, and anchored to real systems.
+
+Suggested concrete change list
+- Create missing assessment pages
+- Add:
+  - /src/app/assessments/quizzes/page.tsx
+  - /src/app/assessments/labs/page.tsx
+  - /src/app/assessments/certification/page.tsx
+  - /src/app/glossary/page.tsx
+  - /src/app/learning-path/page.tsx
+- Enhance:
+  - /src/app/tools/incident-simulator/page.tsx
+  - /src/app/tools/slo-calculator/page.tsx
+  - /src/app/tools/postmortem/page.tsx
+- Update:
+  - README.md
+  - src/data/menuItems.ts
+
+Bottom line
+This project already has a strong structure for SRE education. To make it truly junior-ready, I would shift from “nice SRE content” to “guided learning with hands-on practice, templates, and assessments.” The easiest wins are adding an explicit learning path, filling missing assessment pages, and creating practical labs plus a glossary.

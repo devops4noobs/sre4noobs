@@ -39,6 +39,52 @@ export default function IncidentManagementPage() {
     },
   ];
 
+  const outageDecisionWorkflows = [
+    {
+      id: 'database-spike',
+      title: 'Database connection spike',
+      description: 'A burst of traffic causes MySQL connection errors and downtime for a customer portal.',
+      options: [
+        {
+          label: 'Scale the database cluster and monitor connections',
+          outcome: 'Good longer-term stabilization, but may take 10-15 minutes before connections recover. Use with circuit breaker and alert review.',
+        },
+        {
+          label: 'Fail over to the read replica and restart the primary',
+          outcome: 'Fast recovery if replication is healthy, but risk of data lag. Validate replication lag before switching traffic.',
+        },
+        {
+          label: 'Open incident and notify stakeholders while collecting diagnostics',
+          outcome: 'Improves communication, but does not immediately reduce user impact. Use as a coordination action when mitigation is unclear.',
+        },
+      ],
+    },
+    {
+      id: 'api-degradation',
+      title: 'API latency surge',
+      description: 'The public API latency jumps above SLA thresholds during peak usage.',
+      options: [
+        {
+          label: 'Throttle non-critical traffic and prioritize payment flows',
+          outcome: 'Restores core user experience quickly while buying time for debugging. Ensure throttling is transparent to customers.',
+        },
+        {
+          label: 'Rollback the most recent deployment',
+          outcome: 'Useful if the change is likely to blame, but could disrupt ongoing safe deployment and hide underlying infrastructure issues.',
+        },
+        {
+          label: 'Scale application pods and cache layers',
+          outcome: 'Addresses capacity-based slowdowns, but may not solve code-level performance problems. Combine with diagnostics.',
+        },
+      ],
+    },
+  ];
+
+  const [selectedWorkflow, setSelectedWorkflow] = useState(outageDecisionWorkflows[0].id);
+  const [selectedAction, setSelectedAction] = useState<string | null>(null);
+
+  const currentWorkflow = outageDecisionWorkflows.find((workflow) => workflow.id === selectedWorkflow) || outageDecisionWorkflows[0];
+
   // Trigger animation on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -318,6 +364,75 @@ export default function IncidentManagementPage() {
               transition={{ duration: 0.3 }}
             >
               Hover tip: Flip to see real-world resolutions!
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Outage Decision Workshop Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          onHoverStart={() => setHoveredSection("workshop")}
+          onHoverEnd={() => setHoveredSection(null)}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Outage Decision Workshop</h2>
+          <div className="grid gap-4 md:grid-cols-2 mb-4">
+            <div className="bg-gray-900/80 rounded-3xl p-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Choose a scenario</h3>
+              <div className="space-y-2">
+                {outageDecisionWorkflows.map((workflow) => (
+                  <button
+                    key={workflow.id}
+                    onClick={() => {
+                      setSelectedWorkflow(workflow.id);
+                      setSelectedAction(null);
+                    }}
+                    className={`w-full rounded-2xl p-3 text-left transition ${selectedWorkflow === workflow.id ? 'bg-yellow-400 text-indigo-900 shadow-lg' : 'bg-gray-800 text-indigo-100 hover:bg-indigo-900/80'}`}
+                  >
+                    {workflow.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gray-900/80 rounded-3xl p-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Current scenario</h3>
+              <p className="text-indigo-200 mb-4">{currentWorkflow.description}</p>
+              <div className="space-y-2">
+                {currentWorkflow.options.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedAction(option.outcome)}
+                    className="w-full rounded-2xl border border-gray-700 bg-indigo-950/80 px-4 py-3 text-left text-indigo-100 hover:bg-indigo-900/90 transition"
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {selectedAction && (
+            <motion.div
+              className="bg-blue-900/80 rounded-3xl p-4 border border-blue-600 text-indigo-100"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h3 className="text-lg font-semibold text-yellow-300 mb-2">Outcome</h3>
+              <p>{selectedAction}</p>
+            </motion.div>
+          )}
+
+          {hoveredSection === "workshop" && (
+            <motion.div
+              className="bg-yellow-900/50 rounded p-2 mt-4 text-white text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hover tip: Choose an action to compare incident outcomes.
             </motion.div>
           )}
         </motion.div>

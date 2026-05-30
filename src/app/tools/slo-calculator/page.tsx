@@ -35,6 +35,46 @@ export default function SLOCalculator() {
     { slo: 99.999, year: '5 minutes 16 seconds', month: '25 seconds', week: '6 seconds', day: '0.86 seconds' },
   ];
 
+  const [selectedExercise, setSelectedExercise] = useState('checkout-service');
+
+  const exerciseGuidance = [
+    {
+      id: 'checkout-service',
+      title: 'Web checkout service',
+      prompt: 'Design an SLO for a payment checkout endpoint with the highest customer impact.',
+      recommendation: 'Target 99.95% availability over a 30-day window with a 5-minute incident response objective.',
+      notes: [
+        'Use availability or successful transaction rate as the primary SLI.',
+        'Align the error budget to business risk and release cadence.',
+        'Document the measurement window and data source clearly.',
+      ],
+    },
+    {
+      id: 'public-api',
+      title: 'Public API latency',
+      prompt: 'Design an SLO for a public API endpoint used by mobile apps.',
+      recommendation: 'Target 99.9% of requests under 200ms within a 7-day window.',
+      notes: [
+        'Use latency as the SLI when performance impacts user experience.',
+        'Measure from the client-facing endpoint, including network overhead.',
+        'Keep the target achievable while maintaining good service speed.',
+      ],
+    },
+    {
+      id: 'batch-jobs',
+      title: 'Batch job throughput',
+      prompt: 'Design an SLO for nightly data-processing jobs with a business SLA.',
+      recommendation: 'Target 99% completion within the 8-hour window for each nightly run.',
+      notes: [
+        'Use success rate and completion time together if the job is business-critical.',
+        'Monitor end-to-end throughput and data quality.',
+        'Define the error budget based on customer impact and downstream dependencies.',
+      ],
+    },
+  ];
+
+  const currentExercise = exerciseGuidance.find((exercise) => exercise.id === selectedExercise) ?? exerciseGuidance[0];
+
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -132,12 +172,12 @@ export default function SLOCalculator() {
               <select
                 value={period}
                 onChange={(e) => setPeriod(e.target.value)}
-                className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600"
+                className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400"
               >
-                <option value="day">Day</option>
-                <option value="week">Week</option>
-                <option value="month">Month (30 days)</option>
-                <option value="year">Year (365 days)</option>
+                <option className="text-black" value="day">Day</option>
+                <option className="text-black" value="week">Week</option>
+                <option className="text-black" value="month">Month (30 days)</option>
+                <option className="text-black" value="year">Year (365 days)</option>
               </select>
             </div>
             <div className="bg-gray-900 p-4 rounded-lg">
@@ -198,6 +238,38 @@ export default function SLOCalculator() {
               Hover tip: Reference for standard reliability targets!
             </motion.div>
           )}
+        </motion.div>
+
+        {/* Guided Exercises Card */}
+        <motion.div
+          className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Guided Exercises</h2>
+          <div className="grid gap-4 md:grid-cols-3 mb-6">
+            {exerciseGuidance.map((exercise) => (
+              <button
+                key={exercise.id}
+                onClick={() => setSelectedExercise(exercise.id)}
+                className={`rounded-2xl p-4 text-left transition ${selectedExercise === exercise.id ? 'bg-yellow-400 text-indigo-900 shadow-xl' : 'bg-gray-900/80 text-indigo-100 hover:bg-indigo-900/80'}`}
+              >
+                <h3 className="font-semibold">{exercise.title}</h3>
+                <p className="text-sm mt-2 text-indigo-200">{exercise.prompt}</p>
+              </button>
+            ))}
+          </div>
+
+          <div className="bg-gray-900/80 rounded-3xl p-5">
+            <h3 className="text-xl font-semibold text-yellow-300 mb-3">Exercise guidance</h3>
+            <p className="text-indigo-100 mb-4">{currentExercise.recommendation}</p>
+            <ul className="list-disc list-inside text-indigo-100 space-y-2 text-sm sm:text-base">
+              {currentExercise.notes.map((note, index) => (
+                <li key={index}>{note}</li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
 
         {/* Error Budget Explanation Card */}
