@@ -1,5 +1,5 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
+  "$schema": "https://raw.githubusercontent.com/cloudflare/wrangler/main/config-schema.json",
   "name": "admin-handler",
   "main": "src/index.ts",
   "compatibility_date": "2025-02-04",
