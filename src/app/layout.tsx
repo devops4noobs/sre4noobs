@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import * as React from 'react'; // Import React for types
-import { GeistSans } from "geist/font/sans"; // Correct import
+// Removed problematic Geist font import (module not found). Use a simple placeholder
+// for geist variable to avoid type/import errors.
 import "./globals.css";
 import InteractiveLayout from "./InteractiveLayout"; // New client component
 
-const geist = GeistSans; // Simplified, no subsets needed for Geist
+const geist = { variable: "" };
 
 export const metadata: Metadata = {
   title: "Devops4Noobs",
