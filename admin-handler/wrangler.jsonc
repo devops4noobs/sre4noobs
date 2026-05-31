@@ -9,11 +9,5 @@
       "id": "5a8456be06b94e749e0cc0c50fe8b876",
       "preview_id": "<ID_OF_PREVIEW_KV_NAMESPACE_FOR_LOCAL_DEVELOPMENT>"
     }
-  ],
-  "routes": [
-    {
-      "pattern": "www.devops4noobs.com/admin-handler/*",
-      "zone_name": "devops4noobs.com"
-    }
   ]
 }
