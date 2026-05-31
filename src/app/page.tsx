@@ -104,7 +104,7 @@ export default function HomePage() {
 
       {/* Trends Section with Glassmorphism */}
       <section ref={getStartedRef} className="bg-gray-800/80 backdrop-blur-md p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-xl max-w-xs sm:max-w-3xl md:max-w-6xl mx-auto text-left mb-6 sm:mb-12" id="get-started">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 mb-4 sm:mb-6 glow-text">SRE Trends Shaping 2025</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 mb-4 sm:mb-6 glow-text">SRE Trends Shaping 2026</h2>
         <div className="grid gap-4 sm:gap-6">
           <motion.div
             className="bg-gray-900/80 rounded-xl p-4 sm:p-6 shadow-lg flex flex-col gap-2 hover:bg-indigo-900/80 transition-colors duration-300"

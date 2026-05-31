@@ -86,7 +86,7 @@ export default function SreLabsPage() {
               className={`rounded-2xl p-4 text-left transition ${activeLab === lab.id ? 'bg-yellow-400 text-indigo-900 shadow-xl' : 'bg-gray-800/80 text-indigo-100 hover:bg-indigo-900/80'}`}
             >
               <h2 className="text-lg font-semibold">{lab.title}</h2>
-              <p className="text-sm mt-2 text-indigo-200">{lab.summary}</p>
+              <p className="text-sm mt-2">{lab.summary}</p>
             </button>
           ))}
         </section>
