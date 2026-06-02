@@ -52,7 +52,7 @@ export default function HomePage() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          Welcome to <span className="text-yellow-300 neon-text">Devops4Noobs</span>
+          Welcome to <span className="text-yellow-300 neon-text" style={{ fontSize: 'inherit' }}>Devops4Noobs</span>
         </motion.h1>
         <motion.p
           className="text-base sm:text-lg md:text-xl text-indigo-100 mb-4 sm:mb-6"

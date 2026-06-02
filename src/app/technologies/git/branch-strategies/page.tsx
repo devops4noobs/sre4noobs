@@ -90,7 +90,7 @@ export default function BranchStrategiesPage() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Why Branching Strategies Matter</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Why Branching Strategies Matter</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             In DevOps and SRE, a good branching strategy enables continuous integration, parallel development, and safe releases. It minimizes conflicts, ensures code quality, and supports scalable workflows for teams of any size.
           </p>
@@ -116,7 +116,7 @@ export default function BranchStrategiesPage() {
           onHoverStart={() => setHoveredSection("strategies")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Common Branching Strategies</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Common Branching Strategies</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {strategiesData.map((data, index) => (
               <motion.div
@@ -178,7 +178,7 @@ export default function BranchStrategiesPage() {
           onHoverStart={() => setHoveredSection("choosing")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Choosing the Right Strategy</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Choosing the Right Strategy</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Select based on team size, project complexity, and release frequency. For small teams and frequent releases, GitHub Flow or Trunk-Based works well. For larger projects with multiple versions, GitFlow provides structure. Always combine with CI/CD and feature flags for best results.
           </p>
@@ -203,7 +203,7 @@ export default function BranchStrategiesPage() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Best Practices for Branching in SRE</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Best Practices for Branching in SRE</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Use descriptive branch names (e.g., feature/user-auth).</li>
             <li>Keep branches short-lived to minimize merge conflicts.</li>

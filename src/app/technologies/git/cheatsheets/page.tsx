@@ -132,7 +132,7 @@ export default function GitCheatsheetsPage() {
   };
 
   return (
-    <main className="p-6 bg-gray-900 text-white  overflow-y-auto">
+    <main className="p-6 bg-gray-900 text-white overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Git Cheatsheets</h1>
       <p className="mb-4">
         Quick reference guides for common Git commands and configurations. Surprise: Thoroughly categorized and expanded with all commands from the provided file, plus additional best-practice commands from web searches (e.g., from GitHub Education, Atlassian, freeCodeCamp, DataCamp, and GitHub Blog in 2025).

@@ -142,7 +142,7 @@ export default function DetectorsPage() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
             What Are Detectors?
           </h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
@@ -175,7 +175,7 @@ export default function DetectorsPage() {
           onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
             Guiding Principles
           </h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
@@ -293,7 +293,7 @@ export default function DetectorsPage() {
           onHoverStart={() => setHoveredSection("conclusion")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">
             Putting It All Together
           </h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">

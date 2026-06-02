@@ -145,7 +145,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("core")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Core Concept: Structured Response to Disruptions</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Core Concept: Structured Response to Disruptions</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Incident Management is the process of detecting, responding to, and resolving disruptions in systems or services. By combining real-time observability, clear communication, and structured workflows, it minimizes downtime and ensures rapid recovery, maintaining user trust and system reliability.
           </p>
@@ -170,7 +170,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("why")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🎯 Why Incident Management Matters</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">🎯 Why Incident Management Matters</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Incidents can disrupt operations, frustrate users, and damage reputation. Effective incident management reduces impact, restores services quickly, and leverages observability tools to identify issues in real time, enabling teams to respond proactively and learn from each event.
           </p>
@@ -195,7 +195,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("mission")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🏁 Mission: Respond, Resolve, Learn</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">🏁 Mission: Respond, Resolve, Learn</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Rapid Response:</strong> Detect and address issues before they escalate.</li>
             <li><strong>Coordination:</strong> Ensure clear communication and role clarity during incidents.</li>
@@ -222,7 +222,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("what")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">❓ What Is Incident Management?</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">❓ What Is Incident Management?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Incident Management is a disciplined approach to handling system disruptions, from detection to resolution and post-incident learning. It relies on observability tools (e.g., metrics, logs, traces) to identify issues, structured processes to coordinate responses, and post-incident analysis to drive improvements, ensuring systems remain reliable and resilient.
           </p>
@@ -247,7 +247,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">🧭 Guiding Principles (2025 Best Practices)</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">🧭 Guiding Principles (2025 Best Practices)</h2>
           <ol className="list-decimal list-inside text-indigo-100 space-y-3 text-sm sm:text-base">
             <li>
               <strong>Prioritize Detection with AI-Enhanced Observability</strong><br />
@@ -307,7 +307,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("examples")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">📚 Example Scenarios</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">📚 Example Scenarios</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {exampleScenariosData.map((data, index) => (
               <motion.div
@@ -377,7 +377,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("workshop")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">Outage Decision Workshop</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">Outage Decision Workshop</h2>
           <div className="grid gap-4 md:grid-cols-2 mb-4">
             <div className="bg-gray-900/80 rounded-3xl p-4">
               <h3 className="text-lg font-semibold text-white mb-2">Choose a scenario</h3>
@@ -446,7 +446,7 @@ export default function IncidentManagementPage() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4 pulse-text">💡 Best Practices (2025 Edition)</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-200 mb-4">💡 Best Practices (2025 Edition)</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Integrate AIOps for predictive detection and auto-remediation (e.g., Datadog AI).</li>
             <li>Adopt Zero Trust security in response workflows for hybrid clouds.</li>

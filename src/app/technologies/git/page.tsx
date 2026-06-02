@@ -94,7 +94,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("intro")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">What is Git?</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">What is Git?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Created by Linus Torvalds in 2005, it&apos;s the backbone of modern software development, enabling collaboration, tracking changes, and maintaining code history.
           </p>
@@ -119,7 +119,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("concepts")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Fundamental Concepts</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Fundamental Concepts</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Repository:</strong> A project folder containing all files and their history.</li>
             <li><strong>Commit:</strong> A snapshot of changes with a message describing them.</li>
@@ -148,7 +148,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("workflow")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Git Workflow in SRE</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Git Workflow in SRE</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             In SRE, Git enables versioned infrastructure as code, collaborative incident response, and automated pipelines. Use branches for features, pull requests for reviews, and tags for releases.
           </p>
@@ -174,7 +174,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("commands")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Common Git Commands</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Common Git Commands</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {gitCommandsData.map((data, index) => (
               <motion.div
@@ -236,7 +236,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("benefits")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Benefits of Git in SRE</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Benefits of Git in SRE</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Version History:</strong> Track changes and revert if needed.</li>
             <li><strong>Collaboration:</strong> Multiple developers work simultaneously without conflicts.</li>
@@ -265,7 +265,7 @@ export default function GitPage() {
           onHoverStart={() => setHoveredSection("practices")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">Best Practices for Git in SRE</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">Best Practices for Git in SRE</h2>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li>Use meaningful commit messages.</li>
             <li>Implement Git Flow or GitHub Flow for branching.</li>

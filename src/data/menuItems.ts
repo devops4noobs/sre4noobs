@@ -52,6 +52,33 @@ export const menuItems: MenuItem[] = [
     ],
   },
   {
+    label: 'SRE Practices',
+    icon: ClipboardDocumentCheckIcon,
+    subItems: [
+      { label: 'Overview', href: '/sre-practices', icon: EyeIcon },
+      { label: 'Monitoring', href: '/sre-practices/monitoring', icon: ChartBarIcon },
+      { label: 'Incident Response', href: '/sre-practices/incident-response', icon: BellIcon },
+      { label: 'Postmortem & RCA', href: '/sre-practices/postmortem-rca', icon: BookOpenIcon },
+      { label: 'Capacity Planning', href: '/sre-practices/capacity-planning', icon: ServerIcon },
+      { label: 'Safe Releases & Change Management', href: '/sre-practices/safe-releases-change-management', icon: RocketLaunchIcon },
+      { label: 'Practical SRE Workflow', href: '/sre-practices/practical-sre-workflow', icon: CogIcon },
+    ],
+  },
+  {
+    label: 'Observability',
+    icon: EyeIcon,
+    subItems: [
+      { label: 'Overview', href: '/observability', icon: EyeIcon },
+      { label: 'Why Observability', href: '/observability/overview/why-observability', icon: EyeIcon },
+      { label: 'Monitoring vs Observability', href: '/observability/overview/monitoring-vs-observability', icon: EyeIcon },
+      { label: 'Three Pillars', href: '/observability/overview/three-pillars', icon: EyeIcon },
+      { label: 'Instrumentation', href: '/observability/instrumentation', icon: WrenchScrewdriverIcon },
+      { label: 'Tracing', href: '/observability/tracing', icon: CpuChipIcon },
+      { label: 'Metrics', href: '/observability/metrics', icon: ChartBarIcon },
+      { label: 'Logging', href: '/observability/logging', icon: DocumentTextIcon },
+    ],
+  },
+  {
     label: 'Tools',
     icon: WrenchScrewdriverIcon,
     subItems: [

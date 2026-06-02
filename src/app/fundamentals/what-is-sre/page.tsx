@@ -35,7 +35,7 @@ export default function WhatIsSre() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            Welcome to <span className="text-yellow-300 neon-text">Devops4Noobs</span>
+            Welcome to <span className="text-yellow-300" style={{ fontSize: 'inherit' }}>Devops4Noobs</span>
           </motion.h1>
           <motion.p
             className="text-base sm:text-lg md:text-xl text-indigo-100 mb-4 sm:mb-6"
@@ -57,7 +57,7 @@ export default function WhatIsSre() {
           onHoverStart={() => setHoveredSection("what-is-sre")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4 pulse-text">What is SRE?</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-300 mb-4">What is SRE?</h2>
           <p className="text-indigo-100 mb-4 text-sm sm:text-base">
             Site Reliability Engineering (SRE) merges software and systems expertise to craft scalable, dependable systems. SRE professionals focus on automating operations, boosting reliability, and minimizing manual effort, ensuring seamless service delivery.
           </p>
@@ -134,17 +134,17 @@ export default function WhatIsSre() {
           )}
         </motion.div>
 
-        {/* SRE Pillars Card */}
+        {/* SRE Principles Card */}
         <motion.div
           className="bg-gray-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 shadow-lg hover:bg-indigo-900/80 transition-colors duration-300"
           initial="hidden"
           animate="visible"
           variants={cardVariants}
           whileHover="hover"
-          onHoverStart={() => setHoveredSection("pillars")}
+          onHoverStart={() => setHoveredSection("principles")}
           onHoverEnd={() => setHoveredSection(null)}
         >
-          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-400 mb-4">SRE Pillars</h3>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-400 mb-4">SRE Principles</h3>
           <ul className="list-disc list-inside text-indigo-100 space-y-1 text-sm sm:text-base">
             <li><strong>Monitoring & Alerting:</strong> Detect issues early with real-time data</li>
             <li><strong>Incident Management:</strong> Resolve disruptions efficiently</li>
@@ -153,7 +153,7 @@ export default function WhatIsSre() {
             <li><strong>Change Management:</strong> Deploy with zero downtime</li>
             <li><strong>Postmortem & RCA:</strong> Learn from every outage</li>
           </ul>
-          {hoveredSection === "pillars" && (
+          {hoveredSection === "principles" && (
             <motion.div
               className="bg-yellow-900/50 rounded p-2 mt-2 text-white text-xs sm:text-sm"
               initial={{ opacity: 0 }}
