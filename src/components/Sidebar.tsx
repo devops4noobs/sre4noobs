@@ -3,7 +3,6 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
-  ChevronDownIcon,
   LockClosedIcon,
   XMarkIcon,
   StarIcon,
@@ -15,7 +14,7 @@ import { useFavorites } from '../hooks/useFavorites';
 import { useMenuFilter } from '../hooks/useMenuFilter';
 import { useSearchHistory } from '../hooks/useSearchHistory';
 import { useRecentlyVisited } from '../hooks/useRecentlyVisited';
-import { SearchHighlighter } from './SearchHighlighter';
+// SearchHighlighter intentionally removed (unused) to satisfy lint rules
 import { LoadingState } from './LoadingState';
 import { Breadcrumbs } from './Breadcrumbs';
 
@@ -317,7 +316,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 filteredItems.map((item) => renderMenuItem(item))
               ) : searchQuery ? (
                 <li className="rounded-lg border border-slate-700 bg-slate-900 p-4 text-center text-sm text-slate-400">
-                  <p>No results for "{searchQuery}"</p>
+                  <p>No results for {`"${searchQuery}"`}</p>
                   <button
                     onClick={() => setSearchQuery('')}
                     className="mt-2 text-xs text-indigo-400 hover:text-indigo-300 font-medium"

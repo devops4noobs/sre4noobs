@@ -14,7 +14,7 @@ export default function ObservabilityPage() {
 
         <section className="grid gap-4 mb-6">
           <div className="bg-gray-800/80 backdrop-blur-md rounded-3xl p-6 shadow-xl text-indigo-100">
-            <h2 className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-4">What you'll practice</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-4">What you&apos;ll practice</h2>
             <ul className="list-disc list-inside space-y-2 text-sm sm:text-base">
               <li>Design meaningful SLIs and metrics for a service.</li>
               <li>Add tracing to a critical request path and identify latency hotspots.</li>

@@ -14,7 +14,7 @@ export default function InstrumentationPage() {
           <h2 className="text-2xl font-bold text-yellow-300 mb-4">Getting started</h2>
           <ol className="list-decimal list-inside space-y-2 text-sm sm:text-base">
             <li>Pick key user journeys to instrument.</li>
-            <li>Define SLIs and how you'll collect metrics.</li>
+            <li>Define SLIs and how you&apos;ll collect metrics.</li>
             <li>Instrument critical code paths with counters and histograms.</li>
           </ol>
         </section>
